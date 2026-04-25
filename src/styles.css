@@ -131,10 +131,6 @@ body{
     flex-shrink:0;
 }
 .nav-logo-badge{
-    width:42px;
-    height:42px;
-    background:#fff;
-    border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaChevronDown, FaInfoCircle, FaEye, FaUsers, FaMedal, FaLandmark, FaGraduationCap, FaBriefcase, FaFlask, FaBookOpen, FaChartLine, FaBuilding, FaCompass, FaHome, FaDumbbell, FaMusic, FaBook, FaPaperPlane } from "react-icons/fa";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import logo from "../../assets/images/logos/logo.png";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -42,11 +43,9 @@ const Navbar = () => {
       <nav id="navbar" className={scrolled ? "scrolled" : ""}>
         <Link to="/" className="nav-logo">
           <div className="nav-logo-badge">
-            <img src="assets/images/logos/fav.png" alt="" width="50px" />
+            <img src={logo} alt="SRM IST Logo" height="70px" />
           </div>
-          <div className="nav-logo-text">
-            SRM IST <span className="nav-logo-sub">Trichy Campus</span>
-          </div>
+          
         </Link>
 
         <ul className="nav-links">
