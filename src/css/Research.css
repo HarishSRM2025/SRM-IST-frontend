@@ -1,0 +1,244 @@
+.esearch-overview,
+.research-areas,
+.publications,
+.contact-research{
+    padding:96px 0;
+    position:relative;
+    overflow:hidden;
+}
+
+/* BACKGROUND TEXTURE (SUBTLE IMAGE) */
+.research-overview::before,
+.research-areas::before,
+.publications::before,
+.contact-research::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:url('../assets/research-bg.jpg') center/cover;
+    opacity:.04;
+    z-index:0;
+}
+
+/* COMMON WRAP */
+.research-overview .container,
+.research-areas .container,
+.publications .container,
+.contact-research .container{
+    position:relative;
+    z-index:2;
+    max-width:1200px;
+    margin:auto;
+    padding:0 80px;
+}
+
+/* ===============================
+   OVERVIEW
+================================= */
+.research-overview{
+    background:var(--cream);
+    text-align:center;
+}
+
+.research-overview h2{
+    font-family:'Playfair Display',serif;
+    font-size:42px;
+    color:var(--navy);
+    margin-bottom:18px;
+}
+
+.research-overview p{
+    max-width:700px;
+    margin:auto;
+    color:var(--gray);
+    font-size:16px;
+    line-height:1.8;
+}
+
+/* ===============================
+   RESEARCH AREAS (GLASS CARDS)
+================================= */
+.research-areas{
+    background:linear-gradient(135deg,var(--navy),#1a3a5c);
+    text-align:center;
+}
+
+.research-areas h2{
+    font-family:'Playfair Display',serif;
+    font-size:42px;
+    color:var(--white);
+    margin-bottom:40px;
+}
+
+.area-grid{
+    display:flex;
+    justify-content:center;
+    gap:28px;
+}
+
+/* GLASSMORPHISM CARD */
+.area-card{
+    width:230px;
+    padding:26px 20px;
+    border-radius:12px;
+
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(14px);
+
+    border:1px solid rgba(200,149,42,.25);
+
+    transition:all .35s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+.area-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.08),transparent);
+    opacity:0;
+    transition:.4s;
+}
+
+.area-card:hover::before{
+    opacity:1;
+}
+
+.area-card:hover{
+    transform:translateY(-6px);
+    border-color:var(--gold);
+    box-shadow:0 12px 40px rgba(0,0,0,.4);
+}
+
+.area-card h3{
+    font-family:'Playfair Display',serif;
+    font-size:18px;
+    color:var(--gold);
+}
+
+/* ===============================
+   PUBLICATIONS (ELEGANT LIST)
+================================= */
+.publications{
+    background:var(--white);
+}
+
+.publications h2{
+    font-family:'Playfair Display',serif;
+    font-size:42px;
+    color:var(--navy);
+    margin-bottom:30px;
+    text-align:center;
+}
+
+.publications ul{
+    list-style:none;
+    max-width:700px;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+/* GLASS ROW */
+.publications li{
+    padding:18px 22px;
+    border-radius:8px;
+
+    background:rgba(11,29,53,.03);
+    border:1px solid var(--border);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    transition:all .25s;
+}
+
+.publications li:hover{
+    border-color:var(--gold);
+    background:rgba(200,149,42,.06);
+    transform:translateX(6px);
+}
+
+.publications span{
+    color:var(--gold);
+    font-weight:600;
+}
+
+/* ===============================
+   CONTACT / CTA
+================================= */
+.contact-research{
+    background:linear-gradient(135deg,var(--navy),#132b4a);
+    text-align:center;
+}
+
+.contact-research h2{
+    font-family:'Playfair Display',serif;
+    font-size:40px;
+    color:var(--white);
+    margin-bottom:12px;
+}
+
+.contact-research p{
+    color:rgba(255,255,255,.65);
+    margin-bottom:28px;
+}
+
+/* GLASS BUTTON */
+.contact-research .btn{
+    background:rgba(200,149,42,.9);
+    color:var(--navy);
+    border:none;
+    padding:12px 26px;
+    border-radius:6px;
+    font-weight:600;
+
+    backdrop-filter:blur(6px);
+
+    transition:.3s;
+}
+
+.contact-research .btn:hover{
+    background:var(--gold2);
+    transform:translateY(-3px);
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+/* ===============================
+   RESPONSIVE
+================================= */
+@media(max-width:1024px){
+    .research-overview .container,
+    .research-areas .container,
+    .publications .container,
+    .contact-research .container{
+        padding:0 40px;
+    }
+}
+
+@media(max-width:768px){
+    .research-overview,
+    .research-areas,
+    .publications,
+    .contact-research{
+        padding:64px 0;
+    }
+
+    .area-card{
+        width:100%;
+        max-width:300px;
+    }
+
+    .research-overview .container,
+    .research-areas .container,
+    .publications .container,
+    .contact-research .container{
+        padding:0 20px;
+    }
+}
+.research-overview .container{
+    padding:50px;
+}

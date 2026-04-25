@@ -1,0 +1,143 @@
+/* AboutUs.css */
+
+.about-page {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background-color: var(--cream);
+  min-height: 100vh;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.overview-text {
+  text-align: justify;
+  color: #4b5563;
+  line-height: 1.8;
+  margin: 0 auto var(--TB);
+  font-size: 16px;
+}
+
+/* History Section */
+.history-hero {
+  background: url('https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1920') center/cover no-repeat;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 60px;
+}
+
+.history-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(11,29,53,0.7);
+}
+
+.history-hero h2 {
+  position: relative;
+  color: white;
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  z-index: 2;
+}
+
+.timeline {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  padding-bottom: 80px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #e5e7eb;
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  position: relative;
+  width: 100%;
+}
+
+.timeline-item.left {
+  flex-direction: row-reverse;
+}
+
+.timeline-content {
+  width: 45%;
+  background: #fff;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.timeline-year {
+  width: 45%;
+  text-align: right;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.timeline-item.left .timeline-year {
+  text-align: left;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: var(--gold);
+  border-radius: 50%;
+  border: 4px solid #fff;
+  box-shadow: 0 0 0 2px rgba(200,149,42,0.2);
+}
+
+@media (max-width: 900px) {
+  .timeline::before {
+    left: 30px;
+  }
+  .timeline-item {
+    flex-direction: row-reverse !important;
+    justify-content: flex-start;
+    padding-left: 60px;
+  }
+  .timeline-content {
+    width: 100%;
+  }
+  .timeline-year {
+    position: absolute;
+    left: 60px;
+    top: -30px;
+    width: auto;
+    text-align: left;
+  }
+  .timeline-dot {
+    left: 30px;
+    top: 20px;
+  }
+}
