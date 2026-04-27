@@ -29,15 +29,11 @@ const Topbar = () => {
       {/* Right */}
       <div className="tb-right">
         <div className="tb-social">
-          <a href="#" title="Facebook"><FaFacebookF /></a>
-          <a href="#" title="Instagram"><FaInstagram /></a>
-          <a href="#" title="LinkedIn"><FaLinkedinIn /></a>
-          <a href="#" title="YouTube"><IoLogoYoutube /></a>
+          <a href="#" title="Facebook" style={{ color: '#1877F2' }}><FaFacebookF /></a>
+          <a href="#" title="Instagram" style={{ color: '#E4405F' }}><FaInstagram /></a>
+          <a href="#" title="LinkedIn" style={{ color: '#0A66C2' }}><FaLinkedinIn /></a>
+          <a href="#" title="YouTube" style={{ color: '#FF0000' }}><IoLogoYoutube /></a>
         </div>
-
-        <span className="tb-lang">
-          <FaGlobe /> EN
-        </span>
       </div>
 
     </div>

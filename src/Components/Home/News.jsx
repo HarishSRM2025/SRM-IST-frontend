@@ -15,7 +15,7 @@ const News = () => {
           <div>
             <span className="s-tag">Latest News & Articles</span>
             <h2 className="s-title">
-              Stories from <em>Our Campus</em>
+              Events & Recent<em> Highlights</em>
             </h2>
           </div>
 

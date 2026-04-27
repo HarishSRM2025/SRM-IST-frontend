@@ -45,14 +45,14 @@ const Home = () => {
       <About />
       <Stats />
       <Ranking />
-      <News/>
-      <Placements/>
-      <Academics/>
-      <CampusLife/>
       <VisionandMission/>
       <Management/>
+      <Academics/>
+      <Placements/>
       <AluminiVoice/>
+      <CampusLife/>
       <VideoTestimonial/>
+      <News/>
       <Broucher/>
       <Contact/>
     </>

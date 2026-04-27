@@ -40,7 +40,7 @@ const CampusLife = () => {
   ];
 
   return (
-    <section className="campus-section rev" id="campus">
+    <section className="campus-section" style={{backgroundColor:'#fff'}} id="campus">
       <div className="wrap">
 
         {/* Header */}
