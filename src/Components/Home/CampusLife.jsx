@@ -1,34 +1,39 @@
 import React from "react";
+import img1 from "../../assets/images/home/campuslife/1.JPG";
+import img2 from "../../assets/images/home/campuslife/2.jpg";
+import img3 from "../../assets/images/home/campuslife/3.jpg";
+import img4 from "../../assets/images/home/campuslife/4.jpg";
+import img5 from "../../assets/images/home/campuslife/5.jpg";
 
 const CampusLife = () => {
   const campusItems = [
     {
       title: "Sports & Athletics",
-      img: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=700&q=80",
+      img: img1,
       alt: "Sports",
       cls: "",
     },
     {
       title: "Research Labs",
-      img: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&q=80",
+      img: img2,
       alt: "Labs",
       cls: "d1",
     },
     {
       title: "Cultural Events",
-      img: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80",
+      img: img3,
       alt: "Cultural",
       cls: "d2",
     },
     {
       title: "Guest Lectures",
-      img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&q=80",
+      img: img4,
       alt: "Seminar",
       cls: "d1",
     },
     {
       title: "Library & Study",
-      img: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=400&q=80",
+      img: img5,
       alt: "Library",
       cls: "d2",
     },
@@ -56,9 +61,9 @@ const CampusLife = () => {
                 alt={item.alt}
                 loading="lazy"   // ✅ performance fix
               />
-              <div className="cc-ov">
+              {/* <div className="cc-ov">
                 <div className="cc-ov-title">{item.title}</div>
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { FaEye, FaRocket } from "react-icons/fa";
+import vissionImage from "../../assets/images/home/vission.png"
 
 const VisionandMission = () => {
   return (
@@ -22,7 +23,7 @@ const VisionandMission = () => {
 
             <div className="vis-card">
               <div className="vis-card-ico">
-                <FaEye />
+                <FaEye color="#e4b316"/>
               </div>
               <div className="vis-card-title">Our Vision</div>
               <p className="vis-card-text">
@@ -32,7 +33,7 @@ const VisionandMission = () => {
                {/* Image */}
             <div className="vis-img">
               <img
-                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=700&q=80"
+                src={vissionImage}
                 alt="Students"
                 loading="lazy"   // ✅ performance fix
               />
@@ -47,7 +48,7 @@ const VisionandMission = () => {
             </div>
             <div className="vis-card">
               <div className="vis-card-ico">
-                <FaRocket />
+                <FaRocket color="#e4b316"/>
               </div>
               <div className="vis-card-title">Our Mission</div>
               <p className="vis-card-text">
