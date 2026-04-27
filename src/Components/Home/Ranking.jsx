@@ -18,7 +18,7 @@ const Ranking = () => {
   const rankings = [
     {
       id: 1,
-      image: awardImg,
+      image: 'https://www.globalinstitutes.edu.in/wp-content/uploads/2022/07/NAACAlogo-1.png',
       icon: <FaAward />,
       title: "NAAC A++",
       subtitle: "Highest Grade",
@@ -26,7 +26,7 @@ const Ranking = () => {
     },
     {
       id: 2,
-      image: innovationImg,
+      image:'https://blog.indiaccess.com/wp-content/uploads/2025/09/nirf-logo.jpg',
       icon: <FaTrophy />,
       title: "NIRF Ranking",
       subtitle: "Top 20 Universities",
@@ -34,7 +34,7 @@ const Ranking = () => {
     },
     {
       id: 3,
-      image: awardImg, // Reusing image for demonstration
+      image: 'https://mma.prnewswire.com/media/2429773/5597560/QS_Quacquarelli_Symonds_Logo.jpg?w=300', // Reusing image for demonstration
       icon: <FaMedal />,
       title: "QS World Rankings",
       subtitle: "Global Recognition",
@@ -42,7 +42,7 @@ const Ranking = () => {
     },
     {
       id: 4,
-      image: innovationImg, // Reusing image for demonstration
+      image: 'https://cbit.ac.in/wp-content/uploads/2022/03/ariia-2021.jpg', // Reusing image for demonstration
       icon: <FaStar />,
       title: "ARIIA",
       subtitle: "Innovation Leader",
@@ -50,7 +50,7 @@ const Ranking = () => {
     },
     {
       id: 5,
-      image: awardImg, // Reusing image for demonstration
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHUomC5Y9snBQu8fDUvm3QSv_WWsXm3eqZRA&s', // Reusing image for demonstration
       icon: <FaAward />,
       title: "NBA Accredited",
       subtitle: "Engineering Excellence",
