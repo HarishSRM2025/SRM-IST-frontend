@@ -59,7 +59,6 @@ const Stats = () => {
     <section className="stats-section" ref={sectionRef}>
       <div className="wrap">
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <span className="s-tag" style={{ color: 'var(--gold)', letterSpacing: '0.15em' }}></span>
           <h2 className="s-title" style={{ color: '#fff', fontSize: '32px', marginTop: '10px', marginBottom: 0 }}>What Defines  <em>SRM</em></h2>
           <div className="gold-bar" style={{ margin: '15px auto 0' }}></div>
         </div>
