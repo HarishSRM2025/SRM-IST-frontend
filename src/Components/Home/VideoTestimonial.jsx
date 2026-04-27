@@ -13,7 +13,7 @@ const VideoTestimonial = () => {
     {
       name: "Ananya Krishnan",
       role: "B.Tech CSE 2023 · Placed at TCS",
-      img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80",
+      img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80",
       video: "https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1",
       text: "SRM Trichy transformed my career trajectory completely."
     },

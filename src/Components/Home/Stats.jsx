@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FaUsers, FaGraduationCap, FaRupeeSign } from "react-icons/fa";
+import { FaUsers, FaGraduationCap, FaHandshake  } from "react-icons/fa";
+import { FaBuilding } from "react-icons/fa6";
 
 const Stats = () => {
   const sectionRef = useRef(null);
@@ -58,33 +59,33 @@ const Stats = () => {
     <section className="stats-section" ref={sectionRef}>
       <div className="wrap">
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <span className="s-tag" style={{ color: 'var(--gold)', letterSpacing: '0.15em' }}>OUR ACHIEVEMENTS</span>
-          <h2 className="s-title" style={{ color: '#fff', fontSize: '32px', marginTop: '10px', marginBottom: 0 }}>SRM by the <em>Numbers</em></h2>
+          <span className="s-tag" style={{ color: 'var(--gold)', letterSpacing: '0.15em' }}></span>
+          <h2 className="s-title" style={{ color: '#fff', fontSize: '32px', marginTop: '10px', marginBottom: 0 }}>What Defines  <em>SRM</em></h2>
           <div className="gold-bar" style={{ margin: '15px auto 0' }}></div>
         </div>
         <div className="stats-row">
 
           {/* Stat 1 */}
           <div className="stat-box">
-            <div className="stat-ico"><FaUsers style={{ fontSize: '36px', color: 'var(--gold)', border:"0px solid "}} /></div>
-            <div className="stat-num">{count1}+</div>
-            <div className="stat-lbl">Connections to Stars</div>
+            <div className="stat-ico"><FaHandshake style={{ fontSize: '36px', color: 'var(--gold)', border:"0px solid "}} /></div>
+            <div className="stat-num">60+</div>
+            <div className="stat-lbl">Industry Partnerships</div>
           </div>
 
           {/* Stat 2 */}
           <div className="stat-box">
             <div className="stat-ico"><FaGraduationCap style={{ fontSize: '36px', color: 'var(--gold)', border:"0px solid "}} /></div>
-            <div className="stat-num">{count2.toLocaleString()}+</div>
+            <div className="stat-num">6000+</div>
             <div className="stat-lbl">Annual Students</div>
           </div>
 
           {/* Stat 3 */}
           <div className="stat-box">
-            <div className="stat-ico"><FaRupeeSign style={{ fontSize: '36px', color: 'var(--gold)', border:"0px solid "}} /></div>
+            <div className="stat-ico"><FaBuilding style={{ fontSize: '36px', color: 'var(--gold)', border:"0px solid "}} /></div>
             <div className="stat-num">
-              30<span className="small">Cr+</span>
+              30+
             </div>
-            <div className="stat-lbl">Scholarship Pool</div>
+            <div className="stat-lbl">Number of departments</div>
           </div>
 
         </div>
