@@ -87,7 +87,7 @@ const Ranking = () => {
                   <div style={{
                     width: '100%',
                     aspectRatio: '4/3',
-                    background: 'var(--navy)',
+                    background: '#fff',
                     position: 'relative',
                     overflow: 'hidden'
                   }}>
@@ -97,23 +97,12 @@ const Ranking = () => {
                       style={{
                         width: '100%',
                         height: '100%',
-                        objectFit: 'cover',
+                        objectFit: 'contain',
                         display: 'block'
                       }} 
                     />
                     {/* Overlay gradient for premium look */}
-                    <div style={{
-                      position: 'absolute',
-                      inset: 0,
-                      background: 'linear-gradient(to top, rgba(11,29,53,0.8) 0%, transparent 50%)',
-                      display: 'flex',
-                      alignItems: 'flex-end',
-                      padding: '30px'
-                    }}>
-                       <div style={{ color: 'var(--gold)', fontSize: '40px', filter: 'drop-shadow(0 2px 5px rgba(0,0,0,0.5))' }}>
-                         {rank.icon}
-                       </div>
-                    </div>
+                    
                   </div>
                 </SwiperSlide>
               ))}
