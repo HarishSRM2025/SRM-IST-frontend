@@ -79,7 +79,7 @@ const Contact = () => {
             </div>
 
             <div className="c-item">
-              <div className="c-ico"><FaPhone color="#c8952a"/></div>
+              <div className="c-ico"><FaPhone color="#c8952a" /></div>
               <div>
                 <div className="c-title">Phone</div>
                 <div className="c-text">+91 431 400 2000</div>
@@ -87,7 +87,7 @@ const Contact = () => {
             </div>
 
             <div className="c-item">
-              <div className="c-ico"><FaEnvelope color="#c8952a"/></div>
+              <div className="c-ico"><FaEnvelope color="#c8952a" /></div>
               <div>
                 <div className="c-title">Email</div>
                 <div className="c-text">admissions@srmtrichy.edu.in</div>
@@ -95,7 +95,7 @@ const Contact = () => {
             </div>
 
             <div className="c-item">
-              <div className="c-ico"><FaClock color="#c8952a"/></div>
+              <div className="c-ico"><FaClock color="#c8952a" /></div>
               <div>
                 <div className="c-title">Office Hours</div>
                 <div className="c-text">Mon – Sat: 9:00 AM – 5:00 PM</div>

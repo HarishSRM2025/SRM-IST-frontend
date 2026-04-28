@@ -59,16 +59,7 @@ const Contact = () => {
 
               {/* Map */}
               <div style={{ width: '100%', height: '250px', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border)' }}>
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m3!1d3917.387816028564!2d78.7513813148021!3d10.934057992214693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baaf70e88380e21%3A0xcda6bda69ba5baea!2sSRM%20Institute%20of%20Science%20and%20Technology%2C%20Tiruchirappalli%20Campus!5e0!3m2!1sen!2sin!4v1684490333202!5m2!1sen!2sin" 
-                  width="100%" 
-                  height="100%" 
-                  style={{ border: 0 }} 
-                  allowFullScreen="" 
-                  loading="lazy" 
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="SRM IST Trichy Campus Map"
-                ></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15668.593671239774!2d78.73500008715816!3d10.9521593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baafb9b231ae861%3A0xe015b4e7a6e2c2d6!2sSRM%20Institute%20of%20Science%20%26%20Technology%2C%20Tiruchirapalli%20Campus!5e0!3m2!1sen!2sin!4v1777350999764!5m2!1sen!2sin" width={'100%'} height={'100%'}  loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
               </div>
             </div>
 
