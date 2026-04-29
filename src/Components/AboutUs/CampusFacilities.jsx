@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
+import campusImage from '../../assets/images/about/campus.JPG';
+import hostelImage from '../../assets/images/about/hostel.JPG';
+import transportImage from '../../assets/images/about/transport.png';
 
 const CampusFacilities = () => {
   const [activeTab, setActiveTab] = useState('Campus');
 
   const tabs = {
     Campus: {
-      image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=800',
+      image: campusImage,
       text: 'SRM Institute of Science and Technology, Tiruchirappalli, known for its verdant surroundings, peaceful atmosphere, and striking infrastructure, stands as a vibrant hub for students from across the country. SRMIST Tiruchirappalli has established itself as a preferred choice for higher education, offering internationally acclaimed programs that expose students to advanced and emerging technologies used in modern industries. Our dedicated and proficient faculty members, with their vast knowledge and experience, create a dynamic learning environment and provide numerous opportunities for students and research scholars to grow and succeed with confidence in a competitive world. SRMIST emphasizes the importance of collaboration, considering it a means to broaden perspectives and incorporate diverse, high-quality academic experiences.'
     },
     Hostel: {
-      image: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=800',
+      image: hostelImage,
       text: 'The hostel facilities at SRMIST Tiruchirappalli are designed to provide a home away from home. With well-furnished rooms, modern amenities, and strict round-the-clock security, we ensure a comfortable and safe environment for all our residents. Nutritious multi-cuisine food, Wi-Fi connectivity, recreation rooms, and medical assistance are readily available to cater to the diverse needs of the student community, fostering a strong sense of camaraderie and personal growth.'
     },
     Transport: {
-      image: 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=800',
+      image: transportImage,
       text: 'Our comprehensive transport network ensures hassle-free commuting for students and staff. A fleet of modern, GPS-enabled buses covers extensive routes across the city and neighboring districts. Safety and punctuality are guaranteed, making the daily travel experience smooth and convenient for everyone. The transport system is regularly upgraded to accommodate the growing needs of our academic community.'
     }
   };
