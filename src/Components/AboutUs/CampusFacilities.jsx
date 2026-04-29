@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import campusImage from '../../assets/images/about/campus.JPG';
 import hostelImage from '../../assets/images/about/hostel.JPG';
-import transportImage from '../../assets/images/about/transport.png';
+import transportImage from '../../assets/images/about/transport.JPG';
 
 const CampusFacilities = () => {
   const [activeTab, setActiveTab] = useState('Campus');
