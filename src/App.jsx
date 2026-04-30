@@ -14,7 +14,9 @@ import AboutUs from './Pages/AboutUs';
 import CampusLife from './Pages/CampusLife';
 import NewsAndEvents from './Pages/NewsAndEvents';
 import Contact from './Pages/Contact';
+import Institution from './Pages/Institution';
 import ScrollToTop from './Components/Common/ScrollToTop';
+import WhatsAppFloat from './Components/Common/WhatsAppFloat';
 
 const App = () => {
   return (
@@ -31,9 +33,11 @@ const App = () => {
         <Route path="/news-and-events" element={<NewsAndEvents/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/sponsored-research" element={<SponsoredResearch />} />
+        <Route path="/institution" element={<Institution />} />
         <Route path="/center/:id" element={<CenterDetails />} />
       </Routes>
 
+      <WhatsAppFloat />
       <Footer />
     </Router>
   )

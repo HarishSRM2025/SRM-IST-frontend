@@ -71,7 +71,13 @@ const Navbar = () => {
               Academics <FaChevronDown className="chev" />
             </a>
             <div className="nav-drop">
-              <Link to="/departments"><FaGraduationCap />Departments</Link>
+              <Link to="/institution"><FaGraduationCap />Engineering & Technology</Link>
+              <Link to="/institution"><FaGraduationCap />College of Management </Link>
+              <Link to="/institution"><FaGraduationCap />Science & Humanities</Link>
+              <Link to="/institution"><FaGraduationCap />Institute of Hotel Management</Link>
+              <Link to="/institution"><FaGraduationCap />College of Physiotherapy</Link>
+              <Link to="/institution"><FaGraduationCap />College of Occupational Therapy</Link>
+              <Link to="/institution"><FaGraduationCap />College of Allied Health Sciences</Link>
             </div>
           </li>
 
