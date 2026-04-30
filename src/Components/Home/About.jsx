@@ -18,11 +18,11 @@ const About = () => {
 
             <div className="gold-bar"></div>
 
-            <p className="wc-body">
+            <p className="wc-body" style={{textAlign:'justify'}}>
               SRM Institute of Science and Technology, Trichy is a state-of-the-art campus committed to academic excellence, innovation, and holistic development. With world-class infrastructure, distinguished faculty, and industry partnerships, we offer students a transformative experience.
             </p>
 
-            <p className="wc-body">
+            <p className="wc-body" style={{textAlign:'justify'}}>
               Our programs blend theoretical knowledge with practical application, preparing graduates to excel in global careers and contribute meaningfully to society.
             </p>
 
