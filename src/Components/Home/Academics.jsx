@@ -131,7 +131,7 @@ const Academics = () => {
                   {prog.departments && (
                     <div className="dept-list">
                       {prog.departments.map((dept, deptIndex) => (
-                        <button key={deptIndex} onClick={() => navigate(`/departments/`)} type="button" className="dept-tile">
+                        <button key={deptIndex} onClick={() => navigate(`/departments`, { state: { deptName: dept.name } })} type="button" className="dept-tile">
                           {dept.name}
                         </button>
                       ))}

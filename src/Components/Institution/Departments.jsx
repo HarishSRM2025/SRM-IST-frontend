@@ -32,7 +32,7 @@ const Departments = () => {
           {departments.map((dept, index) => (
             <button
               key={index}
-              onClick={() => navigate('/departments')}
+              onClick={() => navigate('/departments', { state: { deptName: dept.name, deptCode: dept.code } })}
               type="button"
               className="dept-tile"
               style={{ padding: '16px 24px', fontSize: '15px' }}

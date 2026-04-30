@@ -1,5 +1,6 @@
 import React from "react";
 import Breadcrum from "../Common/Breadcrum";
+import { useLocation } from "react-router-dom";
 
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -157,14 +158,21 @@ const highlights = [
 ];
 
 export default function DeptHero() {
+  const location = useLocation();
+  const deptName = location.state?.deptName || "Computer Science Engineering";
+  const deptCode = location.state?.deptCode || "CSE";
+
+  // Optional: style the last word or '&' part if you want it to match previous design,
+  // but just using the name directly is cleaner for dynamic content.
+
   return (
     <>
       <style>{css}</style>
 
       {/* HERO */}
       <Breadcrum 
-        title="Computer Science <em style='color: var(--gold); font-style: italic'>& Engineering</em>"
-        paths={[{ name: 'Home', link: '/' }, { name: 'Departments', link: '/departments' }, { name: 'CSE' }]}
+        title={deptName}
+        paths={[{ name: 'Home', link: '/' }, { name: 'Departments', link: '/departments' }, { name: deptCode }]}
         bgImage="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1920&auto=format&fit=crop&q=80"
       />
 
