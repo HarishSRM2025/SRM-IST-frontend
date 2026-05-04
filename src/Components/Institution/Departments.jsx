@@ -21,9 +21,9 @@ const Departments = () => {
     <section className="ac-section" id="departments" style={{ backgroundColor: "var(--cream)" }}>
       <div className="wrap">
         <div>
-          <span className="s-tag">Academic Departments</span>
+          <span className="s-tag">Academic Schools</span>
           <h2 className="s-title">
-            Explore Our <em>Departments</em>
+            Explore Our <em>Schools</em>
           </h2>
           <div className="gold-bar"></div>
         </div>

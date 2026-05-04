@@ -5,6 +5,10 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
+import vid1 from '../../assets/video/placement_feedback/IMG_5272.MP4';
+import vid2 from '../../assets/video/placement_feedback/IMG_5274.MP4';
+import vid3 from '../../assets/video/placement_feedback/IMG_5275.MP4';
+
 const Testimonials = () => {
   const [activeVideo, setActiveVideo] = useState(null);
 
@@ -13,31 +17,19 @@ const Testimonials = () => {
       name: "Sri Anusha B",
       role: "Graduate Trainee, XYZ Ltd",
       img: "https://via.placeholder.com/800x450?text=Video+1",
-      url: "https://www.youtube.com/embed/dQw4w9WgXcQ" // Example YT Embed
+      url: vid1
     },
     {
       name: "Rahul Sharma",
       role: "Software Engineer, Amazon",
       img: "https://via.placeholder.com/800x450?text=Video+2",
-      url: "https://www.youtube.com/embed/tgbNymZ7vqY" // Example YT Embed
+      url: vid2
     },
     {
       name: "Priya Raj",
       role: "Data Analyst, Optum",
       img: "https://via.placeholder.com/800x450?text=Video+3",
-      url: "https://www.youtube.com/embed/dQw4w9WgXcQ"
-    },
-    {
-      name: "John Doe",
-      role: "UI/UX Designer, Adobe",
-      img: "https://via.placeholder.com/800x450?text=Video+4",
-      url: "https://www.youtube.com/embed/tgbNymZ7vqY"
-    },
-    {
-      name: "Siva Kumar",
-      role: "Frontend Engineer, Akamai",
-      img: "https://via.placeholder.com/800x450?text=Video+5",
-      url: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      url: vid3
     }
   ];
 
@@ -90,12 +82,19 @@ const Testimonials = () => {
             <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
           {activeVideo && (
-            <iframe 
+            <video 
                src={activeVideo} 
-               title="Video Player" 
-               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-               allowFullScreen
-            ></iframe>
+               controls
+               autoPlay
+               style={{ 
+                 maxWidth: '100%', 
+                 maxHeight: '80vh', 
+                 outline: 'none', 
+                 backgroundColor: '#000',
+                 display: 'block',
+                 margin: '0 auto'
+               }}
+            ></video>
           )}
         </div>
       </div>

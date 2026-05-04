@@ -49,10 +49,10 @@ const Home = () => {
       <Management/>
       <Academics/>
       <Placements/>
-      <AluminiVoice/>
       <CampusLife/>
-      <VideoTestimonial/>
       <News/>
+      <VideoTestimonial/>
+      <AluminiVoice/>
       <Broucher/>
       <Contact/>
     </>

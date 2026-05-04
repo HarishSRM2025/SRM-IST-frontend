@@ -46,8 +46,8 @@ const AluminiVoice = () => {
 
         {/* Header */}
         <div className="rev" style={{ textAlign: "center" }}>
-          <span className="s-tag">Student Testimonials</span>
-          <h2 className="s-title">
+          <span className="s-tag">Alumni Success</span>
+          <h2 className="s-title" style={{color:'#0c4da2'}}>
             Voices of Our <em>Alumni</em>
           </h2>
           <div className="gold-bar" style={{ margin: "0 auto 40px" }}></div>

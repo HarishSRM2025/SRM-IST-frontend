@@ -9,31 +9,9 @@ const Academics = () => {
 
   const programs = [
     {
-      name: "B.E / B.Tech Programs",
-      count: "12 Courses",
-      details: "Hands-on engineering degrees with labs, internships, and industry-led projects for future-ready careers.",
-      departments: [
-        {
-          name: "Computer Science Engineering",
-          desc: "AI, ML, Data Science and Core CS",
-          subdepts: ["AI & ML", "Data Science", "Cyber Security"]
-        },
-        {
-          name: "Electronics & Communication Engineering",
-          desc: "VLSI, Embedded Systems and Communication Systems",
-          subdepts: ["VLSI Design", "Embedded Systems", "Signal Processing"]
-        },
-        {
-          name: "Mechanical Engineering",
-          desc: "Design, Manufacturing and Thermal Sciences",
-          subdepts: ["CAD/CAM", "Thermal Engineering", "Robotics"]
-        }
-      ]
-    },
-    {
-      name: "M.E / M.Tech Programs",
-      count: "8 Courses",
-      details: "Advanced technology programs focused on research, innovation, and high-demand engineering specializations.",
+      name: "Engineering & Technology",
+      count: "View Programs",
+      details: "Innovative engineering and technology programs designed to foster technical excellence and problem-solving skills.",
       departments: [
         { name: "Computer Science Engineering" },
         { name: "Electronics & Communication Engineering" },
@@ -42,46 +20,60 @@ const Academics = () => {
       ]
     },
     {
-      name: "MBA Programs",
-      count: "4 Specializations",
-      details: "Leadership and management training built around business strategy, analytics, and entrepreneurship.",
+      name: "College of Management",
+      count: "View Programs",
+      details: "Comprehensive management programs shaping future business leaders, innovators, and entrepreneurs.",
       departments: [
-        { name: "Marketing" },
-        { name: "Finance" },
-        { name: "Human Resources" },
-        { name: "Operations" }
+        { name: "MBA" },
+        { name: "BBA" }
       ]
     },
     {
-      name: "MCA Programs",
-      count: "2 Courses",
-      details: "Comprehensive computer applications curriculum emphasizing software development and real-world problem solving.",
+      name: "Science & Humanities",
+      count: "View Programs",
+      details: "Foundational and advanced programs in core sciences, literature, and humanistic studies for holistic development.",
       departments: [
-        { name: "Software Systems" },
-        { name: "Data Science" },
-        { name: "Cyber Security" }
+        { name: "Physics" },
+        { name: "Chemistry" },
+        { name: "Mathematics" },
+        { name: "English" }
       ]
     },
     {
-      name: "Ph.D Programs",
-      count: "All Depts",
-      details: "Doctoral research opportunities across departments with mentorship, funding, and published output.",
+      name: "Institute of Hotel Management",
+      count: "View Programs",
+      details: "Top-tier hospitality and culinary management training with world-class facilities and global industry exposure.",
       departments: [
-        { name: "Engineering" },
-        { name: "Management" },
-        { name: "Computer Science" },
-        { name: "Applied Sciences" }
+        { name: "Hotel Management" },
+        { name: "Culinary Arts" }
       ]
     },
     {
-      name: "Lateral Entry",
-      count: "Select Courses",
-      details: "Pathway options for diploma students to join degree programs with bridge courses and academic support.",
+      name: "College of Physiotherapy",
+      count: "View Programs",
+      details: "Specialized training in physical rehabilitation, sports medicine, and advanced therapeutic sciences.",
       departments: [
-        { name: "CSE" },
-        { name: "ECE" },
-        { name: "ME" },
-        { name: "Civil" }
+        { name: "BPT" },
+        { name: "MPT" }
+      ]
+    },
+    {
+      name: "College of Occupational Therapy",
+      count: "View Programs",
+      details: "Empowering students with clinical knowledge and skills to help individuals regain health and independence.",
+      departments: [
+        { name: "BOT" },
+        { name: "MOT" }
+      ]
+    },
+    {
+      name: "College of Allied Health Sciences",
+      count: "View Programs",
+      details: "Advanced healthcare programs focusing on medical diagnostics, therapeutic support, and clinical technology.",
+      departments: [
+        { name: "Medical Lab Technology" },
+        { name: "Radiography" },
+        { name: "Optometry" }
       ]
     }
   ];

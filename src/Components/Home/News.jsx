@@ -7,7 +7,7 @@ import innovationImage from '../../assets/images/home/innovation-home.jpg';
 
 const News = () => {
   return (
-    <section className="news-section rev" id="news" >
+    <section className="news-section" id="news" style={{backgroundColor:'#f3f4f6'}}>
       <div className="wrap">
 
         {/* Header */}

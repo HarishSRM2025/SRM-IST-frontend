@@ -6,7 +6,7 @@ const css = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=DM+Sans:wght@300;400;500;600&display=swap');
 
   :root {
-    --navy: #0b1d35;
+    --navy: #0c4da2;
     --gold: #c8952a;
     --gold2: #e0aa45;
     --cream: #f8f6f1;

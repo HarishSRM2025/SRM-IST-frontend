@@ -4,6 +4,7 @@ import "swiper/css/navigation";
 import { FaUser } from "react-icons/fa";
 import founder from '../../assets/images/home/founder.webp';
 import chairman from '../../assets/images/home/chairman.jpg';   
+import cochairman from '../../assets/images/home/co_chairman.jpg';   
 
 const Management = () => {
   const leaders = [
@@ -18,6 +19,12 @@ const Management = () => {
       role: "Chairman",
       img: chairman,
       desc: "Our mission at SRM Trichy is to create an environment where academic rigor meets real-world application. We are committed to developing not just engineers and managers, but compassionate, curious global citizens who will shape tomorrow.",
+    },
+    {
+      name: "Mr. S. Niranjan",
+      role: "Co-Chairman",
+      img: cochairman,
+      desc: "To position SRM Trichy as a globally recognized institution that transforms students into industry-ready professionals, innovators, and leaders through cutting-edge research, industry integration, and holistic development.",
     }
   ];
 

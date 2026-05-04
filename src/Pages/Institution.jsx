@@ -7,6 +7,8 @@ import Stats from '../Components/Institution/Stats';
 import Departments from '../Components/Institution/Departments';
 
 import '../css/Department.css'; // For common widgets and cards
+import InstituteFacilities from '../Components/Institution/InstituteFacilities';
+import InstituteGallery from '../Components/Institution/InstituteGallery';
 
 const Institution = () => {
   const location = useLocation();
@@ -24,6 +26,8 @@ const Institution = () => {
       <VisionMission />
       <Stats />
       <Departments />
+      <InstituteFacilities/>
+      <InstituteGallery/>
     </div>
   );
 };
