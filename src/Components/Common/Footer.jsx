@@ -57,6 +57,7 @@ const Footer = () => {
               <li><a href="#">Alumni Network</a></li>
               <li><a href="#">NAAC Accreditation</a></li>
               <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Careers</a></li>
             </ul>
           </div>
 

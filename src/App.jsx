@@ -16,6 +16,8 @@ import NewsAndEvents from './Pages/NewsAndEvents';
 import Contact from './Pages/Contact';
 import Institution from './Pages/Institution';
 import EventDetails from './Pages/EventDetails';
+import InternationalRelations from './Pages/InternationalRelations';
+import Students from './Pages/Students';
 import ScrollToTop from './Components/Common/ScrollToTop';
 import WhatsAppFloat from './Components/Common/WhatsAppFloat';
 
@@ -37,6 +39,8 @@ const App = () => {
         <Route path="/institution" element={<Institution />} />
         <Route path="/center/:id" element={<CenterDetails />} />
         <Route path="/event/:id" element={<EventDetails />} />
+        <Route path="/international-relations" element={<InternationalRelations />} />
+        <Route path="/students" element={<Students />} />
       </Routes>
 
       <WhatsAppFloat />
