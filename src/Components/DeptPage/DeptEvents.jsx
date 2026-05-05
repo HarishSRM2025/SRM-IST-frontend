@@ -34,7 +34,7 @@ export default function DeptEvents() {
 
           <div>
             <div className="section-label">Campus Life</div>
-            <h2 className="section-title">Events & Activities</h2>
+            <h2 className="section-title" style={{color:'#fff'}}>Events & <em>Activities</em></h2>
           </div>
 
           <div className="events-filters">

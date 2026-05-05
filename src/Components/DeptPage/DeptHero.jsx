@@ -170,37 +170,59 @@ export default function DeptHero() {
       <style>{css}</style>
 
       {/* HERO */}
-      <Breadcrum 
+      <Breadcrum
         title={deptName}
         paths={[{ name: 'Home', link: '/' }, { name: 'Departments', link: '/departments' }, { name: deptCode }]}
         bgImage="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1920&auto=format&fit=crop&q=80"
       />
 
+      {/* Overview */}
+      <section style={{ margin: "60px 0" }}>
+        <div className="dept-programmes-inner" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+          <div className="dept-section-header" style={{ marginBottom: '30px' }}>
+            <div>
+              <div className="section-label" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '10px' }}>Overview</div>
+              <h2 className="section-title" style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', fontWeight: '700', color: 'var(--navy)', margin: 0 }}>About the <em>Department</em></h2>
+            </div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "40px", alignItems: "start" }}>
+            <div style={{ fontSize: "1.1rem", lineHeight: "1.8", color: "var(--gray)", textAlign: 'justify' }}>
+              <p style={{ marginBottom: "20px" }}>
+                The Department of {deptName} is dedicated to producing highly skilled professionals and researchers who are equipped to meet the challenges of the rapidly evolving technological landscape. We strive for excellence in education, research, and innovation.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo optio eaque deserunt nesciunt recusandae dolorem nobis fugiat. Consectetur repellendus quis ipsum exercitationem aperiam, dolorum voluptate reprehenderit quo, quos ab vitae accusamus dolorem tempora? Eius impedit quidem maiores assumenda perspiciatis nobis nulla fugit possimus? Dolores quia dolorem officiis veniam obcaecati dolore maiores ipsa sit ratione et alias debitis quae aperiam, cupiditate nam soluta consequuntur minima enim animi nesciunt atque a quasi dolorum eius. Ad nam, temporibus necessitatibus blanditiis saepe sed, quia commodi sapiente, voluptas molestiae ullam sit earum dolores a quidem nesciunt quod! Aperiam, harum hic asperiores expedita repellat laborum alias?
+              </p>
+              <p>
+                Our curriculum is designed to provide a strong foundation in core concepts while offering flexibility to explore specialized areas through electives and project work. We collaborate closely with industry leaders to ensure our programs remain relevant and up-to-date.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* HOD */}
-      <section style={{margin:"60px 0"}}>
+      <section style={{ margin: "60px 0 0",backgroundColor:'#f8f6f1' ,padding:'50px 0'}}>
         <div className="dept-programmes-inner">
-        <div className="dept-section-header">
-              <div>
-                <div className="section-label">Message from Head</div>
-                <h2 className="section-title">Our <em>Head of Department</em></h2>
-              </div>
-         </div>
+          <div className="dept-section-header">
+            <div>
+              <div className="section-label">Message from Head</div>
+              <h2 className="section-title">Our <em>Head of Department</em></h2>
+            </div>
+          </div>
         </div>
         <div className="dept-hod-inner">
-          
+
           <div className="hod-card">
             <div className="hod-img-placeholder">
-                <img
-                  src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-gray-placeholder-vector-illustration_514344-14757.jpg?w=360"
-                  alt="HOD"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover"
-                  }}
-                />
-              </div>
+              <img
+                src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-gray-placeholder-vector-illustration_514344-14757.jpg?w=360"
+                alt="HOD"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover"
+                }}
+              />
+            </div>
             <div className="hod-body-content">
               <strong>Dr. Rajesh Kumar</strong>
               <p>Head of Department</p>
@@ -209,7 +231,7 @@ export default function DeptHero() {
 
           <div>
             <h2 className="section-title"><em>Welcome</em> Message</h2>
-            <p >
+            <p style={{textAlign:'justify'}} >
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga impedit, aut est sunt corrupti veniam ipsum, culpa commodi numquam necessitatibus recusandae adipisci et nulla amet? Blanditiis ad perferendis dolor amet suscipit. Eaque officia tempora exercitationem. Impedit necessitatibus corrupti aperiam ratione ullam sed voluptatum quasi fugit id repudiandae architecto quas, ducimus deserunt delectus eligendi officiis doloremque dignissimos tempora velit! Minus doloremque maxime eaque vel exercitationem porro excepturi fugiat deserunt magnam sequi illo ad fuga in voluptas velit adipisci quisquam, molestiae architecto cupiditate nihil impedit natus nemo. Quo dolores a, quasi quia, doloribus dicta rerum obcaecati magnam distinctio amet repellendus illum quas exercitationem, ea aliquid voluptatum maiores voluptatibus alias dolore ratione et esse? Natus nisi perferendis aspernatur porro sint laborum eligendi? Est beatae harum nostrum fugit dolorem atque aliquam debitis vel, deserunt voluptate sunt dolore delectus consequatur totam ea quod dolores perspiciatis, ratione quam nobis eveniet sapiente, consectetur magnam. Dignissimos, sit maiores.
             </p>
           </div>

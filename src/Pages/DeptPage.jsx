@@ -18,8 +18,8 @@ export default function DeptPage() {
       </nav>
 
       <section id="about"><DeptHero/></section>
-      <section id="programmes"><DeptProgrammes /></section>
       <section id="faculty"><DeptFaculty/></section>
+      <section id="programmes"><DeptProgrammes /></section>
       <section id="events"><DeptEvents/></section>
       <section id="achievements"><DeptAchievements/></section>
     </>

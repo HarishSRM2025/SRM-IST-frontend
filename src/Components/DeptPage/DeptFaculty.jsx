@@ -28,7 +28,7 @@ const faculty = [
 
   return (
     <>
-      <section className="dept-faculty">
+      <section className="dept-faculty" >
         <div className="dept-faculty-inner">
           <div className="dept-section-header">
             <div>
