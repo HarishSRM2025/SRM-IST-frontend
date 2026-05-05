@@ -2,10 +2,10 @@ import React from 'react';
 
 const JourneySection = () => {
   return (
-    <section className="pl-section pl-bg-navy">
+    <section className="pl-section pl-bg-cream" >
       <div className="wrap">
-        <span className="s-tag" style={{color: 'var(--white)', opacity: '0.7'}}>LIFE AT SRM</span>
-        <h2 className="s-title light">Where Could Your Journey At University <em>Take You?</em></h2>
+        <span className="s-tag" >LIFE AT SRM</span>
+        <h2 className="s-title">Where Could Your Journey At University <em>Take You?</em></h2>
         <div className="gold-bar"></div>
         
         <div className="pl-journey-grid">

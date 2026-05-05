@@ -10,7 +10,6 @@ import WhyChooseSRM from "../Components/Placement/WhyChooseSRM";
 import CareerPrograms from "../Components/Placement/CareerPrograms";
 import Testimonials from "../Components/Placement/Testimonials";
 import JourneySection from "../Components/Placement/JourneySection";
-import ReachUs from "../Components/Placement/ReachUs";
 
 const Placement = () => {
   return (
@@ -24,7 +23,6 @@ const Placement = () => {
       <CareerPrograms />
       <Testimonials />
       <JourneySection />
-      <ReachUs />
     </>
   );
 };

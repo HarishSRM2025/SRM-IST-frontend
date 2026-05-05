@@ -9,6 +9,10 @@ import vid1 from '../../assets/video/placement_feedback/IMG_5272.MP4';
 import vid2 from '../../assets/video/placement_feedback/IMG_5274.MP4';
 import vid3 from '../../assets/video/placement_feedback/IMG_5275.MP4';
 
+import img1 from '../../assets/images/placement/1.png';
+import img2 from '../../assets/images/placement/2.png';
+import img3 from '../../assets/images/placement/3.png';
+
 const Testimonials = () => {
   const [activeVideo, setActiveVideo] = useState(null);
 
@@ -16,19 +20,19 @@ const Testimonials = () => {
     {
       name: "Sri Anusha B",
       role: "Graduate Trainee, XYZ Ltd",
-      img: "https://via.placeholder.com/800x450?text=Video+1",
+      img: img1,
       url: vid1
     },
     {
       name: "Rahul Sharma",
       role: "Software Engineer, Amazon",
-      img: "https://via.placeholder.com/800x450?text=Video+2",
+      img: img2,
       url: vid2
     },
     {
       name: "Priya Raj",
       role: "Data Analyst, Optum",
-      img: "https://via.placeholder.com/800x450?text=Video+3",
+      img:   img3,
       url: vid3
     }
   ];
