@@ -2,9 +2,9 @@ import React from 'react';
 import { FaTools, FaMicrophone, FaIndustry, FaLightbulb, FaShieldAlt, FaBroadcastTower } from 'react-icons/fa';
 
 export const dummyEvents = [
-  { id: 1, type: "Workshop", icon: <FaTools />, title: "Machine Learning Bootcamp", date: "14 Feb 2025", year: "2025", desc: "Intensive hands-on ML training.", organizer: "CSE Dept" },
-  { id: 2, type: "Seminar", icon: <FaMicrophone />, title: "Quantum Talk", date: "28 Jan 2025", year: "2025", desc: "Quantum computing future seminar.", organizer: "IBM" },
-  { id: 3, type: "Visit", icon: <FaIndustry />, title: "Zoho Visit", date: "10 Dec 2024", year: "2024", desc: "Industry exposure for final years.", organizer: "Zoho" },
+  { id: 1, type: "Workshop", icon: <FaTools />, title: "Machine Learning Bootcamp", date: "14 Feb 2026", year: "2026", desc: "Intensive hands-on ML training.", organizer: "CSE Dept", status: "Upcoming", registrationLink: "https://forms.gle/example1", images: ["https://picsum.photos/seed/ml1/1200/500", "https://picsum.photos/seed/ml2/1200/500", "https://picsum.photos/seed/ml3/1200/500"] },
+  { id: 2, type: "Seminar", icon: <FaMicrophone />, title: "Quantum Talk", date: "28 Jan 2026", year: "2026", desc: "Quantum computing future seminar.", organizer: "IBM", status: "Upcoming", registrationLink: "https://forms.gle/example2", images: ["https://picsum.photos/seed/qt1/1200/500", "https://picsum.photos/seed/qt2/1200/500"] },
+  { id: 3, type: "Visit", icon: <FaIndustry />, title: "Zoho Visit", date: "10 Dec 2024", year: "2024", desc: "Industry exposure for final years.", organizer: "Zoho", status: "Completed", images: ["https://picsum.photos/seed/zh1/1200/500"] },
   { id: 4, type: "Workshop", icon: <FaShieldAlt />, title: "Ethical Hacking", date: "5 Nov 2024", year: "2024", desc: "Security workshop by OWASP.", organizer: "OWASP" },
   { id: 5, type: "Activity", icon: <FaLightbulb />, title: "Hackathon", date: "18 Oct 2024", year: "2024", desc: "Annual innovation event.", organizer: "Students Club" },
   { id: 6, type: "Seminar", icon: <FaBroadcastTower />, title: "5G & AI Integration", date: "2 Sep 2024", year: "2024", desc: "Tech seminar on telecom.", organizer: "Qualcomm" },
