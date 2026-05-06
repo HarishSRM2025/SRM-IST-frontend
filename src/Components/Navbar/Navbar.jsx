@@ -111,7 +111,7 @@ const Navbar = () => {
               <Link to='/sponsored-research'><FaMoneyBillTransfer />Sponsored Research</Link>
             </div>
           </li>
-          <li><Link to="/international-relations">International Relations</Link></li>
+          <li><Link to="/international-relations">International Affairs</Link></li>
           <li><Link to="/students">Students</Link></li>
           <li><Link to="/news-and-events">News</Link></li>
           <li><Link to="/contact">Contact</Link></li>
@@ -181,7 +181,7 @@ const Navbar = () => {
           </div>
 
           {/* Links */}
-          <Link className="mob-plain-link" to="/international-relations" onClick={closeDrawer}>International Relations</Link>
+          <Link className="mob-plain-link" to="/international-relations" onClick={closeDrawer}>International Affairs</Link>
           <Link className="mob-plain-link" to="/students" onClick={closeDrawer}>Students</Link>
           <Link className="mob-plain-link" to="/news-and-events" onClick={closeDrawer}>News</Link>
           <Link className="mob-plain-link" to="/contact" onClick={closeDrawer}>Contact</Link>
