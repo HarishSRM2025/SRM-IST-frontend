@@ -111,9 +111,9 @@ const Academics = () => {
                   <div className="prog-r">
                     <span className="prog-ct">{prog.count}</span>
                     {active === index ? (
-                      <FaChevronUp color="#c8952a" />
+                      <FaChevronUp />
                     ) : (
-                      <FaChevronRight color="#c8952a" />
+                      <FaChevronRight />
                     )}
                   </div>
                 </button>

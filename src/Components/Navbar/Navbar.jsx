@@ -112,7 +112,15 @@ const Navbar = () => {
             </div>
           </li>
           <li><Link to="/international-relations">International Affairs</Link></li>
-          <li><Link to="/students">Students</Link></li>
+          <li>
+            <Link to="/students">
+              Students <FaChevronDown className="chev" />
+            </Link>
+            <div className="nav-drop">
+              <Link to="/students"><FaGraduationCap />Students Home</Link>
+              <Link to="/examcell"><FaBookOpen />Examcell</Link>
+            </div>
+          </li>
           <li><Link to="/news-and-events">News</Link></li>
           <li><Link to="/contact">Contact</Link></li>
           <li>
@@ -182,7 +190,24 @@ const Navbar = () => {
 
           {/* Links */}
           <Link className="mob-plain-link" to="/international-relations" onClick={closeDrawer}>International Affairs</Link>
-          <Link className="mob-plain-link" to="/students" onClick={closeDrawer}>Students</Link>
+          {/* Students */}
+          <div className="mob-row">
+            <div
+              className={`mob-trigger ${activeMob === "students" ? "open" : ""}`}
+              onClick={() => handleMobToggle("students")}
+            >
+              Students <FaChevronDown />
+            </div>
+            <div
+              className="mob-sub"
+              style={{
+                maxHeight: activeMob === "students" ? "100px" : "0px",
+              }}
+            >
+              <Link to="/students" onClick={closeDrawer}>Students Home</Link>
+              <Link to="/examcell" onClick={closeDrawer}>Examcell</Link>
+            </div>
+          </div>
           <Link className="mob-plain-link" to="/news-and-events" onClick={closeDrawer}>News</Link>
           <Link className="mob-plain-link" to="/contact" onClick={closeDrawer}>Contact</Link>
 
