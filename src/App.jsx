@@ -19,6 +19,7 @@ import EventDetails from './Pages/EventDetails';
 import InternationalRelations from './Pages/InternationalRelations';
 import Students from './Pages/Students';
 import Examcell from './Pages/Examcell';
+import Careers from './Pages/Careers';
 import ScrollToTop from './Components/Common/ScrollToTop';
 import WhatsAppFloat from './Components/Common/WhatsAppFloat';
 
@@ -43,6 +44,7 @@ const App = () => {
         <Route path="/international-relations" element={<InternationalRelations />} />
         <Route path="/students" element={<Students />} />
         <Route path="/examcell" element={<Examcell />} />
+        <Route path="/careers" element={<Careers />} />
       </Routes>
 
       <WhatsAppFloat />
