@@ -572,6 +572,252 @@
   .cl-lib-stats { grid-template-columns: repeat(3, 1fr); }
 }
 
+/* ════════════════════════════════════════════════════════
+   LIBRARY PAGES — Working Hours, Committee, Staff
+════════════════════════════════════════════════════════ */
+
+/* Library Hours */
+.lib-hours-wrapper {
+  margin-top: 24px;
+}
+.lib-hours-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.lib-hours-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 24px;
+  transition: box-shadow 0.2s;
+}
+.lib-hours-card:hover {
+  box-shadow: 0 4px 16px rgba(12,77,162,0.08);
+}
+.lib-hours-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0c4da2;
+  font-family: sans-serif;
+}
+.lib-hours-title svg {
+  font-size: 20px;
+  color: #e4b316;
+}
+.lib-hours-title h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+.lib-hours-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.lib-hours-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.lib-hours-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.lib-hours-day {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  font-family: sans-serif;
+}
+.lib-hours-time {
+  font-size: 13px;
+  font-weight: 700;
+  color: #e4b316;
+  font-family: sans-serif;
+}
+.lib-hours-note {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 8px 0 0 0;
+  font-family: sans-serif;
+}
+.lib-hours-note-box {
+  background: rgba(228,179,22,0.08);
+  border-left: 4px solid #e4b316;
+  border-radius: 4px;
+  padding: 14px 16px;
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.6;
+  font-family: sans-serif;
+}
+
+/* Library Committee */
+.lib-committee-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.lib-role-card {
+  background: #f8f9fb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.lib-role-card:hover {
+  border-color: #0c4da2;
+  box-shadow: 0 4px 16px rgba(12,77,162,0.1);
+}
+.lib-role-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: #0c4da2;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 22px;
+  margin: 0 auto 12px;
+}
+.lib-role-card h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0c4da2;
+  margin: 0 0 4px;
+  font-family: sans-serif;
+}
+.lib-role-position {
+  font-size: 12px;
+  font-weight: 600;
+  color: #e4b316;
+  margin: 0 0 8px;
+  font-family: sans-serif;
+}
+.lib-role-desc {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+  font-family: sans-serif;
+}
+.lib-functions-box {
+  background: #f8f9fb;
+  border-left: 4px solid #e4b316;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+/* Library Staff */
+.lib-staff-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.lib-staff-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 18px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.lib-staff-card:hover {
+  border-color: #0c4da2;
+  box-shadow: 0 4px 16px rgba(12,77,162,0.1);
+}
+.lib-staff-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.lib-staff-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: #0c4da2;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.lib-staff-header > div {
+  flex: 1;
+}
+.lib-staff-role {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0c4da2;
+  margin: 0 0 2px;
+  font-family: sans-serif;
+}
+.lib-staff-name {
+  font-size: 11px;
+  color: #e4b316;
+  margin: 0;
+  font-weight: 600;
+  font-family: sans-serif;
+}
+.lib-staff-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+.lib-staff-meta p {
+  font-size: 11px;
+  color: #6b7280;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+}
+.lib-staff-meta svg {
+  color: #e4b316;
+  font-size: 12px;
+}
+.lib-staff-desc {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+/* Services Grid extends Activity Grid */
+.lib-services-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 960px) {
+  .cl-split,
+  .cl-hero-grid,
+  .cl-residential-hero { grid-template-columns: 1fr; gap: 32px; }
+  .cl-split--flip .cl-split__img { order: 0; }
+  .cl-hostel-grid { grid-template-columns: 1fr; }
+  .cl-stats-row { grid-template-columns: repeat(2, 1fr); }
+  .cl-lib-stats { grid-template-columns: repeat(3, 1fr); }
+  .lib-hours-grid { grid-template-columns: 1fr; }
+  .lib-committee-grid { grid-template-columns: 1fr; }
+  .lib-staff-grid { grid-template-columns: 1fr; }
+  .lib-services-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 640px) {
   .cl-sec { padding: 52px 14px 64px; }
   .cl-event-cards,
@@ -580,4 +826,8 @@
   .cl-club-grid { grid-template-columns: repeat(2, 1fr); }
   .cl-lib-stats { grid-template-columns: 1fr; }
   .cl-rstats { grid-template-columns: repeat(3, 1fr); }
+  .lib-hours-grid { grid-template-columns: 1fr; }
+  .lib-committee-grid { grid-template-columns: 1fr; }
+  .lib-staff-grid { grid-template-columns: 1fr; }
+  .lib-services-grid { grid-template-columns: 1fr; }
 }

@@ -73,7 +73,7 @@ const Contact = () => {
               <div>
                 <div className="c-title">Address</div>
                 <div className="c-text">
-                  SRM IST, Irungalur, Trichy – 621105, Tamil Nadu
+                 SRM institute of Science & Technology (SRMIST) Tiruchirappalli Campus , Deemed to be University (Formerly SRM University) SRM Nagar, Trichy-Chennai highway, Near Samayapuram Trichy - 621105, Tamil Nadu , India.
                 </div>
               </div>
             </div>
@@ -82,7 +82,7 @@ const Contact = () => {
               <div className="c-ico"><FaPhone color="#c8952a" /></div>
               <div>
                 <div className="c-title">Phone</div>
-                <div className="c-text">+91 431 400 2000</div>
+                <div className="c-text">1800 202 4565</div>
               </div>
             </div>
 

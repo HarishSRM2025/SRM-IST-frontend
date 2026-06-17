@@ -32,10 +32,7 @@ const Contact = () => {
                   <div>
                     <h4 style={{ margin: '0 0 5px 0', color: 'var(--navy)', fontSize: '16px' }}>Campus Address</h4>
                     <p style={{ margin: 0, color: 'var(--gray)', lineHeight: '1.6' }}>
-                      SRM Institute of Science and Technology,<br />
-                      Tiruchirappalli Campus,<br />
-                      SRM Nagar, Trichy - Chennai Highway,<br />
-                      Irungalur Village, Trichy - 621 105.
+                     SRM institute of Science & Technology (SRMIST) Tiruchirappalli Campus , Deemed to be University (Formerly SRM University) SRM Nagar, Trichy-Chennai highway, Near Samayapuram Trichy - 621105, Tamil Nadu , India.
                     </p>
                   </div>
                 </div>
@@ -44,17 +41,11 @@ const Contact = () => {
                   <div style={{ color: 'var(--gold)', fontSize: '20px' }}><FaPhoneAlt /></div>
                   <div>
                     <h4 style={{ margin: '0 0 5px 0', color: 'var(--navy)', fontSize: '16px' }}>Phone Numbers</h4>
-                    <p style={{ margin: 0, color: 'var(--gray)' }}>+91 431 2250200 / +91 97868 62222</p>
+                    <p style={{ margin: 0, color: 'var(--gray)' }}>1800 202 4565</p>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-                  <div style={{ color: 'var(--gold)', fontSize: '20px' }}><FaEnvelope /></div>
-                  <div>
-                    <h4 style={{ margin: '0 0 5px 0', color: 'var(--navy)', fontSize: '16px' }}>Email Address</h4>
-                    <p style={{ margin: 0, color: 'var(--gray)' }}>admissions@ist.srmtrichy.edu.in</p>
-                  </div>
-                </div>
+                
               </div>
 
               {/* Map */}
