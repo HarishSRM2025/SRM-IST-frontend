@@ -4,7 +4,7 @@ import { FaEye, FaRocket } from "react-icons/fa";
 // Actually, let's use the same image from the home component for consistency
 import vissionImage from "../../assets/images/home/vission.png";
 
-const VisionMission = () => {
+const VisionMission = ({ vision, mission }) => {
   return (
     <section className="vision-section" id="vision">
       <div className="wrap">
@@ -26,7 +26,7 @@ const VisionMission = () => {
               </div>
               <div className="vis-card-title">Our Vision</div>
               <p className="vis-card-text">
-                To emerge as a premier institution recognized globally for academic excellence, innovative research, and producing socially responsible professionals who are equipped to meet the challenges of the future.
+                {vision || "To emerge as a premier institution recognized globally for academic excellence, innovative research, and producing socially responsible professionals who are equipped to meet the challenges of the future."}
               </p>
             </div>
             
@@ -52,7 +52,7 @@ const VisionMission = () => {
               </div>
               <div className="vis-card-title">Our Mission</div>
               <p className="vis-card-text">
-                Our mission is to disseminate knowledge through rigorous academic programs, foster a culture of inquiry and innovation, and build strong linkages with industry and society to create impactful solutions.
+                {mission || "Our mission is to disseminate knowledge through rigorous academic programs, foster a culture of inquiry and innovation, and build strong linkages with industry and society to create impactful solutions."}
               </p>
             </div>
           </div>

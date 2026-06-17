@@ -5,8 +5,30 @@ import { FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 import { IoLogoYoutube } from "react-icons/io";
 import { HiOutlineSpeakerphone } from "react-icons/hi";
 import { MdClose } from "react-icons/md";
-const Topbar = () => {
+const Topbar = ({ announcements = [] }) => {
   const [isAnnouncementsOpen, setIsAnnouncementsOpen] = useState(false);
+
+  const isUpcomingEvent = (item) => {
+    const status = String(item.status || '').toLowerCase();
+    const eventTime = item.eventDateTime ? new Date(item.eventDateTime).getTime() : NaN;
+    return status.includes('upcoming') || (!Number.isNaN(eventTime) && eventTime > Date.now());
+  };
+
+  const upcomingAnnouncements = announcements.filter(isUpcomingEvent);
+  const otherAnnouncements = announcements.filter((item) => !isUpcomingEvent(item));
+ console.log("upcomingAnnouncements",upcomingAnnouncements);
+ console.log("otherAnnouncements",otherAnnouncements);
+  // Group announcements by type
+  const grouped = otherAnnouncements.reduce((acc, item) => {
+    const typeLabel = item.type 
+      ? item.type.charAt(0).toUpperCase() + item.type.slice(1) 
+      : 'Other';
+    if (!acc[typeLabel]) {
+      acc[typeLabel] = [];
+    }
+    acc[typeLabel].push(item);
+    return acc;
+  }, {});
 
   return (
     <div id="topbar" className="dark-topbar">
@@ -30,9 +52,22 @@ const Topbar = () => {
           onMouseOver={(e) => e.currentTarget.stop()}
           onMouseOut={(e) => e.currentTarget.start()}
         >
-          <span className="marquee-item">Application Open for UG / PG / UG NRI / Foreign/ Research Programmes 2026 – 27 – Apply Now</span>
-          <span className="marquee-item">SRMJEEE 2026 – Admit Card Download</span>
-          <span className="marquee-item">B.Tech Foreign 2026 (July session) – Apply Now</span>
+            <span className="marquee-item"><Link to={"/admission"} style={{textDecoration:'none',color:"#fff"}}>Application Open for UG / PG / UG NRI / Foreign/ Research Programmes 2026 – 27 – Apply Now</Link></span>
+          {announcements.length > 0 ? (
+            announcements.map((ann) => (
+              <span className="marquee-item" key={ann._id || ann.id}>
+                <Link to={`/event/${ann._id || ann.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                  {ann.name} – click for details
+                </Link>
+              </span>
+            ))
+          ) : (
+            <>
+              <span className="marquee-item">Application Open for UG / PG / UG NRI / Foreign/ Research Programmes 2026 – 27 – Apply Now</span>
+              <span className="marquee-item">SRMJEEE 2026 – Admit Card Download</span>
+              <span className="marquee-item">B.Tech Foreign 2026 (July session) – Apply Now</span>
+            </>
+          )}
         </marquee>
       </div>
 
@@ -60,38 +95,96 @@ const Topbar = () => {
           </div>
           
           <div className="announcements-content">
-            <Link to="#" className="announcement-link top-link">
-              <FaArrowCircleRight className="a-arrow" />
-              <span>Application Open for UG / PG / UG NRI / Foreign/ Research Programmes 2026 – 27 – Apply Now</span>
-            </Link>
+            {announcements.length > 0 ? (
+              <>
+               <Link to="#" className="announcement-link top-link">
+                  <FaArrowCircleRight className="a-arrow" />
+                  <span>Application Open for UG / PG / UG NRI / Foreign/ Research Programmes 2026 – 27 – Apply Now</span>
+                </Link>
 
-            <div className="announcement-category">
-              <h3 className="category-title">Admission Open</h3>
-              <ul className="category-list">
-                <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Undergraduate Programmes 2026</Link></li>
-                <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Postgraduate Programmes 2026</Link></li>
-                <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Ph.D. Admissions 2026</Link></li>
-              </ul>
-            </div>
+                <div className="announcement-category">
+                  <h3 className="category-title">Admission Open</h3>
+                  <ul className="category-list">
+                    <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Undergraduate Programmes 2026</Link></li>
+                    <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Postgraduate Programmes 2026</Link></li>
+                    <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Ph.D. Admissions 2026</Link></li>
+                  </ul>
+                </div>
 
-            <div className="announcement-category">
-              <h3 className="category-title">Hiring</h3>
-              <ul className="category-list">
-                <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Faculty Positions (Multiple Departments)</Link></li>
-                <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Non-Teaching Staff Vacancies</Link></li>
-                <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Research Assistant Opportunities</Link></li>
-              </ul>
-            </div>
+                <div className="announcement-category">
+                  <h3 className="category-title">Hiring</h3>
+                  <ul className="category-list">
+                    <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Faculty Positions (Multiple Departments)</Link></li>
+                    <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Non-Teaching Staff Vacancies</Link></li>
+                    <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Research Assistant Opportunities</Link></li>
+                  </ul>
+                </div>
 
-            <div className="announcement-category">
-              <h3 className="category-title">Upcoming Event</h3>
-              <ul className="category-list">
-                <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> International Conference on Emerging Technologies</Link></li>
-                <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Annual Tech Fest 2026</Link></li>
-                <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Alumni Meet & Greet</Link></li>
-              </ul>
-            </div>
-            
+                {upcomingAnnouncements.length > 0 && (
+                  <div className="announcement-category">
+                    <h3 className="category-title">Upcoming Events</h3>
+                    <ul className="category-list">
+                      {upcomingAnnouncements.map((ann) => (
+                        <li key={ann._id || ann.id}>
+                          <Link to={`/event/${ann._id || ann.id}`} onClick={() => setIsAnnouncementsOpen(false)}>
+                            <FaArrowCircleRight className="a-arrow" /> {ann.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {otherAnnouncements.length > 0 && (
+                  <div className="announcement-category">
+                    <h3 className="category-title">Upcoming Events</h3>
+                    <ul className="category-list">
+                      {otherAnnouncements.map((ann) => (
+                        <li key={ann._id || ann.id}>
+                          <Link to={`/event/${ann._id || ann.id}`} onClick={() => setIsAnnouncementsOpen(false)}>
+                            <FaArrowCircleRight className="a-arrow" /> {ann.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </>
+            ) : (
+              <>
+                <Link to="#" className="announcement-link top-link">
+                  <FaArrowCircleRight className="a-arrow" />
+                  <span>Application Open for UG / PG / UG NRI / Foreign/ Research Programmes 2026 – 27 – Apply Now</span>
+                </Link>
+
+                <div className="announcement-category">
+                  <h3 className="category-title">Admission Open</h3>
+                  <ul className="category-list">
+                    <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Undergraduate Programmes 2026</Link></li>
+                    <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Postgraduate Programmes 2026</Link></li>
+                    <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Ph.D. Admissions 2026</Link></li>
+                  </ul>
+                </div>
+
+                <div className="announcement-category">
+                  <h3 className="category-title">Hiring</h3>
+                  <ul className="category-list">
+                    <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Faculty Positions (Multiple Departments)</Link></li>
+                    <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Non-Teaching Staff Vacancies</Link></li>
+                    <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Research Assistant Opportunities</Link></li>
+                  </ul>
+                </div>
+
+                <div className="announcement-category">
+                  <h3 className="category-title">Upcoming Event</h3>
+                  <ul className="category-list">
+                    <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> International Conference on Emerging Technologies</Link></li>
+                    <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Annual Tech Fest 2026</Link></li>
+                    <li><Link to="#"><FaArrowCircleRight className="a-arrow" /> Alumni Meet & Greet</Link></li>
+                  </ul>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}

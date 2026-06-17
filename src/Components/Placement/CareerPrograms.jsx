@@ -13,25 +13,25 @@ const CareerPrograms = () => {
                 <div className="pl-list-ico">
                     <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </div>
-                Soft skills training starting from the first year to build communication and teamwork skills.
+                Regular soft skills and personality development workshops to build confidence, communication, and workplace readiness
             </li>
             <li>
                 <div className="pl-list-ico">
                     <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </div>
-                Aptitude and reasoning classes specifically tailored to recruitment tests.
+                Mock interviews and group discussion sessions designed to prepare students for real-world recruitment processes
             </li>
             <li>
                 <div className="pl-list-ico">
                     <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </div>
-                Domain-specific technical sessions.
+                Engaging hackathons, quizzes, and leadership activities that encourage innovation, teamwork, and problem-solving skills
             </li>
             <li>
                 <div className="pl-list-ico">
                     <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </div>
-                Mock interviews by industry experts to simulate actual interview environments.
+                Industry-aligned technical training sessions to keep students updated with the latest tools, technologies, and trends
             </li>
         </ul>
       </div>

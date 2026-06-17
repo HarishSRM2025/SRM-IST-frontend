@@ -1,29 +1,48 @@
 import React from 'react';
+import img1 from '../../assets/images/internationalAffairs/expertsTalk/1.jpg';
+import img2 from '../../assets/images/internationalAffairs/expertsTalk/2.jpg';
+import img3 from '../../assets/images/internationalAffairs/expertsTalk/3.jpg';
+import img4 from '../../assets/images/internationalAffairs/expertsTalk/4.jpg';
+import img5 from '../../assets/images/internationalAffairs/expertsTalk/5.jpg';
+import img6 from '../../assets/images/internationalAffairs/expertsTalk/6.jpg';
+
+import pdf1 from '../../assets/images/internationalAffairs/pdf-expertTalk/1.pdf';
+import pdf2 from '../../assets/images/internationalAffairs/pdf-expertTalk/2.pdf';
+import pdf3 from '../../assets/images/internationalAffairs/pdf-expertTalk/3.pdf';
+import pdf4 from '../../assets/images/internationalAffairs/pdf-expertTalk/4.pdf';
+import pdf5 from '../../assets/images/internationalAffairs/pdf-expertTalk/5.pdf';
+import pdf6 from '../../assets/images/internationalAffairs/pdf-expertTalk/6.pdf';
 
 const talks = [
   {
     title: "IoT-Driven Green Energy Architectures: Edge Electronics for Sustainable Smart Buildings",
-    img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&auto=format&fit=crop&q=60"
+    img: img1,
+    pdf: pdf1
   },
   {
     title: "Modern Neural Network Architecture",
-    img: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&auto=format&fit=crop&q=60"
+    img: img2,
+    pdf: pdf2
   },
   {
     title: "Your Pathway to the USA: Exploring Education Opportunities at Northeastern University",
-    img: "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=500&auto=format&fit=crop&q=60"
+    img: img3,
+    pdf: pdf3
   },
   {
     title: "5-day Micro-Credential Course on Technology and Practice of 5G/B5G Core Networks",
-    img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=500&auto=format&fit=crop&q=60"
+    img: img4,
+    pdf: pdf4
   },
   {
     title: "Enhancing the Quality and Impact of Research Proposals",
-    img: "https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?w=500&auto=format&fit=crop&q=60"
+    img: img5,
+    pdf: pdf5
   },
   {
     title: "Hybrid Intelligence for Mobile Robots and Manipulators",
-    img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=500&auto=format&fit=crop&q=60"
+    img: img6,
+    pdf: pdf6
   }
 ];
 
@@ -52,6 +71,7 @@ const IRExpertTalks = () => {
             }}
             onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-10px)'; e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.1)'; }}
             onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.05)'; }}
+            onClick={() => window.open(talk.pdf, '_blank')}
             >
               <div style={{ height: '220px', position: 'relative' }}>
                 <img src={talk.img} alt={talk.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />

@@ -27,7 +27,7 @@ const Overview = () => {
               SRM Institute of Science and Technology, Tiruchirappalli have taken various research initiatives to mobilize the available knowledge resources for research and also, to come up strongly with innovative solutions.
             </p>
             <p style={{ marginBottom: "14px", fontWeight: "600", color: "var(--navy)" }}>
-              Faculty and students are actively involved in research, as the university is:
+             Faculty and students are actively involved in research, as the university is
             </p>
             <ul style={{ listStyleType: "none", paddingLeft: "0", color: "#555", fontSize: "14px", lineHeight: "1.8" }}>
               <li style={{ position: "relative", paddingLeft: "15px", marginBottom: "8px" }}>
@@ -40,7 +40,7 @@ const Overview = () => {
               </li>
               <li style={{ position: "relative", paddingLeft: "15px", marginBottom: "8px" }}>
                 <span style={{ position: "absolute", left: 0, top: "2px", color: "var(--gold)" }}>•</span>
-                Actively involved in a research projects that have nation building and public cause at their heart like for instance rural healthcare, among others.
+                Actively involved in a research projects that have nation building and public cause at their heart like for instance rural   healthcare, among others.
               </li>
             </ul>
           </div>

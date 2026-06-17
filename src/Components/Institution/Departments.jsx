@@ -1,21 +1,24 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Departments = () => {
+const Departments = ({ schools = [] }) => {
   const navigate = useNavigate();
 
-  const departments = [
-    { name: "Computer Science Engineering", code: "CSE" },
-    { name: "Electronics & Communication Engineering", code: "ECE" },
-    { name: "Mechanical Engineering", code: "ME" },
-    { name: "Civil Engineering", code: "CE" },
-    { name: "Information Technology", code: "IT" },
-    { name: "Artificial Intelligence & Data Science", code: "AI&DS" },
-    { name: "Electrical & Electronics Engineering", code: "EEE" },
-    { name: "Biomedical Engineering", code: "BME" },
-    { name: "Management Studies", code: "MBA" },
-    { name: "Science & Humanities", code: "S&H" },
-  ];
+  const openDepartment = (school) => {
+    navigate('/departments', {
+      state: {
+        deptName: school.name,
+        deptSlug: school.slug,
+        deptCode: school.code || school.slug,
+        sourceType: 'school',
+        schoolId: school._id,
+        schoolDivisionId: null
+      }
+    });
+  };
+
+  if (schools.length === 0) {
+    return null;
+  }
 
   return (
     <section className="ac-section" id="departments" style={{ backgroundColor: "var(--cream)" }}>
@@ -28,18 +31,21 @@ const Departments = () => {
           <div className="gold-bar"></div>
         </div>
 
-        <div className="dept-list" style={{ marginTop: '40px', gap: '15px' }}>
-          {departments.map((dept, index) => (
-            <button
-              key={index}
-              onClick={() => navigate('/departments', { state: { deptName: dept.name, deptCode: dept.code } })}
-              type="button"
-              className="dept-tile"
-              style={{ padding: '16px 24px', fontSize: '15px' }}
-            >
-              {dept.name}
-            </button>
-          ))}
+        <div style={{ marginTop: '40px', display: 'grid', gap: '28px' }}>
+          <div className="dept-list" style={{ gap: '15px' }}>
+            {schools.map((school) => (
+              <button
+                key={school._id}
+                onClick={() => openDepartment(school)}
+                type="button"
+                className="dept-tile"
+                title={school.about || school.name}
+                style={{ padding: '16px 24px', fontSize: '15px' }}
+              >
+                {school.name}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>

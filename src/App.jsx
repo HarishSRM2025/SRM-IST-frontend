@@ -6,11 +6,13 @@ import Header from './Components/Common/Header'
 import Footer from './Components/Common/Footer'
 import Home from './Pages/Home'
 import DeptPage from './Pages/DeptPage';
+import DivisionPage from './Pages/DivisionPage';
 import Research from './Pages/Research';
 import Placement from './Pages/Placement';
 import SponsoredResearch from './Pages/SponsoredResearch';
 import CenterDetails from './Pages/CenterDetails';
 import AboutUs from './Pages/AboutUs';
+import Policy from './Pages/Policy';
 import CampusLife from './Pages/CampusLife';
 import NewsAndEvents from './Pages/NewsAndEvents';
 import Contact from './Pages/Contact';
@@ -22,6 +24,8 @@ import Examcell from './Pages/Examcell';
 import Careers from './Pages/Careers';
 import ScrollToTop from './Components/Common/ScrollToTop';
 import WhatsAppFloat from './Components/Common/WhatsAppFloat';
+import PlacementPage from './Pages/CatapultingCareers';
+import CareerDevelopmentCentre from './Pages/CareerDevelopmentCentre';
 
 const App = () => {
   return (
@@ -31,9 +35,13 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/departments" element={<DeptPage />} />
+        <Route path="/division-details" element={<DivisionPage />} />
         <Route path="/research" element={<Research/>} />
         <Route path="/placement" element={<Placement/>} />
+        <Route path='/placement/captapulating-careers' element={<PlacementPage/>} />
+        <Route path="/placement/career-development-centre" element={<CareerDevelopmentCentre />} />
         <Route path="/about" element={<AboutUs/>} />
+        <Route path="/policy" element={<Policy/>} />
         <Route path="/campus-life" element={<CampusLife/>} />
         <Route path="/news-and-events" element={<NewsAndEvents/>} />
         <Route path="/contact" element={<Contact/>} />

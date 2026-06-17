@@ -20,7 +20,7 @@ const AboutUs = () => {
 
       <Overview />
       <ThrivingCampus />
-      <Placements />
+      {/* <Placements /> */}
       <CampusFacilities />
       <History />
     </div>

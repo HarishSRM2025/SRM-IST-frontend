@@ -10,19 +10,19 @@ const StatsSection = () => {
 
         <div className="pl-stats-grid">
             <div className="pl-stat-col">
-                <h4>Dream Offers</h4>
-                <p>2100</p>
+                <h4>Companies Visited</h4>
+                <p>2193</p>
             </div>
             <div className="pl-stat-col">
                 <h4>Highest Salary</h4>
-                <p>52 LPA</p>
+                <p>53 LPA</p>
             </div>
             <div className="pl-stat-col">
-                <h4>Super Dream</h4>
+                <h4>Global Offers</h4>
                 <p>1</p>
             </div>
             <div className="pl-stat-col">
-                <h4>Marquee Dream</h4>
+                <h4>20 LPA & Above</h4>
                 <p>1</p>
             </div>
         </div>

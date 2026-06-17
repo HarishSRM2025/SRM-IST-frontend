@@ -1,15 +1,23 @@
 import React from "react";
 import { FaFileAlt } from "react-icons/fa";
 
+import pdf1 from "../../assets/images/research/pdf-policies/1.pdf";
+import pdf2 from "../../assets/images/research/pdf-policies/2.pdf";
+import pdf3 from "../../assets/images/research/pdf-policies/3.pdf";
+import pdf4 from "../../assets/images/research/pdf-policies/4.pdf";
+import pdf5 from "../../assets/images/research/pdf-policies/5.pdf";
+import pdf6 from "../../assets/images/research/pdf-policies/6.pdf";
+import pdf7 from "../../assets/images/research/pdf-policies/7.pdf";
+
 const Policies = () => {
   const policiesList = [
-    "Policy on Promotion of Research",
-    "Policy on Chemical and Hazardous Waste disposal",
-    "Policy on Incentives",
-    "Policy on Plagiarism",
-    "Policy on IPR",
-    "Policy on Consultancy",
-    "Institutional Code of Ethics for Research"
+    { title: "Policy on Promotion of Research", pdf: pdf1 },
+    { title: "Policy on Chemical and Hazardous Waste disposal", pdf: pdf2 },
+    { title: "Policy on Incentives", pdf: pdf3 },
+    { title: "Policy on Plagiarism", pdf: pdf4 },
+    { title: "Policy on IPR", pdf: pdf5 },
+    { title: "Policy on Consultancy", pdf: pdf6 },
+    { title: "Institutional Code of Ethics for Research", pdf: pdf7 }
   ];
 
   return (
@@ -36,10 +44,11 @@ const Policies = () => {
             }}
             onMouseOver={(e) => { e.currentTarget.style.transform = "translateY(-5px)"; e.currentTarget.style.boxShadow = "0 8px 15px rgba(0,0,0,0.2)"; }}
             onMouseOut={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)"; }}
+            onClick={() => window.open(policy.pdf, '_blank')}
             >
               <FaFileAlt style={{ color: "var(--navy)", fontSize: "24px", flexShrink: 0 }} />
               <span style={{ color: "var(--navy)", fontSize: "14px", fontWeight: "700", lineHeight: "1.4" }}>
-                {policy}
+                {policy.title}
               </span>
             </div>
           ))}

@@ -141,3 +141,135 @@
     top: 20px;
   }
 }
+
+/* Policy Page */
+.policy-section {
+  background: var(--cream);
+}
+
+.policy-intro {
+  max-width: 850px;
+  margin-bottom: 36px;
+}
+
+.policy-intro .s-title {
+  margin-bottom: 18px;
+}
+
+.policy-intro p,
+.policy-card p,
+.policy-note p {
+  color: #4b5563;
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+.policy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.policy-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 26px;
+  min-height: 230px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.policy-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(228, 179, 22, 0.55);
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
+}
+
+.policy-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(12, 77, 162, 0.08);
+  color: var(--navy);
+  font-size: 22px;
+  margin-bottom: 18px;
+}
+
+.policy-card h3 {
+  color: var(--navy);
+  font-size: 20px;
+  margin: 0 0 12px;
+  font-family: 'Playfair Display', serif;
+}
+
+.policy-card p {
+  margin: 0;
+}
+
+.policy-note {
+  margin-top: 42px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.policy-note h3 {
+  color: var(--navy);
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  margin: 8px 0 10px;
+}
+
+.policy-note p {
+  margin: 0;
+  max-width: 760px;
+}
+
+.policy-contact-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 130px;
+  min-height: 44px;
+  padding: 12px 20px;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 4px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.policy-contact-link:hover {
+  background: #083b7d;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+  .policy-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .policy-note {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .policy-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .policy-card {
+    min-height: auto;
+  }
+}

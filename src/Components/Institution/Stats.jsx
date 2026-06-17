@@ -1,17 +1,66 @@
-import React, { useEffect, useRef, useState } from "react";
-import { FaBook, FaChalkboardTeacher, FaUserGraduate } from "react-icons/fa";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
-const Stats = () => {
+const Stats = ({ institutionId }) => {
   const sectionRef = useRef(null);
   const [start, setStart] = useState(false);
-
-  const [count1, setCount1] = useState(0);
-  const [count2, setCount2] = useState(0);
-  const [count3, setCount3] = useState(0);
+  const [stats, setStats] = useState(null);
+  const [counts, setCounts] = useState([]);
 
   useEffect(() => {
+    const fetchStats = async () => {
+      if (!institutionId) {
+        setStats(null);
+        return;
+      }
+
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/institution/stats/getall`);
+        const json = await res.json();
+
+        if (json.success && json.data) {
+          const records = Array.isArray(json.data) ? json.data : [json.data];
+          const match = records.find((record) => {
+            const recordInstituteId = typeof record.instituteId === "object"
+              ? record.instituteId?._id
+              : record.instituteId;
+            return recordInstituteId === institutionId;
+          });
+
+          if (match?.instituteStats?.length) {
+            setStats(match.instituteStats.filter((stat) => stat.name && Number.isFinite(Number(stat.value))));
+          } else {
+            setStats(null);
+          }
+        } else {
+          setStats(null);
+        }
+      } catch (err) {
+        console.error("Failed to fetch institute stats", err);
+        setStats(null);
+      }
+    };
+
+    fetchStats();
+  }, [institutionId]);
+
+  useEffect(() => {
+    setCounts((stats || []).map(() => 0));
+    setStart(false);
+  }, [stats]);
+
+  useEffect(() => {
+    if (!stats?.length) return;
+
     const current = sectionRef.current;
     if (!current) return;
+
+    const currentRect = current.getBoundingClientRect();
+    const isAlreadyVisible = currentRect.top < window.innerHeight && currentRect.bottom > 0;
+
+    if (isAlreadyVisible) {
+      setStart(true);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -29,7 +78,12 @@ const Stats = () => {
     observer.observe(current);
 
     return () => observer.disconnect();
-  }, []);
+  }, [stats]);
+
+  const targetValues = useMemo(
+    () => (stats || []).map((stat) => Number(stat.value) || 0),
+    [stats]
+  );
 
   useEffect(() => {
     if (!start) return;
@@ -42,17 +96,21 @@ const Stats = () => {
       const progress = time - startTime;
       const percent = Math.min(progress / duration, 1);
 
-      setCount1(Math.floor(percent * 150));
-      setCount2(Math.floor(percent * 50));
-      setCount3(Math.floor(percent * 3500));
+      setCounts(targetValues.map((value) => Math.floor(percent * value)));
 
       if (percent < 1) {
         requestAnimationFrame(animate);
       }
     };
 
-    requestAnimationFrame(animate);
-  }, [start]);
+    const animationFrame = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, [start, targetValues]);
+
+  if (!stats?.length) {
+    return null;
+  }
 
   return (
     <section className="stats-section" ref={sectionRef}>
@@ -64,28 +122,12 @@ const Stats = () => {
           <div className="gold-bar" style={{ margin: '15px auto 0' }}></div>
         </div>
         <div className="stats-row">
-
-          {/* Stat 1 */}
-          <div className="stat-box">
-            <div className="stat-ico"><FaChalkboardTeacher style={{ fontSize: '36px', color: 'var(--gold)' }} /></div>
-            <div className="stat-num">{count1}+</div>
-            <div className="stat-lbl">Expert Faculty</div>
-          </div>
-
-          {/* Stat 2 */}
-          <div className="stat-box">
-            <div className="stat-ico"><FaBook style={{ fontSize: '36px', color: 'var(--gold)' }} /></div>
-            <div className="stat-num">{count2}+</div>
-            <div className="stat-lbl">Programs Offered</div>
-          </div>
-
-          {/* Stat 3 */}
-          <div className="stat-box">
-            <div className="stat-ico"><FaUserGraduate style={{ fontSize: '36px', color: 'var(--gold)' }} /></div>
-            <div className="stat-num">{count3}+</div>
-            <div className="stat-lbl">Successful Alumni</div>
-          </div>
-
+          {stats.map((stat, index) => (
+            <div className="stat-box" key={`${stat.name}-${index}`}>
+              <div className="stat-num">{counts[index] || 0}+</div>
+              <div className="stat-lbl">{stat.name}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

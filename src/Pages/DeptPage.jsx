@@ -1,27 +1,100 @@
 import DeptAchievements from "../Components/DeptPage/DeptAchievements";
+import DeptDivisions from "../Components/DeptPage/DeptDivisions";
 import DeptEvents from "../Components/DeptPage/DeptEvents";
 import DeptFaculty from "../Components/DeptPage/DeptFaculty";
 import DeptHero from "../Components/DeptPage/DeptHero";
 import DeptProgrammes from "../Components/DeptPage/DeptProgrammes";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import '../css/Department.css';
+
+const defaultOptionalSections = {
+  about: false,
+  divisions: false,
+  faculty: false,
+  programmes: false,
+  events: false,
+  achievements: false,
+};
+
 export default function DeptPage() {
-  const sections = [ { label: "About", href: "#about" }, { label: "Programmes", href: "#programmes" }, { label: "Faculty", href: "#faculty" }, { label: "Facilities", href: "#facilities" }, { label: "Events", href: "#events" }, { label: "Achievements", href: "#achievements" }, { label: "Gallery", href: "#gallery" }, ];
+  const location = useLocation();
+  const pageKey = [
+    location.state?.deptName,
+    location.state?.deptSlug,
+    location.state?.schoolId,
+    location.state?.schoolDivisionId,
+    location.state?.sourceType,
+  ].join("|");
+  const [optionalSectionsState, setOptionalSectionsState] = useState({
+    pageKey,
+    visible: defaultOptionalSections,
+  });
+
+  const visibleOptionalSections = optionalSectionsState.pageKey === pageKey
+    ? optionalSectionsState.visible
+    : defaultOptionalSections;
+
+  const setOptionalSectionVisible = (section, isVisible) => {
+    setOptionalSectionsState((prev) => {
+      const currentVisible = prev.pageKey === pageKey ? prev.visible : defaultOptionalSections;
+
+      if (currentVisible[section] === isVisible && prev.pageKey === pageKey) {
+        return prev;
+      }
+
+      return {
+        pageKey,
+        visible: { ...currentVisible, [section]: isVisible },
+      };
+    });
+  };
+
+  // const sections = [
+  //   visibleOptionalSections.about && { label: "About", href: "#about" },
+  //   visibleOptionalSections.divisions && { label: "Divisions", href: "#divisions" },
+  //   visibleOptionalSections.programmes && { label: "Programmes", href: "#programmes" },
+  //   visibleOptionalSections.faculty && { label: "Faculty", href: "#faculty" },
+  //   visibleOptionalSections.events && { label: "Events", href: "#events" },
+  //   visibleOptionalSections.achievements && { label: "Achievements", href: "#achievements" },
+  // ].filter(Boolean);
+
   return (
     <>
-      {/* Section Nav */}
-      <nav className="dept-subnav">
-        <div className="dept-subnav-inner">
-          {sections.map((s, i) => (
-            <a key={i} href={s.href}>{s.label}</a>
-          ))}
-        </div>
-      </nav>
+      {/* {sections.length > 0 && (
+        <nav className="dept-subnav">
+          <div className="dept-subnav-inner">
+            {sections.map((s, i) => (
+              <a key={i} href={s.href}>{s.label}</a>
+            ))}
+          </div>
+        </nav>
+      )} */}
 
-      <section id="about"><DeptHero/></section>
-      <section id="faculty"><DeptFaculty/></section>
-      <section id="programmes"><DeptProgrammes /></section>
-      <section id="events"><DeptEvents/></section>
-      <section id="achievements"><DeptAchievements/></section>
+      <DeptHero
+        id="about"
+        onVisibilityChange={(isVisible) => setOptionalSectionVisible("about", isVisible)}
+      />
+      <DeptDivisions
+        id="divisions"
+        onVisibilityChange={(isVisible) => setOptionalSectionVisible("divisions", isVisible)}
+      />
+      <DeptFaculty
+        id="faculty"
+        onVisibilityChange={(isVisible) => setOptionalSectionVisible("faculty", isVisible)}
+      />
+      <DeptProgrammes
+        id="programmes"
+        onVisibilityChange={(isVisible) => setOptionalSectionVisible("programmes", isVisible)}
+      />
+      <DeptEvents
+        id="events"
+        onVisibilityChange={(isVisible) => setOptionalSectionVisible("events", isVisible)}
+      />
+      <DeptAchievements
+        id="achievements"
+        onVisibilityChange={(isVisible) => setOptionalSectionVisible("achievements", isVisible)}
+      />
     </>
   );
 }

@@ -1,14 +1,14 @@
 import React from 'react';
-import logo1 from '../../assets/images/internationAffair/1.jpg';
-import logo2 from '../../assets/images/internationAffair/2.jpg';
-import logo3 from '../../assets/images/internationAffair/3.jpg';
-import logo4 from '../../assets/images/internationAffair/4.jpg';
-import logo5 from '../../assets/images/internationAffair/5.jpg';
-import logo6 from '../../assets/images/internationAffair/6.jpg';
-import logo7 from '../../assets/images/internationAffair/7.jpg';
-import logo8 from '../../assets/images/internationAffair/8.jpg';
-import logo9 from '../../assets/images/internationAffair/9.jpg';
-import logo10 from '../../assets/images/internationAffair/10.jpg';
+import logo1 from '../../assets/images/internationalAffairs/collaboration/1.jpg';
+import logo2 from '../../assets/images/internationalAffairs/collaboration/2.jpg';
+import logo3 from '../../assets/images/internationalAffairs/collaboration/3.jpg';
+import logo4 from '../../assets/images/internationalAffairs/collaboration/4.jpg';
+import logo5 from '../../assets/images/internationalAffairs/collaboration/5.jpg';
+import logo6 from '../../assets/images/internationalAffairs/collaboration/6.jpg';
+import logo7 from '../../assets/images/internationalAffairs/collaboration/7.jpg';
+import logo8 from '../../assets/images/internationalAffairs/collaboration/8.jpg';
+import logo9 from '../../assets/images/internationalAffairs/collaboration/9.jpg';
+import logo10 from '../../assets/images/internationalAffairs/collaboration/10.jpg';
 
 const logos = [
   logo1, logo2, logo3, logo4, logo5, logo6, logo7, logo8, logo9, logo10

@@ -20,7 +20,7 @@ const WelcomeSection = () => {
                     <svg viewBox="0 0 24 24"><path d="M5 22h14M12 15v7M8 3h8a2 2 0 0 1 2 2v5a7 7 0 0 1-14 0V5a2 2 0 0 1 2-2z"></path></svg>
                 </div>
                 <div className="pl-card-val">144+</div>
-                <div className="pl-card-lbl">Placement Awards</div>
+                <div className="pl-card-lbl">Number of Roles</div>
             </div>
             <div className="pl-card-box">
                 <div className="pl-card-icon">
@@ -34,14 +34,21 @@ const WelcomeSection = () => {
                     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                 </div>
                 <div className="pl-card-val">24+</div>
-                <div className="pl-card-lbl">Global Placements</div>
+                <div className="pl-card-lbl">High Paying Offers</div>
             </div>
             <div className="pl-card-box">
                 <div className="pl-card-icon">
                     <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
                 </div>
-                <div className="pl-card-val">52 LPA</div>
-                <div className="pl-card-lbl">Highest Salary</div>
+                <div className="pl-card-val">53 LPA</div>
+                <div className="pl-card-lbl">Highest CTC</div>
+            </div>
+            <div className="pl-card-box">
+                <div className="pl-card-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                </div>
+                <div className="pl-card-val">5.7 LPA</div>
+                <div className="pl-card-lbl">Average CTC</div>
             </div>
         </div>
 
@@ -49,19 +56,19 @@ const WelcomeSection = () => {
         <ul className="pl-hl-list">
             <li className="pl-hl-item">
                 <svg viewBox="0 0 16 16"><path d="M13,2H3A1,1 0 0,0 2,3V6A4,4 0 0,0 6,10V12H4V14H12V12H10V10A4,4 0 0,0 14,6V3A1,1 0 0,0 13,2M12,6A2,2 0 0,1 10,8H6A2,2 0 0,1 4,6V4H12V6Z"/></svg> 
-                <span>230+ Recruiters visiting the campus every year</span>
+                <span>200+ Recruiters visit our campus every year</span>
             </li>
             <li className="pl-hl-item">
                 <svg viewBox="0 0 16 16"><path d="M13,2H3A1,1 0 0,0 2,3V6A4,4 0 0,0 6,10V12H4V14H12V12H10V10A4,4 0 0,0 14,6V3A1,1 0 0,0 13,2M12,6A2,2 0 0,1 10,8H6A2,2 0 0,1 4,6V4H12V6Z"/></svg> 
-                <span>1000+ Offers offering Rs. 5 Lakhs or more per annum</span>
+                <span>1000+ Offers rolled out to students across departments</span>
             </li>
             <li className="pl-hl-item">
                 <svg viewBox="0 0 16 16"><path d="M13,2H3A1,1 0 0,0 2,3V6A4,4 0 0,0 6,10V12H4V14H12V12H10V10A4,4 0 0,0 14,6V3A1,1 0 0,0 13,2M12,6A2,2 0 0,1 10,8H6A2,2 0 0,1 4,6V4H12V6Z"/></svg> 
-                <span>Exclusive Dream and Super Dream opportunities</span>
+                <span>Top Packages reaching impressive figures</span>
             </li>
             <li className="pl-hl-item">
                 <svg viewBox="0 0 16 16"><path d="M13,2H3A1,1 0 0,0 2,3V6A4,4 0 0,0 6,10V12H4V14H12V12H10V10A4,4 0 0,0 14,6V3A1,1 0 0,0 13,2M12,6A2,2 0 0,1 10,8H6A2,2 0 0,1 4,6V4H12V6Z"/></svg> 
-                <span>Dedicated training and assessment units for students</span>
+                <span>Consistent Growth in average salaries year after year</span>
             </li>
         </ul>
       </div>

@@ -13,25 +13,25 @@ const WhyChooseSRM = () => {
                 <div className="pl-list-ico">
                     <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </div>
-                Excellent placement record with top-tier companies offering incredible super dream and dream packages.
+                Centralized placement team with dedicated coordinators
             </li>
             <li>
                 <div className="pl-list-ico">
                     <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </div>
-                Industry-aligned curriculum and modern infrastructure equipped with cutting edge technology.
+                Strong alumni network across Fortune 500 companies
             </li>
             <li>
                 <div className="pl-list-ico">
                     <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </div>
-                Global tie-ups and international opportunities that foster a worldwide perspective for students.
+                Proven track record of successful placements
             </li>
             <li>
                 <div className="pl-list-ico">
                     <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </div>
-                Personalized mentoring and career guidance available constantly on campus.
+                Personalized mentoring and career guidance
             </li>
         </ul>
       </div>

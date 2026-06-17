@@ -1,5 +1,6 @@
 import React from 'react';
 import dean from '../../assets/placement_dean.jpeg';
+import { Link } from 'react-router-dom';
 
 const DeansMessage = () => {
   return (
@@ -33,24 +34,27 @@ const DeansMessage = () => {
         </div>
         <div>
           <ul className="pl-dean-list">
-                <li>
-                    Skill enhancement & training
-                </li>
-                <li>
-                    Industry interaction
-                </li>
-                <li>
-                    Placement Assistance
-                </li>
-                <li>
-                    Mock Interviews
-                </li>
-                <li>
-                    Resume preparation
-                </li>
-                <li>
-                    Alumni contact
-                </li>
+              <li>
+                 <Link to="/placement/captapulating-careers">Captapulating Careers</Link>
+              </li>
+              <li>
+                  <Link to="/placement/captapulating-careers#activities">Latest Activities</Link>
+              </li>
+              <li>
+                 <Link to="/research#mous">Industrial Collaborations</Link>
+              </li>
+              <li>
+                 <Link to="/placement/captapulating-careers#staff">Meet Our Staff</Link>
+              </li>
+              <li>
+                <Link to="/placement/career-development-centre">Career Development Centre</Link>
+              </li>
+              <li>
+                  <Link to='/placement/captapulating-careers#cdc-team'>The CDC Team</Link>
+              </li>
+              <li>
+                  <Link to="/placement/captapulating-careers#contact">Contact Us</Link>
+              </li>
             </ul>
         </div>
 

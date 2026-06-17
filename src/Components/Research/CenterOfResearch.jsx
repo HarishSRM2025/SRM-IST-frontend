@@ -1,36 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaAngleRight, FaRobot, FaDna, FaIndustry, FaNetworkWired, FaMobileAlt, FaMicrochip } from 'react-icons/fa';
+import { FaAngleRight } from 'react-icons/fa';
 
-const centers = [
-  { name: 'Center of Artificial Intelligence', icon: <FaRobot />, link: '/center/artificial-intelligence' },
-  { name: 'Center of Computational Biology', icon: <FaDna />, link: '/center/computational-biology' },
-  { name: 'Center of Industrial Robotics', icon: <FaIndustry />, link: '/center/industrial-robotics' },
-  { name: 'Center of IoT and Industrial Automation', icon: <FaNetworkWired />, link: '/center/iot-and-industrial-automation' },
-  { name: 'App Development Studio', icon: <FaMobileAlt />, link: '/center/app-development-studio' },
-  { name: 'Center of Chip Design', icon: <FaMicrochip />, link: '/center/chip-design' }
-];
+// Support either VITE_API_URL (full api root like http://host:port/api)
+// or VITE_API_BASE (base host like http://host:port)
+const apiRoot = import.meta.env.VITE_API_URL || `${import.meta.env.VITE_API_BASE || 'http://localhost:3000'}/api`;
 
 const CenterOfResearch = () => {
+  const [centers, setCenters] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCenters = async () => {
+      try {
+        const res = await fetch(`${apiRoot}/research`);
+        if (!res.ok) throw new Error(`Failed to load (${res.status})`);
+        const data = await res.json();
+        setCenters(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCenters();
+  }, []);
+
   return (
     <section style={{ padding: '80px 0', background: '#ffffff' }}>
       <div className="wrap" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', textAlign: 'center' }}>
-        
         <div style={{ marginBottom: "50px", textAlign: "left" }}>
           <span className="s-tag">FACILITIES</span>
           <h2 className="s-title">Centers of Excellence & <em>Research</em></h2>
           <div className="gold-bar"></div>
         </div>
 
+        {loading && <p>Loading centers...</p>}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
           gap: '30px'
         }}>
-          {centers.map((center, index) => (
-            <Link 
-              key={index} 
-              to={center.link}
+          {centers.map((center) => (
+            <Link
+              key={center._id}
+              to={`/center/${center._id}`}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -43,27 +60,10 @@ const CenterOfResearch = () => {
                 color: 'var(--navy)',
                 transition: 'all 0.3s ease',
                 border: '1px solid transparent',
-                cursor: 'pointer',
-                group: 'hover'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'translateY(-5px)';
-                e.currentTarget.style.background = '#ffffff';
-                e.currentTarget.style.boxShadow = '0 15px 35px rgba(0,0,0,0.06)';
-                e.currentTarget.style.border = '1px solid rgba(200, 149, 42, 0.3)';
-                e.currentTarget.querySelector('.icon-wrapper').style.background = 'var(--gold)';
-                e.currentTarget.querySelector('.icon-wrapper').style.color = '#fff';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.background = 'var(--lgray)';
-                e.currentTarget.style.boxShadow = 'none';
-                e.currentTarget.style.border = '1px solid transparent';
-                e.currentTarget.querySelector('.icon-wrapper').style.background = 'var(--navy)';
-                e.currentTarget.querySelector('.icon-wrapper').style.color = '#fff';
+                cursor: 'pointer'
               }}
             >
-              <div 
+              <div
                 className="icon-wrapper"
                 style={{
                   width: '64px',
@@ -79,27 +79,28 @@ const CenterOfResearch = () => {
                   transition: 'all 0.3s'
                 }}
               >
-                {center.icon}
+                {/* If the backend provides an icon field (e.g., emoji), it will render; otherwise show first letter */}
+                {center.icon || center.centerName?.charAt(0)}
               </div>
-              
-              <h3 style={{ 
-                fontSize: '18px', 
-                fontWeight: '700', 
+
+              <h3 style={{
+                fontSize: '18px',
+                fontWeight: '700',
                 lineHeight: '1.4',
                 fontFamily: "'Playfair Display', serif",
                 marginBottom: '10px'
               }}>
-                {center.name}
+                {center.centerName}
               </h3>
-              
-              <div style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '5px', 
-                color: 'var(--gold)', 
-                fontSize: '13px', 
-                fontWeight: '600', 
-                textTransform: 'uppercase', 
+
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '5px',
+                color: 'var(--gold)',
+                fontSize: '13px',
+                fontWeight: '600',
+                textTransform: 'uppercase',
                 letterSpacing: '1px',
                 marginTop: '10px'
               }}>

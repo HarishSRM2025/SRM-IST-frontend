@@ -2,7 +2,7 @@ import React from 'react';
 
 const Overview = () => {
   return (
-    <div className="dept-programmes">
+    <div className="dept-programmes" style={{backgroundColor:'#f8f6f1'}}>
       <div className="dept-programmes-inner">
         <span className="s-tag">SRMIST TRICHY</span>
         <h2 className="s-title">Overview of the <em>Organization</em></h2>

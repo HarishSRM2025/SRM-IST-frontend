@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Breadcrum from "../Common/Breadcrum";
 import { useLocation } from "react-router-dom";
 
@@ -119,16 +119,27 @@ const css = `
     display: grid;
     grid-template-columns: 280px 1fr;
     gap: 40px;
+    align-items: start;
   }
 
   .hod-card {
-    border: 1px solid var(--border);
-    background: white;
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+  }
+
+  .hod-card:hover {
+    transform: translateY(-5px);
   }
 
   .hod-img-placeholder {
-    height: 250px;
+    height: 350px;
+    width: 100%;
     background: #eee;
+    overflow: hidden;
   }
 
   @media (max-width: 900px) {
@@ -157,13 +168,146 @@ const highlights = [
   { title: "Placement Support", desc: "Career-focused training." },
 ];
 
-export default function DeptHero() {
+export default function DeptHero({ id, onVisibilityChange }) {
   const location = useLocation();
   const deptName = location.state?.deptName || "Computer Science Engineering";
   const deptCode = location.state?.deptCode || "CSE";
 
-  // Optional: style the last word or '&' part if you want it to match previous design,
-  // but just using the name directly is cleaner for dynamic content.
+  const [hodData, setHodData] = useState(null);
+  const [schoolData, setSchoolData] = useState(null);
+  const [divisionData, setDivisionData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  useEffect(() => {
+    const fetchHOD = async () => {
+      setLoading(true);
+      setSchoolData(null);
+      setDivisionData(null);
+      setHodData(null);
+      try {
+        const sourceType = location.state?.sourceType;
+        const schoolDivisionId = location.state?.schoolDivisionId;
+
+        // Fetch all schools
+        const schoolRes = await fetch(`${import.meta.env.VITE_API_URL}/schools/getall`);
+        if (!schoolRes.ok) throw new Error("Failed to fetch schools");
+        const schools = await schoolRes.json();
+        
+        // Find matching school
+        const deptSlug = location.state?.deptSlug;
+        let matchedSchool = null;
+
+        if (Array.isArray(schools)) {
+          if (location.state?.schoolId) {
+            matchedSchool = schools.find(s => s._id === location.state.schoolId);
+          }
+          // 1. Try slug exact match
+          if (!matchedSchool && deptSlug) {
+            matchedSchool = schools.find(s => s.slug && s.slug.toLowerCase() === deptSlug.toLowerCase());
+          }
+          // 2. Try exact name match
+          if (!matchedSchool) {
+            matchedSchool = schools.find(s => s.name && s.name.toLowerCase() === deptName.toLowerCase());
+          }
+          // 3. Try inclusion match: database school name in deptName (e.g., School of Computing in Computer Science Engineering)
+          if (!matchedSchool) {
+            matchedSchool = schools.find(s => s.name && (
+              deptName.toLowerCase().includes(s.name.toLowerCase()) || 
+              (s.name.toLowerCase().includes("computing") && deptName.toLowerCase().includes("computer")) ||
+              (s.name.toLowerCase().includes("management") && deptName.toLowerCase().includes("business"))
+            ));
+          }
+          // 4. Try reverse inclusion match: deptName in database school name
+          if (!matchedSchool) {
+            matchedSchool = schools.find(s => s.name && s.name.toLowerCase().includes(deptName.toLowerCase()));
+          }
+          // 5. Try first word keyword match
+          if (!matchedSchool) {
+            const firstWord = deptName.split(" ")[0].toLowerCase();
+            if (firstWord.length > 2) {
+              matchedSchool = schools.find(s => s.name && s.name.toLowerCase().includes(firstWord));
+            }
+          }
+        }
+
+        if (sourceType === 'schoolDivision' && schoolDivisionId) {
+          const divisionRes = await fetch(`${import.meta.env.VITE_API_URL}/school-division/get/${schoolDivisionId}`);
+          if (divisionRes.ok) {
+            const division = await divisionRes.json();
+            if (division?._id) {
+              setDivisionData(division);
+            }
+          }
+        }
+
+        if (matchedSchool) {
+          setSchoolData(matchedSchool);
+        }
+
+        if (sourceType === 'schoolDivision' && schoolDivisionId) {
+          const msgRes = await fetch(`${import.meta.env.VITE_API_URL}/school-division/hod-message/getall`);
+          if (msgRes.ok) {
+            const msgJson = await msgRes.json();
+            const msgList = Array.isArray(msgJson)
+              ? msgJson
+              : (msgJson.data ? (Array.isArray(msgJson.data) ? msgJson.data : [msgJson.data]) : []);
+
+            const match = msgList.find((m) => {
+              const messageDivisionId = typeof m.schoolDivisionId === "object" ? m.schoolDivisionId?._id : m.schoolDivisionId;
+              return messageDivisionId === schoolDivisionId;
+            });
+            if (match) {
+              setHodData(match);
+            }
+          }
+        } else if (matchedSchool) {
+          const msgRes = await fetch(`${import.meta.env.VITE_API_URL}/schools/hod-message/getall`);
+          if (msgRes.ok) {
+            const msgJson = await msgRes.json();
+            const msgList = Array.isArray(msgJson) 
+              ? msgJson 
+              : (msgJson.data ? (Array.isArray(msgJson.data) ? msgJson.data : [msgJson.data]) : []);
+            
+            const match = msgList.find((m) => {
+              const messageSchoolId = typeof m.school === "object" ? m.school?._id : m.school;
+              return messageSchoolId === matchedSchool._id;
+            });
+            if (match) {
+              setHodData(match);
+            }
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching HOD message data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHOD();
+  }, [deptName, location.state?.deptSlug, location.state?.schoolId, location.state?.schoolDivisionId, location.state?.sourceType]);
+
+  const hodName = hodData?.hodName || "";
+  const hodDesignation = hodData?.hodDesignation || "";
+  const message = hodData?.message || hodData?.hodMessage || "";
+  const hodImageFile = hodData?.hodImage?.split("\\").pop().split("/").pop();
+  const imageUrl = hodData?.hodImage
+    ? `${import.meta.env.VITE_API_URL.replace('/api', '')}/public/uploads/${hodImageFile}`
+    : "https://img.freepik.com/premium-vector/default-avatar-profile-icon-gray-placeholder-vector-illustration_514344-14757.jpg?w=360";
+
+  const MAX_LENGTH = 850;
+  const isLongMessage = message && message.length > MAX_LENGTH;
+  const displayMessage = isLongMessage && !isExpanded 
+    ? `${message.substring(0, MAX_LENGTH)}...` 
+    : message;
+  const aboutDepartment = divisionData?.about?.trim() || schoolData?.about?.trim() || "";
+
+  useEffect(() => {
+    if (!loading) {
+      onVisibilityChange?.(Boolean(aboutDepartment));
+    }
+  }, [aboutDepartment, loading, onVisibilityChange]);
 
   return (
     <>
@@ -172,71 +316,91 @@ export default function DeptHero() {
       {/* HERO */}
       <Breadcrum
         title={deptName}
-        paths={[{ name: 'Home', link: '/' }, { name: 'Departments', link: '/departments' }, { name: deptCode }]}
+        paths={[{ name: 'Home', link: '/' }, { name: 'Schools', link: '/' }, { name: deptCode }]}
         bgImage="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1920&auto=format&fit=crop&q=80"
       />
 
       {/* Overview */}
-      <section style={{ margin: "60px 0" }}>
-        <div className="dept-programmes-inner" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-          <div className="dept-section-header" style={{ marginBottom: '30px' }}>
-            <div>
-              <div className="section-label" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '10px' }}>Overview</div>
-              <h2 className="section-title" style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', fontWeight: '700', color: 'var(--navy)', margin: 0 }}>About the <em>Department</em></h2>
+      {aboutDepartment && (
+        <section id={id} style={{ margin: "60px 0" }}>
+          <div className="dept-programmes-inner" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+            <div className="dept-section-header" style={{ marginBottom: '30px' }}>
+              <div>
+                <div className="section-label" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '10px' }}>Overview</div>
+                <h2 className="section-title" style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', fontWeight: '700', color: 'var(--navy)', margin: 0 }}>About the <em>{deptName.split(' ')[0]}</em></h2>
+              </div>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "40px", alignItems: "start" }}>
+              <div style={{ fontSize: "1.1rem", lineHeight: "1.8", color: "var(--gray)", textAlign: 'justify', whiteSpace: 'pre-wrap' }}>
+                {aboutDepartment}
+              </div>
             </div>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "40px", alignItems: "start" }}>
-            <div style={{ fontSize: "1.1rem", lineHeight: "1.8", color: "var(--gray)", textAlign: 'justify' }}>
-              <p style={{ marginBottom: "20px" }}>
-                The Department of {deptName} is dedicated to producing highly skilled professionals and researchers who are equipped to meet the challenges of the rapidly evolving technological landscape. We strive for excellence in education, research, and innovation.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo optio eaque deserunt nesciunt recusandae dolorem nobis fugiat. Consectetur repellendus quis ipsum exercitationem aperiam, dolorum voluptate reprehenderit quo, quos ab vitae accusamus dolorem tempora? Eius impedit quidem maiores assumenda perspiciatis nobis nulla fugit possimus? Dolores quia dolorem officiis veniam obcaecati dolore maiores ipsa sit ratione et alias debitis quae aperiam, cupiditate nam soluta consequuntur minima enim animi nesciunt atque a quasi dolorum eius. Ad nam, temporibus necessitatibus blanditiis saepe sed, quia commodi sapiente, voluptas molestiae ullam sit earum dolores a quidem nesciunt quod! Aperiam, harum hic asperiores expedita repellat laborum alias?
-              </p>
-              <p>
-                Our curriculum is designed to provide a strong foundation in core concepts while offering flexibility to explore specialized areas through electives and project work. We collaborate closely with industry leaders to ensure our programs remain relevant and up-to-date.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* HOD */}
-      <section style={{ margin: "60px 0 0",backgroundColor:'#f8f6f1' ,padding:'50px 0'}}>
-        <div className="dept-programmes-inner">
+
+      {hodData && <section style={{ margin: "60px 0 0", backgroundColor: '#f8f6f1', padding: '50px 0' }}>
+        <div className="dept-programmes-inner" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
           <div className="dept-section-header">
             <div>
               <div className="section-label">Message from Head</div>
               <h2 className="section-title">Our <em>Head of Department</em></h2>
             </div>
           </div>
-        </div>
-        <div className="dept-hod-inner">
 
-          <div className="hod-card">
-            <div className="hod-img-placeholder">
-              <img
-                src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-gray-placeholder-vector-illustration_514344-14757.jpg?w=360"
-                alt="HOD"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover"
-                }}
-              />
+          <div className="dept-hod-inner">
+            <div className="hod-card">
+              <div className="hod-img-placeholder">
+                <img
+                  src={imageUrl}
+                  alt={hodName}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center top",
+                    display: "block"
+                  }}
+                />
+              </div>
+              <div className="hod-body-content">
+                <strong>{hodName}</strong>
+                <p>{hodDesignation}</p>
+              </div>
             </div>
-            <div className="hod-body-content">
-              <strong>Dr. Rajesh Kumar</strong>
-              <p>Head of Department</p>
+
+            <div>
+              <h2 className="section-title"><em>Welcome</em> Message</h2>
+              <p style={{ textAlign: 'justify', whiteSpace: 'pre-wrap' }}>
+                {displayMessage}
+                {isLongMessage && (
+                  <button 
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: 'var(--navy)',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      padding: '0',
+                      marginLeft: '8px',
+                      fontStyle: 'normal',
+                      fontSize: '14px',
+                      textDecoration: 'underline',
+                      fontFamily: 'inherit'
+                    }}
+                  >
+                    {isExpanded ? 'Read Less' : 'Read More'}
+                  </button>
+                )}
+              </p>
             </div>
           </div>
-
-          <div>
-            <h2 className="section-title"><em>Welcome</em> Message</h2>
-            <p style={{textAlign:'justify'}} >
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga impedit, aut est sunt corrupti veniam ipsum, culpa commodi numquam necessitatibus recusandae adipisci et nulla amet? Blanditiis ad perferendis dolor amet suscipit. Eaque officia tempora exercitationem. Impedit necessitatibus corrupti aperiam ratione ullam sed voluptatum quasi fugit id repudiandae architecto quas, ducimus deserunt delectus eligendi officiis doloremque dignissimos tempora velit! Minus doloremque maxime eaque vel exercitationem porro excepturi fugiat deserunt magnam sequi illo ad fuga in voluptas velit adipisci quisquam, molestiae architecto cupiditate nihil impedit natus nemo. Quo dolores a, quasi quia, doloribus dicta rerum obcaecati magnam distinctio amet repellendus illum quas exercitationem, ea aliquid voluptatum maiores voluptatibus alias dolore ratione et esse? Natus nisi perferendis aspernatur porro sint laborum eligendi? Est beatae harum nostrum fugit dolorem atque aliquam debitis vel, deserunt voluptate sunt dolore delectus consequatur totam ea quod dolores perspiciatis, ratione quam nobis eveniet sapiente, consectetur magnam. Dignissimos, sit maiores.
-            </p>
-          </div>
         </div>
-      </section>
+      </section>}
+      
     </>
   );
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import img from '../../assets/images/internationalAffairs/internationalAffairDean.jpg'
 
 const IRHead = () => {
   return (
@@ -14,11 +15,11 @@ const IRHead = () => {
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '50px', alignItems: 'center' }}>
           
           <div style={{ textAlign: 'center', width: '280px', background: '#fff', padding: '20px', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
-            <div style={{ width: '100%', height: '240px', background: '#f3f4f6', marginBottom: '20px', overflow: 'hidden', borderRadius: '8px' }}>
+            <div style={{ width: '100%', height: '240px', background: '#ffffffff', marginBottom: '20px', overflow: 'hidden', borderRadius: '8px' }}>
               <img 
-                src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-gray-placeholder-vector-illustration_514344-14757.jpg?w=360" 
+                src={img} 
                 alt="Dr. R. Sanmugasundaram" 
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                style={{ width: 'max-content', height: '100%', objectFit: 'cover' }} 
               />
             </div>
             <h4 style={{ color: 'var(--navy)', margin: '0 0 5px 0', fontSize: '1.2rem', fontWeight: 'bold' }}>Dr. R. Sanmugasundaram</h4>

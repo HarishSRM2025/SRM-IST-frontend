@@ -16,6 +16,11 @@ const EventHeader = ({ event }) => {
             {event.status}
           </div>
         )}
+        {event.announcement && (
+          <div style={{ display: 'inline-block', background: 'var(--gold)', color: 'var(--navy)', padding: '5px 15px', borderRadius: '20px', fontSize: '14px', fontWeight: 'bold' }}>
+            Announcement
+          </div>
+        )}
       </div>
     </div>
   );

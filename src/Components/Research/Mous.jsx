@@ -24,7 +24,7 @@ const companies = [
 
 const Mous = () => {
   return (
-    <section style={{ background: '#fff' }}>
+    <section id='mous' style={{ background: '#fff' }}>
       {/* Grid of Logos */}
       <div className="wrap" style={{ maxWidth: '1200px', margin: '0 auto', padding: '80px 20px' }}>
         

@@ -8,57 +8,8 @@ import {
   FaMicrochip,
 } from "react-icons/fa";
 
-export default function InstituteFacilities() {
-  const facilities = [
-    {
-      id: 1,
-      name: "Advanced Computing Lab",
-      icon: <FaServer />,
-      desc: "High-performance computing environment for ML and parallel processing.",
-      capacity: "60 Students",
-      equipment: ["GPU Workstations", "Linux Servers", "Network Switches"],
-    },
-    {
-      id: 2,
-      name: "Cybersecurity Research Lab",
-      icon: <FaShieldAlt />,
-      desc: "Dedicated lab for ethical hacking and security research.",
-      capacity: "30 Students",
-      equipment: ["Kali Linux", "Firewalls", "SIEM Tools"],
-    },
-    {
-      id: 3,
-      name: "AI & Robotics Studio",
-      icon: <FaRobot />,
-      desc: "Space for AI innovation and robotics development.",
-      capacity: "24 Students",
-      equipment: ["Arduino", "Raspberry Pi", "3D Printer"],
-    },
-    {
-      id: 4,
-      name: "Software Development Centre",
-      icon: <FaLaptopCode />,
-      desc: "Agile development workspace with real-world tools.",
-      capacity: "80 Students",
-      equipment: ["CI/CD", "Cloud Access", "Testing Tools"],
-    },
-    {
-      id: 5,
-      name: "Data Science Lab",
-      icon: <FaChartBar />,
-      desc: "Big data analytics and visualization lab.",
-      capacity: "45 Students",
-      equipment: ["Hadoop", "Spark", "Tableau"],
-    },
-    {
-      id: 6,
-      name: "IoT & Embedded Systems Lab",
-      icon: <FaMicrochip />,
-      desc: "Hands-on IoT and embedded systems lab.",
-      capacity: "30 Students",
-      equipment: ["NodeMCU", "FPGA", "Sensors"],
-    },
-  ];
+export default function InstituteFacilities({ facilities }) {
+  if (!facilities || facilities.length === 0) return null;
 
   return (
     <section className="dept-facilities" style={{backgroundColor:'#fff'}}>
@@ -74,32 +25,54 @@ export default function InstituteFacilities() {
 
         <div className="facilities-grid">
           {facilities.map((f) => (
-            <div className="facility-card" key={f.id}>
-              <div className="facility-img">
-                <div className="facility-icon">{f.icon}</div>
+            <div className="facility-card" key={f._id}>
+              <div 
+                className="facility-img" 
+                style={{
+                  backgroundImage: `url(${import.meta.env.VITE_API_URL.replace('/api', '')}/public/uploads/${f.infraImage})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  minHeight: '180px',
+                  display: 'flex',
+                  alignItems: 'flex-end',
+                  position: 'relative'
+                }}
+              >
+                {/* Gradient overlay to make text readable */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: 0, left: 0, right: 0, top: 0,
+                  background: 'linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0))'
+                }}></div>
 
-                <div className="facility-img-label">
-                  Capacity: {f.capacity}
-                </div>
+                {f.capacity && (
+                  <div className="facility-img-label" style={{ position: 'relative', zIndex: 1 }}>
+                    Capacity: {f.capacity} Persons
+                  </div>
+                )}
               </div>
 
               <div className="facility-body">
-                <div className="facility-name">{f.name}</div>
-                <div className="facility-desc">{f.desc}</div>
+                <div className="facility-name">{f.infraName}</div>
+                <div className="facility-desc">{f.infraDesc}</div>
 
-                <div className="facility-divider" />
+                {f.equipment?.length > 0 && (
+                  <>
+                    <div className="facility-divider" />
 
-                <div className="facility-equip-label">
-                  Equipment Available
-                </div>
-
-                <div className="facility-equip-list">
-                  {f.equipment.map((e, i) => (
-                    <div className="facility-equip-chip" key={i}>
-                      {e}
+                    <div className="facility-equip-label">
+                      Equipment Available
                     </div>
-                  ))}
-                </div>
+
+                    <div className="facility-equip-list">
+                      {f.equipment.map((e, i) => (
+                        <div className="facility-equip-chip" key={i}>
+                          {e}
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           ))}
