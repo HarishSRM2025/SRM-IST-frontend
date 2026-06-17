@@ -1266,6 +1266,8 @@ body{
     display:flex;
     flex-direction:column;
     gap:2px;
+    height: 700px;
+    overflow-y: auto;
 }
 .prog-item{
     display:flex;
