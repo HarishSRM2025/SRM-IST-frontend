@@ -19,6 +19,7 @@ import Contact from './Pages/Contact';
 import Institution from './Pages/Institution';
 import EventDetails from './Pages/EventDetails';
 import InternationalRelations from './Pages/InternationalRelations';
+import Library from './Pages/Library';
 import Students from './Pages/Students';
 import Examcell from './Pages/Examcell';
 import Careers from './Pages/Careers';
@@ -46,6 +47,7 @@ const App = () => {
         <Route path="/news-and-events" element={<NewsAndEvents/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/sponsored-research" element={<SponsoredResearch />} />
+        <Route path="/library" element={<Library />} />
         <Route path="/institution" element={<Institution />} />
         <Route path="/center/:id" element={<CenterDetails />} />
         <Route path="/event/:id" element={<EventDetails />} />

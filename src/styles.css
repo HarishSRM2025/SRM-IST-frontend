@@ -168,11 +168,11 @@ body{
     
 }
 .tb-social a{
-    color:rgb(0,0,0);
+    color:#000000;
     font-size: 12px;
 }
 .tb-social a:hover{
-    background:rgba(0,0,0,.25);
+    background:#ccc4c433;
 }
 .tb-lang{
     font-size:12px;
