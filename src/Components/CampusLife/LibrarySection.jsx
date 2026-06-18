@@ -15,31 +15,44 @@ const LibrarySection = ({ image }) => (
         </div>
         <div className="cl-split__body">
           <p className="cl-lead">
-            The Central Library is a sophisticated repository of knowledge, providing access to
-            extensive digital and print resources to support academic excellence and research.
+           The Central Library serves as the academic heart of SRM IST Trichy, offering a modern,fully air-conditioned learning environment with RFID-enabled services, KOHA Library Management System, and extensive print and digital collections supporting Engineering,Technology, Science, Humanities, Hotel Management, and Allied Health Sciences.
           </p>
           <div className="cl-lib-stats">
             <div className="cl-lib-stat">
               <FaBook className="cl-lib-stat__icon" />
-              <div className="cl-lib-stat__val">18,100+</div>
-              <div className="cl-lib-stat__lbl">Volumes</div>
+              <div className="cl-lib-stat__val">19,148</div>
+              <div className="cl-lib-stat__lbl">Book Volumes</div>
             </div>
+
             <div className="cl-lib-stat">
               <FaLaptop className="cl-lib-stat__icon" />
-              <div className="cl-lib-stat__val">E-Resources</div>
-              <div className="cl-lib-stat__lbl">Digital Access</div>
+              <div className="cl-lib-stat__val">34,000+</div>
+              <div className="cl-lib-stat__lbl">E-Books & E-Resources</div>
             </div>
+
             <div className="cl-lib-stat">
               <FaSearch className="cl-lib-stat__icon" />
-              <div className="cl-lib-stat__val">KOHA</div>
-              <div className="cl-lib-stat__lbl">LMS System</div>
+              <div className="cl-lib-stat__val">3,100+</div>
+              <div className="cl-lib-stat__lbl">E-Journals Access</div>
             </div>
           </div>
           <ul className="cl-check-list">
-            <HItem icon={<FaCheckCircle />} text="Fully Air-Conditioned reading halls and study areas" />
-            <HItem icon={<FaCheckCircle />} text="RFID based Library Management System for seamless access" />
-            <HItem icon={<FaCheckCircle />} text="Access to global research databases and journals" />
+            <HItem
+              icon={<FaCheckCircle />}
+              text="Fully Air-Conditioned Library with RFID-based automated circulation system"
+            />
+            <HItem
+              icon={<FaCheckCircle />}
+              text="Access to 19,148 volumes, 2,949 titles, 75 print journals and 34 magazines"
+            />
+            <HItem
+              icon={<FaCheckCircle />}
+              text="Remote access to EBSCO, IEEE, DELNET, D-Space Repository and research support services"
+            />
           </ul>
+          <div className="cl-actions">
+            <a href="/library" className="cl-btn cl-btn-primary">Visit Library</a>
+          </div>
         </div>
       </div>
     </div>

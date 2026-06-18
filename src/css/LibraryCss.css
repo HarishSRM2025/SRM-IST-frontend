@@ -361,3 +361,21 @@ font-size: 14px;
   }
 }
 
+.cl-lib-stat{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.cl-actions {
+  margin-top:30px;
+}
+.cl-actions a{
+  text-decoration:none;
+  font-size:12px;
+  font-weight:700;
+  background:var(--navy);
+  padding:8px 20px;
+  border-radius:100px;
+  color:white;
+}
