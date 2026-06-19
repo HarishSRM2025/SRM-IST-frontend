@@ -19,6 +19,7 @@ import {
   FaBook, 
   FaPaperPlane, 
   FaFileAlt,
+  FaTrophy,
   FaArrowCircleRight
 } from "react-icons/fa";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
@@ -163,6 +164,7 @@ const Navbar = ({ announcements = [] }) => {
               <Link to="/campus-life#accommodation"><FaHome />Hostels</Link>
               <Link to="/campus-life#art-culture"><FaMusic />Events</Link>
               <Link to="/library"><FaBook />Library</Link>
+              <Link to="/sports"><FaTrophy />Sports</Link>
               <Link to="/campus-life#transport"><FaCompass />Transport</Link>
             </div>
           </li>

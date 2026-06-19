@@ -58,6 +58,9 @@
 .exam-light {
   background-color: var(--lgray);
 }
+.exam-cream {
+  background-color: var(--cream);
+}
 
 .exam-white {
   background-color: white;
