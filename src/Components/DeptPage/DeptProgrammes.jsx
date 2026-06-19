@@ -13,61 +13,23 @@ export default function DeptProgrammes({ id, onVisibilityChange }) {
     const fetchProgrammes = async () => {
       setLoading(true);
       try {
-        // Fetch all schools
-        const schoolRes = await fetch(`${import.meta.env.VITE_API_URL}/schools/getall`);
-        if (!schoolRes.ok) throw new Error("Failed to fetch schools");
-        const schools = await schoolRes.json();
-        
-        // Find matching school (using cascading fuzzy matching)
-        const deptSlug = location.state?.deptSlug;
-        let matchedSchool = null;
+        const sourceType = location.state?.sourceType;
+        const schoolDivisionId = location.state?.schoolDivisionId;
+        const isDivision = sourceType === 'schoolDivision' && schoolDivisionId;
 
-        if (Array.isArray(schools)) {
-          if (location.state?.schoolId) {
-            matchedSchool = schools.find(s => s._id === location.state.schoolId);
-          }
-          // 1. Try slug exact match
-          if (!matchedSchool && deptSlug) {
-            matchedSchool = schools.find(s => s.slug && s.slug.toLowerCase() === deptSlug.toLowerCase());
-          }
-          // 2. Try exact name match
-          if (!matchedSchool) {
-            matchedSchool = schools.find(s => s.name && s.name.toLowerCase() === deptName.toLowerCase());
-          }
-          // 3. Try inclusion match
-          if (!matchedSchool) {
-            matchedSchool = schools.find(s => s.name && (
-              deptName.toLowerCase().includes(s.name.toLowerCase()) || 
-              s.name.toLowerCase().includes("computing") && deptName.toLowerCase().includes("computer") ||
-              s.name.toLowerCase().includes("management") && deptName.toLowerCase().includes("business")
-            ));
-          }
-          // 4. Try reverse inclusion match
-          if (!matchedSchool) {
-            matchedSchool = schools.find(s => s.name && s.name.toLowerCase().includes(deptName.toLowerCase()));
-          }
-          // 5. Try first word keyword match
-          if (!matchedSchool) {
-            const firstWord = deptName.split(" ")[0].toLowerCase();
-            if (firstWord.length > 2) {
-              matchedSchool = schools.find(s => s.name && s.name.toLowerCase().includes(firstWord));
-            }
-          }
-        }
-
-        if (matchedSchool) {
-          // Fetch all programmes
-          const progRes = await fetch(`${import.meta.env.VITE_API_URL}/schools/programmes/getall`);
+        if (isDivision) {
+          // Fetch school division programmes
+          const progRes = await fetch(`${import.meta.env.VITE_API_URL}/school-division/programmes/getall`);
           if (progRes.ok) {
             const progJson = await progRes.json();
             const allProgrammes = Array.isArray(progJson) 
               ? progJson 
               : (progJson.data ? (Array.isArray(progJson.data) ? progJson.data : [progJson.data]) : []);
             
-            // Filter programmes belonging to the matched school
+            // Filter programmes belonging to the division
             const filtered = allProgrammes.filter(p => {
-              const pSchoolId = typeof p.school === 'object' ? p.school?._id : p.school;
-              return pSchoolId === matchedSchool._id;
+              const pDivisionId = typeof p.schoolDivisionId === 'object' ? p.schoolDivisionId?._id : p.schoolDivisionId;
+              return pDivisionId === schoolDivisionId;
             });
             
             setProgrammesList(filtered);
@@ -75,7 +37,70 @@ export default function DeptProgrammes({ id, onVisibilityChange }) {
             setProgrammesList([]);
           }
         } else {
-          setProgrammesList([]);
+          // Fetch all schools
+          const schoolRes = await fetch(`${import.meta.env.VITE_API_URL}/schools/getall`);
+          if (!schoolRes.ok) throw new Error("Failed to fetch schools");
+          const schools = await schoolRes.json();
+          
+          // Find matching school (using cascading fuzzy matching)
+          const deptSlug = location.state?.deptSlug;
+          let matchedSchool = null;
+
+          if (Array.isArray(schools)) {
+            if (location.state?.schoolId) {
+              matchedSchool = schools.find(s => s._id === location.state.schoolId);
+            }
+            // 1. Try slug exact match
+            if (!matchedSchool && deptSlug) {
+              matchedSchool = schools.find(s => s.slug && s.slug.toLowerCase() === deptSlug.toLowerCase());
+            }
+            // 2. Try exact name match
+            if (!matchedSchool) {
+              matchedSchool = schools.find(s => s.name && s.name.toLowerCase() === deptName.toLowerCase());
+            }
+            // 3. Try inclusion match
+            if (!matchedSchool) {
+              matchedSchool = schools.find(s => s.name && (
+                deptName.toLowerCase().includes(s.name.toLowerCase()) || 
+                s.name.toLowerCase().includes("computing") && deptName.toLowerCase().includes("computer") ||
+                s.name.toLowerCase().includes("management") && deptName.toLowerCase().includes("business")
+              ));
+            }
+            // 4. Try reverse inclusion match
+            if (!matchedSchool) {
+              matchedSchool = schools.find(s => s.name && s.name.toLowerCase().includes(deptName.toLowerCase()));
+            }
+            // 5. Try first word keyword match
+            if (!matchedSchool) {
+              const firstWord = deptName.split(" ")[0].toLowerCase();
+              if (firstWord.length > 2) {
+                matchedSchool = schools.find(s => s.name && s.name.toLowerCase().includes(firstWord));
+              }
+            }
+          }
+
+          if (matchedSchool) {
+            // Fetch all programmes
+            const progRes = await fetch(`${import.meta.env.VITE_API_URL}/schools/programmes/getall`);
+            if (progRes.ok) {
+              const progJson = await progRes.json();
+              const allProgrammes = Array.isArray(progJson) 
+                ? progJson 
+                : (progJson.data ? (Array.isArray(progJson.data) ? progJson.data : [progJson.data]) : []);
+              
+              // Filter programmes belonging to the matched school
+              const filtered = allProgrammes.filter(p => {
+                const pSchoolId = typeof p.school === 'object' ? p.school?._id : p.school;
+                return pSchoolId === matchedSchool._id;
+              });
+              
+              setProgrammesList(filtered);
+            } else {
+              setProgrammesList([]);
+            }
+          } else {
+            setProgrammesList([]);
+          }
         }
       } catch (error) {
         console.error("Error fetching programmes:", error);
@@ -86,7 +111,7 @@ export default function DeptProgrammes({ id, onVisibilityChange }) {
     };
 
     fetchProgrammes();
-  }, [deptName, location.state?.deptSlug, location.state?.schoolId]);
+  }, [deptName, location.state?.deptSlug, location.state?.schoolId, location.state?.schoolDivisionId, location.state?.sourceType]);
 
   const activeProgrammes = programmesList;
 

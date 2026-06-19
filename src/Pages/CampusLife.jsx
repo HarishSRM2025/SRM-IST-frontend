@@ -2,11 +2,11 @@ import React from 'react';
 import Breadcrum from '../Components/Common/Breadcrum';
 import ArtCultureSection from '../Components/CampusLife/ArtCultureSection';
 import ClubsSection from '../Components/CampusLife/ClubsSection';
-import LibrarySection from '../Components/CampusLife/LibrarySection';
 import NCCSection from '../Components/CampusLife/NCCSection';
 import NSSSection from '../Components/CampusLife/NSSSection';
 import OverviewSection from '../Components/CampusLife/OverviewSection';
 import ResidentialSection from '../Components/CampusLife/ResidentialSection';
+import LibrarySection from '../Components/CampusLife/LibrarySection';
 import SportsSection from '../Components/CampusLife/SportsSection';
 import TransportSection from '../Components/CampusLife/TransportSection';
 import campusImg from '../assets/images/about/campus.JPG';
@@ -24,8 +24,8 @@ const CampusLife = () => (
     <Breadcrum title="Campus Life" />
     <OverviewSection image={campusImg} />
     <ArtCultureSection image={campusLifeOne} />
-    <SportsSection image={campusLifeTwo} />
-    <LibrarySection image={campusLifeThree} />
+    <SportsSection image={campusLifeThree} />
+    <LibrarySection image={campusLifeTwo} />
     <TransportSection image={transportImg} />
     <NCCSection image={campusLifeFour} />
     <NSSSection image={campusLifeFive} />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaArrowCircleRight, FaChevronDown, FaFacebookF } from "react-icons/fa";
-import { FaInstagram, FaLinkedinIn } from "react-icons/fa6";
+import { FaArrowCircleRight, FaChevronDown, FaFacebookF} from "react-icons/fa";
+import { FaInstagram, FaLinkedinIn,FaXTwitter } from "react-icons/fa6";
 import { IoLogoYoutube } from "react-icons/io";
 import { HiOutlineSpeakerphone } from "react-icons/hi";
 import { MdClose } from "react-icons/md";
@@ -74,10 +74,11 @@ const Topbar = ({ announcements = [] }) => {
       {/* Right */}
       <div className="tb-right">
         <div className="tb-social">
-          <a href="#" title="Facebook" style={{ color: '#1877F2' }}><FaFacebookF /></a>
-          <a href="#" title="Instagram" style={{ color: '#E4405F' }}><FaInstagram /></a>
-          <a href="#" title="LinkedIn" style={{ color: '#0A66C2' }}><FaLinkedinIn /></a>
-          <a href="#" title="YouTube" style={{ color: '#FF0000' }}><IoLogoYoutube /></a>
+          <a href="https://x.com/srmist_trichy" target='_blank' title="twitter" style={{ color: '#000000' }}><FaXTwitter /></a>
+          <a href="http://facebook.com/srmist.trichy" target='_blank' title="Facebook" style={{ color: '#1877F2' }}><FaFacebookF /></a>
+          <a href="https://www.instagram.com/accounts/login/?next=%2Fsrmist.trichy%2F&source=omni_redirect" target='_blank' title="Instagram" style={{ color: '#E4405F' }}><FaInstagram /></a>
+          <a href="https://www.linkedin.com/company/srm-institute-of-science-and-technology-tiruchirappalli/" target='_blank' title="LinkedIn" style={{ color: '#0A66C2' }}><FaLinkedinIn /></a>
+          <a href="https://www.youtube.com/channel/UCDqMZI1OZsPB7bDhiX_mErw" target='_blank' title="YouTube" style={{ color: '#FF0000' }}><IoLogoYoutube /></a>
         </div>
       </div>
 

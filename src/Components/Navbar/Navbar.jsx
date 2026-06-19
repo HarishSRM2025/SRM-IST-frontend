@@ -162,7 +162,7 @@ const Navbar = ({ announcements = [] }) => {
             <div className="nav-drop">
               <Link to="/campus-life#accommodation"><FaHome />Hostels</Link>
               <Link to="/campus-life#art-culture"><FaMusic />Events</Link>
-              <Link to="/campus-life#central-library"><FaBook />Library</Link>
+              <Link to="/library"><FaBook />Library</Link>
               <Link to="/campus-life#transport"><FaCompass />Transport</Link>
             </div>
           </li>
@@ -190,7 +190,7 @@ const Navbar = ({ announcements = [] }) => {
             </Link>
           </li>
           <li>
-            <Link to="/contact" className="nav-cta-link" style={{ marginLeft: '10px' }}>
+            <Link to="https://cubonline.biz/StudentLogin?Instname=SRMT"   target="_blank" className="nav-cta-link" style={{ marginLeft: '10px' }}>
               <FaMoneyBillTransfer /> Fee Payment
             </Link>
           </li>
@@ -442,7 +442,7 @@ const Navbar = ({ announcements = [] }) => {
               <Link to="/campus-life" onClick={closeDrawer}>Campus Life Home</Link>
               <Link to="/campus-life#accommodation" onClick={closeDrawer}>Hostels</Link>
               <Link to="/campus-life#art-culture" onClick={closeDrawer}>Events</Link>
-              <Link to="/campus-life#central-library" onClick={closeDrawer}>Library</Link>
+              <Link to="/library" onClick={closeDrawer}>Library</Link>
               <Link to="/campus-life#transport" onClick={closeDrawer}>Transport</Link>
             </div>
           </div>
