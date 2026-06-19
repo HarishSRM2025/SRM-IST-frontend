@@ -2,16 +2,19 @@ import React, { useEffect } from "react";
 import "../css/NCCCss.css";
 import Breadcrum from "../Components/Common/Breadcrum";
 
-// import nccHero from "../assets/images/ncc/ncc-leadership-camp.webp";
-// import nccLogo from "../assets/images/ncc/ncc-logo.png";
-// import officerPhoto from "../assets/images/ncc/officer-arunkumar.jpg";
-// import unitRaisingImg from "../assets/images/ncc/ncc-unit-raising.jpg";
-// import cadetImg from "../assets/images/ncc/ncc-firing-cadet.jpg";
-// import firingImg1 from "../assets/images/ncc/firing-practice-1.jpg";
-// import firingImg2 from "../assets/images/ncc/firing-practice-2.jpg";
-// import firingImg3 from "../assets/images/ncc/firing-practice-3.jpg";
-// import firingTargetImg from "../assets/images/ncc/firing-practice-target.jpg";
-// import auditImg from "../assets/images/ncc/performance-audit-1.jpg";
+import nccLogo from "../assets/images/ncc/1.webp";
+import nccHero from "../assets/images/ncc/fire/2.webp";
+import officerPhoto from "../assets/images/ncc/2.webp";
+import unitRaisingImg from "../assets/images/ncc/3.webp";
+import cadetImg from "../assets/images/ncc/4.webp";
+import firingImg1 from "../assets/images/ncc/5.webp";
+import firingImg2 from "../assets/images/ncc/6.webp";
+import firingImg3 from "../assets/images/ncc/7.webp";
+import ach1 from "../assets/images/ncc/fire/1.webp";
+import ach2 from "../assets/images/ncc/fire/2.webp";
+import ach3 from "../assets/images/ncc/fire/3.webp";
+import firingTargetImg from "../assets/images/ncc/fire/1.webp";
+import auditImg from "../assets/images/ncc/7.webp";
 
 import NCCAims from "../Components/NCC/NCCAims";
 import NCCDisciplineOfficer from "../Components/NCC/NCCDisciplineOfficer";
@@ -26,7 +29,8 @@ const NationalCadetCorps = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // const firingImages = [firingImg1, firingImg2, firingImg3, firingTargetImg];
+  const firingImages = [firingImg1, firingImg2, firingImg3, firingTargetImg];
+  const achImages = [ach1, ach2, ach3];
 
   return (
     <main className="ncc-page">
@@ -40,12 +44,12 @@ const NationalCadetCorps = () => {
         ]}
       />
 
-      <NCCAims/>
-      <NCCDisciplineOfficer/>
-      <NCCRaisingUnit/>
-      <NCCStudentsList/>
-      <NCCFiringPractice/>
-      <NCCAchievement/>
+      <NCCAims logo={nccLogo}/>
+      <NCCDisciplineOfficer image={officerPhoto}/>
+      <NCCRaisingUnit image={unitRaisingImg}/>
+      <NCCStudentsList image={cadetImg}/>
+      <NCCFiringPractice images={firingImages}/>
+      <NCCAchievement acimages={achImages}/>
       <NCCPerformanceAudit/>
     </main>
   );

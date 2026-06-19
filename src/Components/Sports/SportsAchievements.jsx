@@ -15,7 +15,7 @@ const SportsAchievements = ({ image }) => (
                 Student <em>Achievements</em>
             </h2>
           {sportsData.achievements.items.map((item, i) => (
-                <div className="event-card" key={i}>
+                <div className="event-card-sport" key={i}>
                 <h3>{item.title}</h3>
                 <h5>{item.student}</h5>
                 <p>{item.description}</p>

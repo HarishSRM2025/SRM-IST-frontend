@@ -17,7 +17,7 @@ const SportsEvents = ({ image }) => (
           </h2>
 
           <div className="gold-bar"></div>
-           <div className="event-card">
+           <div className="event-card-sport">
               <h3>{sportsData.events.title}</h3>
 
               <p>{sportsData.events.description}</p>

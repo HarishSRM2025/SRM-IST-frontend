@@ -1,7 +1,7 @@
 import React from "react";
 import { achievementData } from "./nccData";
 
-const NCCAchievement = () => {
+const NCCAchievement = ({acimages}) => {
   return (
     <section className="cl-sec" id="achievements">
       <div className="cl-container">
@@ -20,8 +20,8 @@ const NCCAchievement = () => {
               {achievement.description}
             </p>
 
-            <div className="gallery-grid">
-              {achievement.images.map((img, index) => (
+            <div className="gallery-grid-ncc">
+              {acimages.map((img, index) => (
                 <div className="gallery-card" key={index}>
                   <img
                     src={img}

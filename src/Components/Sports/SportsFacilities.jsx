@@ -46,7 +46,7 @@ const SportsFacilities = () => (
       <div className="cards-grid">
         {sportsData.outdoorFacilities.facilities.map(
           (facility, index) => (
-            <div className="facility-card" key={index}>
+            <div className="facility-card-sport" key={index}>
                 <div className="facility-icon">
                     {iconMap[facility.name] || <FaTrophy />}
                 </div>

@@ -117,7 +117,7 @@ const Placements = () => {
               Your Career <em style={{color:'#e4b316'}}>Starts Here</em>
             </h2>
           </div>
-          <a href="/recruiters" className="btn btn-gold">
+          <a href="/placement" className="btn btn-gold">
             View All Recruiters <FaArrowRight />
           </a>
         </div>

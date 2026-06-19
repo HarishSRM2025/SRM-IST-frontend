@@ -1,6 +1,7 @@
 import React from "react";
 import { nccData } from "./nccData";
 
+
 const NCCAims = ({ logo }) => (
   <section className="cl-sec" id="aims">
     <div className="cl-container">

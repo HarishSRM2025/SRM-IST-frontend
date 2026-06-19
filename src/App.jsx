@@ -29,6 +29,8 @@ import PlacementPage from './Pages/CatapultingCareers';
 import CareerDevelopmentCentre from './Pages/CareerDevelopmentCentre';
 import Sports from './Pages/Sports';
 import NationalCadetCorps from './Pages/NationalCadetCorps';
+import Admission from './Pages/Admission';
+import AcademicCalendar from './Pages/AcademicCalendar';
 
 const App = () => {
   return (
@@ -48,6 +50,8 @@ const App = () => {
         <Route path="/campus-life" element={<CampusLife/>} />
         <Route path="/news-and-events" element={<NewsAndEvents/>} />
         <Route path="/contact" element={<Contact/>} />
+        <Route path="/admission" element={<Admission/>} />
+        <Route path="/academic_calendar" element={<AcademicCalendar/>} />
         <Route path="/sponsored-research" element={<SponsoredResearch />} />
         <Route path="/library" element={<Library />} />
         <Route path="/sports" element={<Sports />} />

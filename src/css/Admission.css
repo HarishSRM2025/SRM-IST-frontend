@@ -1,0 +1,146 @@
+/* Admission.css */
+
+.admission-page {
+background: #f3f4f6;
+padding: 60px 20px;
+min-height: 80vh;
+}
+
+.admission-container {
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.admission-header {
+text-align: center;
+margin-bottom: 60px;
+}
+
+.admission-header .s-tag {
+color: var(--navy);
+}
+
+.admission-header .s-title {
+color: var(--navy);
+margin-top: 10px;
+}
+
+.admission-header .gold-bar {
+margin: 15px auto 0;
+}
+
+.admission-header .overview-text {
+max-width: 750px;
+margin: 20px auto 0;
+text-align: center;
+}
+
+.admission-grid {
+display: grid;
+grid-template-columns: repeat(3,1fr);
+gap: 30px;
+}
+
+.admission-grid2 {
+display: grid;
+grid-template-columns: repeat(2,1fr);
+gap: 30px;
+}
+
+.admission-grid .admission-card {
+    background:linear-gradient(to right,#000000a1,#000000af),url(../assets/images/about/campus.JPG);
+    padding: 40px 30px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: all 0.3s ease;
+    height:300px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+}
+.admission-grid2 .admission-card {
+    background:linear-gradient(to right,#030b58d5,#05288ade),url(../assets/images/about/campus.JPG);
+    background-position:center;
+    padding: 40px 30px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: all 0.3s ease;
+    height:230px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+}
+
+.admission-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.admission-card h4 {
+color:white;
+font-size: 1.4rem;
+margin-bottom: 20px;
+font-family: var(--font-serif);
+}
+
+.admission-card p {
+color: var(--gray);
+line-height: 1.8;
+margin-bottom: 30px;
+}
+
+.admission-actions {
+display: flex;
+justify-content: center;
+gap: 12px;
+flex-wrap: wrap;
+}
+
+
+.btn-outline {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+padding: 12px 24px;
+border: 2px solid var(--gold);
+color: var(--gold);
+background: transparent;
+border-radius: 4px;
+font-weight: 600;
+text-decoration: none;
+transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+background: var(--gold);
+color: #fff;
+}
+
+@media (max-width: 768px) {
+.admission-page {
+padding: 40px 15px;
+}
+
+.admission-card {
+padding: 30px 20px;
+}
+
+.admission-card h3 {
+font-size: 1.4rem;
+}
+
+.admission-actions {
+flex-direction: column;
+}
+
+.admission-actions .btn-gold,
+.admission-actions .btn-outline {
+width: 100%;
+}
+}

@@ -13,7 +13,8 @@ import {
   FaChartLine, 
   FaBuilding, 
   FaCompass, 
-  FaHome, 
+  FaHome,
+  FaCalendar,
   FaDumbbell, 
   FaMusic, 
   FaBook, 
@@ -131,6 +132,9 @@ const Navbar = ({ announcements = [] }) => {
               Academics <FaChevronDown className="chev" />
             </a>
             <div className="nav-drop">
+               <Link to="/academic_calendar">
+                    <FaCalendar />Academic Calendar
+              </Link>
               {institutions.length > 0 ? (
                 institutions.map((inst, idx) => (
                   <Link key={idx} to="/institution" state={{ instName: inst.name }}>
@@ -140,6 +144,7 @@ const Navbar = ({ announcements = [] }) => {
               ) : (
                 <Link to="/institution" state={{ instName: "Engineering & Technology" }}><FaGraduationCap />Engineering & Technology</Link>
               )}
+             
             </div>
           </li>
 
@@ -187,7 +192,7 @@ const Navbar = ({ announcements = [] }) => {
           <li><Link to="/news-and-events">News</Link></li>
           <li><Link to="/contact">Contact</Link></li>
           <li>
-            <Link to="/contact" className="nav-cta-link">
+            <Link to="/admission" className="nav-cta-link">
               <FaPaperPlane /> Admissions 2026
             </Link>
           </li>
