@@ -70,20 +70,20 @@ const ResidentialSection = ({ image }) => (
             home away from home - with round-the-clock support so students live and thrive.
           </p>
           <div className="cl-activity-grid">
-            <div className="cl-activity">
-              <div className="cl-activity__icon"><FaBuilding /></div>
-              <div className="cl-activity__title">4</div>
-              <div className="cl-activity__lbl">Hostel Blocks</div>
+            <div className="cl-club">
+              <div className="cl-club__icon"><FaBuilding /></div>
+              <div className="cl-club__name">4</div>
+              <div className="cl-club__cat">Hostel Blocks</div>
             </div>
-            <div className="cl-activity">
-              <div className="cl-activity__icon"><FaUsers /></div>
-              <div className="cl-activity__title">2000+</div>
-              <div className="cl-activity__lbl">Residents</div>
+            <div className="cl-club">
+              <div className="cl-club__icon"><FaUsers /></div>
+              <div className="cl-club__name">2000+</div>
+              <div className="cl-club__cat">Residents</div>
             </div>
-            <div className="cl-activity">
-              <div className="cl-activity__icon"><FaLock /></div>
-              <div className="cl-activity__title">24/7</div>
-              <div className="cl-activity__lbl">Security</div>
+            <div className="cl-club">
+              <div className="cl-club__icon"><FaLock /></div>
+              <div className="cl-club__name">24/7</div>
+              <div className="cl-club__cat">Security</div>
             </div>
           </div>
         </div>

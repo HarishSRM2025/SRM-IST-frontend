@@ -27,6 +27,8 @@ import ScrollToTop from './Components/Common/ScrollToTop';
 import WhatsAppFloat from './Components/Common/WhatsAppFloat';
 import PlacementPage from './Pages/CatapultingCareers';
 import CareerDevelopmentCentre from './Pages/CareerDevelopmentCentre';
+import Sports from './Pages/Sports';
+import NationalCadetCorps from './Pages/NationalCadetCorps';
 
 const App = () => {
   return (
@@ -48,6 +50,7 @@ const App = () => {
         <Route path="/contact" element={<Contact/>} />
         <Route path="/sponsored-research" element={<SponsoredResearch />} />
         <Route path="/library" element={<Library />} />
+        <Route path="/sports" element={<Sports />} />
         <Route path="/institution" element={<Institution />} />
         <Route path="/center/:id" element={<CenterDetails />} />
         <Route path="/event/:id" element={<EventDetails />} />
@@ -55,6 +58,7 @@ const App = () => {
         <Route path="/students" element={<Students />} />
         <Route path="/examcell" element={<Examcell />} />
         <Route path="/careers" element={<Careers />} />
+        <Route path="/ncc" element={<NationalCadetCorps />} />
       </Routes>
 
       <WhatsAppFloat />

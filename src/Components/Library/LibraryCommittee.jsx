@@ -1,10 +1,46 @@
 import React from 'react';
 
 const committeeMembers = [
-  { role: 'Chairperson', name: 'Dr. R. Shivakumar', designation: 'Chairman, SRM Group' },
-  { role: 'Convener', name: 'Dr. N. Malmurugan', designation: 'Dean, SRM IST' },
-  { role: 'Member Secretary', name: 'Dr. M. Prabakaran', designation: 'Librarian' },
-  { role: 'Member', name: 'HODs of all Departments', designation: 'Academic Representatives' },
+  {
+    role: 'Chairman',
+    name: 'Dr. Jagdish Kannan',
+    designation: 'Dean/E & T',
+  },
+  {
+    role: 'Member Secretary',
+    name: 'Dr. C. Shanmugam Priya',
+    designation: 'AP/English',
+  },
+  {
+    role: 'Member',
+    name: 'Dr. G. Vincent',
+    designation: '-',
+  },
+  {
+    role: 'Internal Member',
+    name: 'Dr. Anitha',
+    designation: '-',
+  },
+  {
+    role: 'Convener',
+    name: 'Dr. M. Ebenezer Selvakumar',
+    designation: 'Librarian',
+  },
+  {
+    role: 'Student Representative',
+    name: 'Westley Raj I',
+    designation: 'I/CSE',
+  },
+  {
+    role: 'Student Representative',
+    name: 'Kathiravan K',
+    designation: 'II/ECE',
+  },
+  {
+    role: 'Student Representative',
+    name: 'Sangeetha S',
+    designation: 'II/B.Com',
+  },
 ];
 
 const LibraryCommittee = () => (
@@ -21,17 +57,17 @@ const LibraryCommittee = () => (
           <thead>
             <tr style={{ background: 'var(--navy)', color: '#fff' }}>
               <th style={{ padding: '15px', textAlign: 'left', border: '1px solid #ddd' }}>Sl.No</th>
-              <th style={{ padding: '15px', textAlign: 'left', border: '1px solid #ddd' }}>Designation in Committee</th>
               <th style={{ padding: '15px', textAlign: 'left', border: '1px solid #ddd' }}>Name</th>
-              <th style={{ padding: '15px', textAlign: 'left', border: '1px solid #ddd' }}>Institutional Designation</th>
+              <th style={{ padding: '15px', textAlign: 'left', border: '1px solid #ddd' }}>Position</th>
+              <th style={{ padding: '15px', textAlign: 'left', border: '1px solid #ddd' }}>Designation</th>
             </tr>
           </thead>
           <tbody>
             {committeeMembers.map((m, i) => (
               <tr key={i} style={{ background: i % 2 === 0 ? '#f9f9f9' : '#fff' }}>
                 <td style={{ padding: '15px', border: '1px solid #ddd' }}>{i + 1}</td>
-                <td style={{ padding: '15px', border: '1px solid #ddd', fontWeight: '600' }}>{m.role}</td>
                 <td style={{ padding: '15px', border: '1px solid #ddd' }}>{m.name}</td>
+                <td style={{ padding: '15px', border: '1px solid #ddd', fontWeight: '600' }}>{m.role}</td>
                 <td style={{ padding: '15px', border: '1px solid #ddd', color: 'var(--gray)' }}>{m.designation}</td>
               </tr>
             ))}

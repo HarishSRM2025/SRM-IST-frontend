@@ -1,7 +1,8 @@
 import React from 'react';
 import { FaArrowRight, FaClock, FaLock, FaMapMarkerAlt } from 'react-icons/fa';
 import { Pill, SectionHeading } from './Shared';
-
+import { Link } from 'react-router-dom';
+import pdf from "../../assets/pdf/transport.pdf"
 const routes = [
   { zone: 'North Zone', buses: '12 Buses', timing: '7:00 AM - 6:30 PM' },
   { zone: 'South Zone', buses: '10 Buses', timing: '7:00 AM - 6:30 PM' },
@@ -24,7 +25,7 @@ const TransportSection = ({ image }) => (
                 <div className="cl-route__icon"><FaMapMarkerAlt /></div>
                 <div className="cl-route__info">
                   <div className="cl-route__zone">{r.zone}</div>
-                  <div className="cl-route__meta">{r.buses} | {r.timing}</div>
+                  <div className="cl-route__meta">{r.buses}</div>
                 </div>
                 <FaArrowRight className="cl-route__arrow" />
               </div>
@@ -33,7 +34,10 @@ const TransportSection = ({ image }) => (
           <div className="cl-pills-row">
             <Pill icon={<FaMapMarkerAlt />} label="GPS Tracked" />
             <Pill icon={<FaLock />} label="Safe & Reliable" />
-            <Pill icon={<FaClock />} label="On Schedule" />
+            <Pill icon={<FaClock />} label="Safe & Reliable" />
+            <Link to={pdf} target="_blank" rel="noopener noreferrer">
+              <Pill icon={<FaArrowRight />} label="View Routes" />
+            </Link>
           </div>
         </div>
         <div className="cl-split__img">

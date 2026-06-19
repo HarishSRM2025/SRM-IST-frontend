@@ -1,5 +1,6 @@
 import React from 'react';
-import { FaFacebookF, FaInstagram, FaLinkedinIn} from 'react-icons/fa';
+import { FaFacebookF} from 'react-icons/fa';
+import { FaInstagram, FaLinkedinIn,FaXTwitter } from "react-icons/fa6";
 import { IoLogoYoutube } from 'react-icons/io';
 
 const Footer = () => {
@@ -17,10 +18,11 @@ const Footer = () => {
             </p>
 
             <div className="ft-social">
-              <a className="ft-soc-a" href="#"><FaFacebookF /></a>
-              <a className="ft-soc-a" href="#"><FaInstagram /></a>
-              <a className="ft-soc-a" href="#"><FaLinkedinIn /></a>
-              <a className="ft-soc-a" href="#"><IoLogoYoutube /></a>
+              <a className="ft-soc-a" href="https://x.com/srmist_trichy" target='_blank' title="twitter"><FaXTwitter /></a>
+              <a className="ft-soc-a" href="http://facebook.com/srmist.trichy" target='_blank' title="Facebook"><FaFacebookF /></a>
+              <a className="ft-soc-a" href="https://www.instagram.com/accounts/login/?next=%2Fsrmist.trichy%2F&source=omni_redirect" target='_blank' title="Instagram" ><FaInstagram /></a>
+              <a className="ft-soc-a" href="https://www.linkedin.com/company/srm-institute-of-science-and-technology-tiruchirappalli/" target='_blank' title="LinkedIn" ><FaLinkedinIn /></a>
+              <a className="ft-soc-a" href="https://www.youtube.com/channel/UCDqMZI1OZsPB7bDhiX_mErw" target='_blank' title="YouTube"><IoLogoYoutube /></a>
             </div>
           </div>
 
