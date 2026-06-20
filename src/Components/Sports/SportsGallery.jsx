@@ -9,12 +9,12 @@ const SportsGallery = () => (
       </span>
 
       <h2 className="s-title">
-        Sports <em>Achievements</em>
+        Students <em>Achievements</em>
       </h2>
 
       <div className="gold-bar"></div>
 
-      <div className="gallery-grid">
+      <div className="gallery-grid-sport-2">
         {sportsData.sportsAchievement.achieve_images.map((item, index) => (
           <div className="gallery-card" key={index}>
             <img

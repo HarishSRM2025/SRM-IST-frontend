@@ -14,7 +14,7 @@ const SportsCourt = () => (
 
       <div className="gold-bar"></div>
 
-      <div className="gallery-grid">
+      <div className="gallery-grid-sport">
         {sportsData.sportsCourt.court_images.map((item, index) => (
           <div className="gallery-card" key={index}>
             <img

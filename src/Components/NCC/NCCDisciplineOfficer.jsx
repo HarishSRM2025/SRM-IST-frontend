@@ -1,7 +1,7 @@
 import React from "react";
 import { nccData } from "./nccData";
 
-const NCCDisciplineOfficer = ({ officerPhoto }) => (
+const NCCDisciplineOfficer = ({ image }) => (
   <section className="cl-sec" id="discipline">
     <div className="cl-container">
       <div className="two-col">
@@ -25,7 +25,7 @@ const NCCDisciplineOfficer = ({ officerPhoto }) => (
 
         <div className="profile-card">
           <img
-            src={officerPhoto}
+            src={image}
             alt={nccData.officer.name}
             style={{ width: "100%", height: "320px", objectFit: "cover" }}
           />

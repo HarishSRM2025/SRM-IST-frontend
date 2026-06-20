@@ -8,7 +8,7 @@ const NCCFiringPractice = ({ images }) => (
         {nccData.firingPractice.title}
       </h2>
 
-      <div className="gallery-grid">
+      <div className="gallery-grid-ncc">
         {images?.map((img, i) => (
           <div className="gallery-card" key={i}>
             <img

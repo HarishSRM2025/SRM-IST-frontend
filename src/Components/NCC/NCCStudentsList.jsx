@@ -4,8 +4,8 @@ import { nccData } from "./nccData";
 const NCCStudentsList = ({ image }) => (
   <section className="cl-sec exam-cream" id="students">
     <div className="cl-container">
-      <div className="cl-split">
-        <div className="cl-split__body">
+      <div className="cl-split2">
+        <div className="cl-split__body1">
           <span className="s-tag">{nccData.students.tag}</span>
           <h2 className="s-title">
             List of <em>Students</em>
@@ -39,7 +39,7 @@ const NCCStudentsList = ({ image }) => (
           </div>
         </div>
 
-        <div className="cl-split__img">
+        <div className="cl-split__img1">
           <img src={image} alt="NCC Cadet" loading="lazy" />
         </div>
       </div>
