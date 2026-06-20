@@ -1,5 +1,6 @@
 import React from "react";
 import { FaBullseye, FaBookOpen, FaUserGraduate, FaHandshake } from "react-icons/fa";
+import bgClg from '../../assets/images/collegeF.JPG';
 
 const Mission = () => {
   return (
@@ -52,7 +53,7 @@ const Mission = () => {
              <div className="achieve-col-title">Campus & Infrastructure</div>
             <div style={{ borderRadius: '6px', overflow: 'hidden', height: 'calc(100% - 46px)', border: '1px solid var(--border)' }}>
                <img 
-                 src="https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80" 
+                 src={bgClg} 
                  alt="Research Mission" 
                  style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
                />

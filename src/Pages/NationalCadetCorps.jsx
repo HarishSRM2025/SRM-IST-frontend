@@ -2,19 +2,16 @@ import React, { useEffect } from "react";
 import "../css/NCCCss.css";
 import Breadcrum from "../Components/Common/Breadcrum";
 
-import nccLogo from "../assets/images/ncc/1.webp";
-import nccHero from "../assets/images/ncc/fire/2.webp";
-import officerPhoto from "../assets/images/ncc/2.webp";
-import unitRaisingImg from "../assets/images/ncc/3.webp";
-import cadetImg from "../assets/images/ncc/4.webp";
-import firingImg1 from "../assets/images/ncc/5.webp";
-import firingImg2 from "../assets/images/ncc/6.webp";
-import firingImg3 from "../assets/images/ncc/7.webp";
-import ach1 from "../assets/images/ncc/fire/1.webp";
-import ach2 from "../assets/images/ncc/fire/2.webp";
-import ach3 from "../assets/images/ncc/fire/3.webp";
-import firingTargetImg from "../assets/images/ncc/fire/1.webp";
-import auditImg from "../assets/images/ncc/7.webp";
+import nccLogo from "../assets/images/ncc/logo.webp";
+import nccHero from "../assets/images/ncc/bg.webp";
+import officerPhoto from "../assets/images/ncc/officer.webp";
+import unitRaisingImg from "../assets/images/ncc/unit.webp";
+import cadetImg from "../assets/images/ncc/cadet.webp";
+import firingImg1 from "../assets/images/ncc/fire/1.webp";
+import firingImg2 from "../assets/images/ncc/fire/2.webp";
+import firingImg3 from "../assets/images/ncc/fire/3.webp";
+import firingImg4 from "../assets/images/ncc/fire/4.webp";
+import prec from "../assets/images/ncc/prec.webp";
 
 import NCCAims from "../Components/NCC/NCCAims";
 import NCCDisciplineOfficer from "../Components/NCC/NCCDisciplineOfficer";
@@ -29,13 +26,13 @@ const NationalCadetCorps = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const firingImages = [firingImg1, firingImg2, firingImg3, firingTargetImg];
-  const achImages = [ach1, ach2, ach3];
+  const firingImages = [firingImg1, firingImg2, firingImg3, firingImg4];
 
   return (
     <main className="ncc-page">
       <Breadcrum
         title="National Cadet Corps"
+        bgImage={nccHero}
         subtitle="Unity and Discipline"
         paths={[
           { name: "Home", link: "/" },
@@ -49,8 +46,8 @@ const NationalCadetCorps = () => {
       <NCCRaisingUnit image={unitRaisingImg}/>
       <NCCStudentsList image={cadetImg}/>
       <NCCFiringPractice images={firingImages}/>
-      <NCCAchievement acimages={achImages}/>
-      <NCCPerformanceAudit/>
+      <NCCAchievement />
+      <NCCPerformanceAudit image={prec}/>
     </main>
   );
 };

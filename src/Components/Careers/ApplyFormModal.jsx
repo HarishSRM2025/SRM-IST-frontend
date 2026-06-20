@@ -28,7 +28,6 @@ const ApplyFormModal = ({ job, onClose }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Here you would normally send the data to a backend
-        console.log("Form submitted for:", job.title, formData, fileName);
         alert(`Application for ${job.title} submitted successfully!`);
         onClose();
     };

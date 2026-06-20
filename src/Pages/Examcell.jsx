@@ -5,6 +5,7 @@ import {
   FaEnvelope, FaPhone, FaBuilding, FaBus, FaCertificate, FaGlobe, FaChartLine
 } from 'react-icons/fa';
 import '../css/Examcell.css';
+import ofc from '../assets/images/examcell.webp';
 
 // Placeholder Images
 import HeroImg from '../assets/images/home/campus-home.JPG';
@@ -36,13 +37,16 @@ const Examcell = () => {
         <div className="wrap">
           <div className="ctrl-wrapper">
             <div className="ctrl-img-box">
-              <img src='https://img.magnific.com/premium-vector/default-avatar-profile-icon-gray-placeholder-vector-illustration_514344-14757.jpg?w=360' alt="Controller of Examinations" className="ctrl-img" />
-              <div className="ctrl-name">Dr. S. Ponnusamy</div>
-              <div className="ctrl-title">Controller of Examinations</div>
+              <img src={ofc} alt="Controller of Examinations" className="ctrl-img" />
+              <div className="ctrl-name">Dr. K. Gunasekaran</div><br/>
+              <div className="ctrl-title">Controller of Examinations</div><br/>
+              <div className="ctrl-title" style={{fontWeight:800,color:'white'}}>Email: <a href="mailto:coe@srmist.edu.in" style={{fontWeight:800,color:'white'}}>coe@srmist.edu.in</a></div>
             </div>
             <div className="ctrl-msg">
               <p>
-                "Welcome to the Office of the Controller of Examinations. We are committed to ensuring the smooth conduct of examinations, timely publication of results, and maintaining the highest standards of academic integrity and confidentiality. Our digital initiatives aim to provide seamless services to our students, alumni, and faculty."
+               The Controller of Examinations is responsible for preparing and scheduling the university examinations for all the courses offered at the SRMIST. CoE also coordinates the central evaluation of answer scripts, the publication of results, and the issue of Grade cards, Transcripts, Provisional Certificates, Degree certificates, Migration certificates, and Duplicate certificates.
+               </p>
+               <p>In addition, we provide genuineness and verification services to various stakeholders such as Government entities, Educational institutions, Corporate bodies, and Private verification agencies. We also arrange for pre-and post-auditing of question papers and answer booklets by both internal and external subject experts as well as maintain records related to examinations.
               </p>
             </div>
           </div>

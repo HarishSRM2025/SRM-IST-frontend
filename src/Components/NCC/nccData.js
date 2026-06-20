@@ -1,4 +1,15 @@
-// import fire1 from "../../assets/images/fire";
+import achv1 from "../../assets/images/ncc/ach/1.webp";
+import achv2 from "../../assets/images/ncc/ach/2.webp";
+import achv3 from "../../assets/images/ncc/ach/3.webp";
+import achv4 from "../../assets/images/ncc/ach/4.png";
+import achv5 from "../../assets/images/ncc/ach/5.png";
+import achv6 from "../../assets/images/ncc/ach/6.webp";
+import achv7 from "../../assets/images/ncc/ach/7.png";
+import achv8 from "../../assets/images/ncc/ach/8.webp";
+import achv9 from "../../assets/images/ncc/ach/9.webp";
+import achv10 from "../../assets/images/ncc/ach/10.webp";
+import achv11 from "../../assets/images/ncc/ach/11.webp";
+import achv12 from "../../assets/images/ncc/ach/12.webp";
 export const nccData = {
   aims: {
     tag: "Our Purpose",
@@ -97,87 +108,61 @@ export const achievementData = [
     title: "77th Republic Day Celebration",
     description:
       "The 77th Republic Day was celebrated with great pride and patriotic fervor on 26th January at SRM Institute of Science and Technology. The celebration featured National Flag hoisting by Lt. Col. R. Muruganatham, Indian Army, followed by the National Anthem. NCC cadets performed an impressive March Past and Special Drill Performance, showcasing discipline, coordination, and dedication. The event inspired students to uphold constitutional values and contribute to nation-building.",
-    images: [
-      "/images/achievements/republic-day-1.webp",
-      "/images/achievements/republic-day-2.webp",
-      "/images/achievements/republic-day-3.webp"
-    ],
+    images: [achv1,achv2,achv3],
   },
   {
     id: 2,
     title: "Silver Medal – 50th State Shooting Competition",
     description:
       "Mr. Sabarish S (III B.Tech – Biotechnology) and Mr. Vijaay A.R. (III B.Com) secured the Silver Medal at the 50th State Shooting Competition held at Saragarhi Shooting Academy, GNC College. They were also selected to participate in the National Firing Competition.",
-    images: [
-      "/images/achievements/shooting-silver-1.webp",
-      "/images/achievements/shooting-silver-2.webp",
-    ],
+    images: [achv4],
   },
   {
     id: 3,
     title: "INF Attachment Camp – Phase II",
     description:
       "Mr. Karthikeyan (II B.Tech – IT) successfully participated in the INF Attachment Camp (Phase II) with the 4/8 Gorkha Rifles at Banaswadi, Bengaluru, Karnataka.",
-    images: [
-      "/images/achievements/inf-camp-1.webp",
-    ],
+    images: [achv5],
   },
   {
     id: 4,
     title: "Basic Leadership Camp",
     description:
       "Ms. Janani K (III B.Tech – EEE) successfully participated in and completed the Basic Leadership Camp held at Coimbatore Institute of Technology, Coimbatore, from 25 July 2025 to 05 August 2025.",
-    images: [
-      "/images/achievements/blc-1.webp",
-      "/images/achievements/blc-2.webp",
-    ],
+    images: [achv6],
   },
   {
     id: 5,
     title: "RDC–IGC Camp (Best Cadets Event)",
     description:
       "Ms. Janani K (III B.Tech – EEE) and Ms. Aarna Agarwal (III B.Tech – Cyber Security) participated in the RDC–IGC Camp (Best Cadets Event) held at Idyaapatti, Madurai. Their performance, discipline, and dedication brought great credit to themselves and the institution.",
-    images: [
-      "/images/achievements/rdc-igc-1.webp",
-      "/images/achievements/rdc-igc-2.webp",
-    ],
+    images: [achv7,achv8],
   },
   {
     id: 6,
     title: "Three Bronze Medals – IDSSC Shooting Competition",
     description:
       "NCC student Mr. Sabarish from B.Tech Biotechnology won three Bronze Medals in the State-Level IDSSC Shooting Competition, demonstrating exceptional skill and commitment.",
-    images: [
-      "/images/achievements/idssc-1.webp",
-      "/images/achievements/idssc-2.webp",
-    ],
+    images: [achv9],
   },
   {
     id: 7,
     title: "Best Cadet Award – ATC Camp",
     description:
       "NCC cadets Mr. Vamshi (II B.Tech – CSE) and Ms. Aarna Agarwal (II B.Tech – Cyber Security) were awarded the Best Cadet title at the ATC Camp conducted by the 2 TN Battalion at Anna University.",
-    images: [
-      "/images/achievements/best-cadet-1.webp",
-      "/images/achievements/best-cadet-2.webp",
-    ],
+    images: [achv10],
   },
   {
     id: 8,
     title: "Felicitation by Group Commander",
     description:
       "Mr. Sabarish, a Biotechnology student, was felicitated by the Group Commander in recognition of his outstanding achievement in a State-Level Shooting Competition.",
-    images: [
-      "/images/achievements/group-commander-1.webp",
-    ],
+    images: [achv11],
   },
   {
     id: 9,
     title: "Felicitation by Hon'ble Minister",
-    description:
-      "Mr. Sabarish from Biotechnology was felicitated by the Hon'ble Minister for Youth Welfare and Sports Development, Mr. Udhayanidhi Stalin, for his remarkable performance in a shooting competition.",
-    images: [
-      "/images/achievements/minister-felicitation-1.webp",
-    ],
+    description:"Mr. Sabarish from Biotechnology was felicitated by the Hon'ble Minister for Youth Welfare and Sports Development, Mr. Udhayanidhi Stalin, for his remarkable performance in a shooting competition.",
+    images: [achv12],
   },
 ];

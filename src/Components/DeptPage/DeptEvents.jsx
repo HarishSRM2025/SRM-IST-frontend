@@ -16,7 +16,6 @@ import {
 export default function DeptEvents({ id, onVisibilityChange }) {
   const location = useLocation();
   const deptName = location.state?.deptName || "Computer Science Engineering";
-  console.log(id);
   const [eventsList, setEventsList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("All");
