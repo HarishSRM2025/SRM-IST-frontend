@@ -80,15 +80,21 @@
   gap:30px;
   align-items:center;
 }
-.cl-split1{
+.cl-split12{
   display:grid;
-  grid-template-columns: 1fr 1.15fr;
+  grid-template-columns: 1fr .6fr;
   gap:30px;
   align-items:center;
 }
 .two-col {
   display: grid;
-  grid-template-columns: .75fr 1.5fr;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+.two-col22 {
+  display: grid;
+  grid-template-columns: 1.25fr .61fr;
   gap: 50px;
   align-items: center;
 }
@@ -166,40 +172,143 @@
   color: var(--navy);
   line-height: 1;
 }
-
 /* ==========================
-   ACHIEVEMENTS
+   NCC ACHIEVEMENTS
 ========================== */
 
-.achievement-grid {
-  display: grid;
-  gap: 25px;
+.achievement-heading{
+  text-align:center;
+  margin-bottom:50px;
 }
 
-.achievement-card {
-  background: var(--white);
-  border-radius: 18px;
-  padding: 30px;
-  border-left: 5px solid var(--gold);
-  box-shadow: 0 5px 20px rgba(0,0,0,.06);
+.achievement-grid-ncc{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:35px;
 }
 
-.achievement-card h3 {
-  color: var(--navy);
-  margin-bottom: 12px;
-  font-size: 22px;
+.achievement-card-ncc{
+  background:#fff;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  transition:.35s ease;
+  border:1px solid #ececec;
 }
 
-.achievement-card h5 {
-  color: var(--gold);
-  margin-bottom: 15px;
-  font-size: 15px;
-  font-weight: 600;
+.achievement-card-ncc:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 40px rgba(0,0,0,.12);
 }
 
-.achievement-card p {
-  line-height: 1.8;
-  color: var(--gray);
+.achievement-image-wrap{
+  position:relative;
+  overflow:hidden;
+  height:320px;
+}
+
+.achievement-image{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .5s ease;
+}
+
+.achievement-card-ncc:hover .achievement-image{
+  transform:scale(1.1);
+}
+
+.achievement-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to top,
+    rgba(11,44,95,.97),
+    rgba(11,44,95,.75)
+  );
+  color:#fff;
+  padding:25px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  opacity:0;
+  transition:.4s ease;
+}
+
+.achievement-card-ncc:hover .achievement-overlay{
+  opacity:1;
+}
+
+.achievement-overlay h3{
+  font-size:1.3rem;
+  margin-bottom:12px;
+  color:#fff;
+}
+
+.achievement-overlay p{
+  font-size:.92rem;
+  line-height:1.7;
+  display:-webkit-box;
+  -webkit-line-clamp:6;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+.achievement-content{
+  padding:22px;
+}
+
+.achievement-content h3{
+  color:var(--navy);
+  font-size:1.2rem;
+  margin-bottom:18px;
+  line-height:1.5;
+}
+
+.achievement-thumb-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.achievement-thumb{
+  width:100%;
+  height:90px;
+  object-fit:cover;
+  border-radius:10px;
+  transition:.3s ease;
+}
+
+.achievement-thumb:hover{
+  transform:scale(1.05);
+}
+
+/* Tablet */
+
+@media(max-width:992px){
+  .achievement-grid-ncc{
+    grid-template-columns:1fr;
+  }
+
+  .achievement-image-wrap{
+    height:280px;
+  }
+}
+
+/* Mobile */
+
+@media(max-width:576px){
+  .achievement-image-wrap{
+    height:240px;
+  }
+
+  .achievement-overlay p{
+    -webkit-line-clamp:4;
+  }
+
+  .achievement-content{
+    padding:18px;
+  }
 }
 
 /* ==========================
@@ -533,6 +642,12 @@
    GALLERY GRID (Firing Practice)
 ========================== */
 
+.gallery-grid-ncc4 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 2rem;
+}
 .gallery-grid-ncc {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

@@ -39,7 +39,6 @@ const Contact = () => {
       return;
     }
 
-    console.log(form);
 
     // 🔥 Success message
     setStatus("Message sent successfully!");

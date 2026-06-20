@@ -5,7 +5,7 @@ import { nccData } from "./nccData";
 const NCCAims = ({ logo }) => (
   <section className="cl-sec" id="aims">
     <div className="cl-container">
-      <div className="cl-split1">
+      <div className="cl-split12">
         <div className="cl-split__body" style={{ textAlign: "center" }}>
           <img
             src={logo}

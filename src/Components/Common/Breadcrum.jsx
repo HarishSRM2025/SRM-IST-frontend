@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaAngleRight } from "react-icons/fa";
+import commonBg from '../../assets/images/college.JPG';
 
 const Breadcrum = ({ title, subtitle, bgImage, paths }) => {
   const breadcrumbPaths = paths || [{ name: 'Home', link: '/' }, { name: title }];
@@ -22,11 +23,11 @@ const Breadcrum = ({ title, subtitle, bgImage, paths }) => {
         style={{ 
           position: 'absolute',
           inset: 0,
-          backgroundImage: bgImage ? `url(${bgImage})` : 'linear-gradient(135deg, #0b1d35 0%, #152d4a 100%)',
+          backgroundImage: bgImage ? `url(${bgImage})` : `url(${commonBg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundBlendMode: bgImage ? 'overlay' : 'normal',
-          backgroundColor: bgImage ? 'rgba(11,29,53,0.78)' : 'transparent',
+          backgroundBlendMode:  'overlay',
+          backgroundColor:  'rgba(11,29,53,0.78)',
           zIndex: 1
         }}
       ></div>

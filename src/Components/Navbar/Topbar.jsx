@@ -16,8 +16,6 @@ const Topbar = ({ announcements = [] }) => {
 
   const upcomingAnnouncements = announcements.filter(isUpcomingEvent);
   const otherAnnouncements = announcements.filter((item) => !isUpcomingEvent(item));
- console.log("upcomingAnnouncements",upcomingAnnouncements);
- console.log("otherAnnouncements",otherAnnouncements);
   // Group announcements by type
   const grouped = otherAnnouncements.reduce((acc, item) => {
     const typeLabel = item.type 

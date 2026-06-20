@@ -2,9 +2,9 @@ import React from "react";
 import { nccData } from "./nccData";
 
 const NCCDisciplineOfficer = ({ image }) => (
-  <section className="cl-sec" id="discipline">
+  <section className="cl-sec exam-cream" id="discipline">
     <div className="cl-container">
-      <div className="two-col">
+      <div className="two-col22">
         <div className="highlight-box">
           <h3>{nccData.discipline.cardinalsTitle}</h3>
           <ul style={{ paddingLeft: "20px", marginTop: "15px" }}>
@@ -27,13 +27,13 @@ const NCCDisciplineOfficer = ({ image }) => (
           <img
             src={image}
             alt={nccData.officer.name}
-            style={{ width: "100%", height: "320px", objectFit: "cover" }}
+            style={{ width: "100%", height: "max-content", objectFit: "cover" }}
           />
           <div className="profile-info">
             <h4>{nccData.officer.name}</h4>
             <span>{nccData.officer.designation}</span>
             {nccData.officer.details.map((line, i) => (
-              <p key={i} style={{ color: "var(--gray)", fontSize: "14px", margin: "4px 0" }}>
+              <p key={i} style={{ color: "var(--gray)", fontSize: "14px", margin: "4px 0" ,textAlign:'center'}}>
                 {line}
               </p>
             ))}
