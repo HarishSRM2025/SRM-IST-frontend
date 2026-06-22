@@ -7,39 +7,53 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { FaPlay } from "react-icons/fa";
 
 const VideoTestimonial = () => {
-  const [videoUrl, setVideoUrl] = useState(null);
+  const [videoId, setVideoId] = useState(null);
 
+  // Use YouTube video IDs and show YouTube thumbnails so all slides are same size
   const videos = [
     {
-      name: "Ananya Krishnan",
-      role: "B.Tech CSE 2023 · Placed at TCS",
-      img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80",
-      video: "https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1",
-      text: "SRM Trichy transformed my career trajectory completely."
+      name: "",
+      role: "",
+      video: "_G98tu5Ik-M",
+      text: ""
     },
     {
-      name: "Vikram Subramanian",
-      role: "B.Tech ECE 2024 · Placed at Infosys",
-      img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80",
-      video: "https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1",
-      text: "The faculty pushed me to discover my true potential."
+      name: "",
+      role: "",
+      video: "QDw-a9Z6Z7M",
+      text: ""
     },
     {
-      name: "Meena Rajendran",
-      role: "MBA 2023 · Placed at Deloitte",
-      img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80",
-      video: "https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1",
-      text: "From a small town to a global company — SRM made it possible."
+      name: "",
+      role: "",
+      video: "-d3xEdbQ7Z4",
+      text: ""
     },
     {
-      name: "Suresh Balaji",
-      role: "B.Tech Mech 2024 · Placed at Bosch",
-      img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
-      video: "https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1",
-      text: "Industry visits gave me real-world confidence."
+      name: "",
+      role: "",
+      video: "7tUS9L6ABDw",
+      text: ""
+    },
+    {
+      name: "",
+      role: "",
+      video: "Bxo2ANs9vBU",
+      text: ""
+    },
+    {
+      name: "",
+      role: "",
+      video: "B2gPMOT-E0M",
+      text: ""
+    },
+    {
+      name: "",
+      role: "",
+      video: "LIBC9SPOdBE",
+      text: ""
     }
   ];
-
   return (
     <div className="video-section">
       <div className="wrap">
@@ -67,38 +81,46 @@ const VideoTestimonial = () => {
         >
           {videos.map((v, i) => (
             <SwiperSlide key={i}>
-              <div
-                className="vc"
-                onClick={() => setVideoUrl(v.video)}
-              >
+              <div className="vc" onClick={() => setVideoId(v.video)}>
                 <div className="vc-thumb">
-                  <img src={v.img} alt={v.name} />
-                  <div className="vc-play">
-                    <FaPlay />
+                  <img
+                    src={`https://img.youtube.com/vi/${v.video}/hqdefault.jpg`}
+                    alt={v.name}
+                  />
+
+                  {/* centered Shorts-style icon overlay */}
+                  <div className="shorts-overlay" aria-hidden>
+                    <div className="shorts-badge">
+                      <svg width="174" height="64" viewBox="0 0 44 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="54" height="64" rx="8" fill="#FF0000" />
+                        <polygon points="18,20 18,44 38,32" fill="#fff" />
+                      </svg>
+                    </div>
                   </div>
+
                 </div>
 
-                <div className="vc-info">
+                {/* <div className="vc-info">
                   <div className="vc-name">{v.name}</div>
                   <div className="vc-role">{v.role}</div>
                   <div className="vc-blurb">"{v.text}"</div>
-                </div>
+                </div> */}
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
 
         {/* Modal */}
-        {videoUrl && (
-          <div className="v-modal open" onClick={() => setVideoUrl(null)}>
+        {videoId && (
+          <div className="v-modal open" onClick={() => setVideoId(null)}>
             <div className="v-modal-box" onClick={(e) => e.stopPropagation()}>
-              <button className="v-close" onClick={() => setVideoUrl(null)}>
+              <button className="v-close" onClick={() => setVideoId(null)}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
               <iframe
-                src={videoUrl}
+                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
                 title="Video"
                 frameBorder="0"
                 allow="autoplay; encrypted-media"
@@ -107,6 +129,19 @@ const VideoTestimonial = () => {
             </div>
           </div>
         )}
+
+        {/* Inline styles to keep thumbnails consistent and place Shorts icon */}
+        <style>{`\
+          .vc-thumb{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; border-radius:8px; }\
+          .vc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }\
+          .shorts-overlay{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none }\
+          .shorts-badge{ opacity:0.95; transform:scale(1); }\
+          .vc{ cursor:pointer; }\
+          .v-modal.open{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.7); z-index:9999 }\
+          .v-modal-box{ width:90%; max-width:960px; aspect-ratio:16/9; background:#000; position:relative }\
+          .v-modal-box iframe{ width:100%; height:100% }\
+          .v-close{ position:absolute; right:12px; top:12px; background:transparent; border:0; color:#fff; z-index:2 }\
+        `}</style>
 
       </div>
     </div>
