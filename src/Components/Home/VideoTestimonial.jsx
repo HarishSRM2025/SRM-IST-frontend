@@ -12,46 +12,39 @@ const VideoTestimonial = () => {
   // Use YouTube video IDs and show YouTube thumbnails so all slides are same size
   const videos = [
     {
-      name: "",
-      role: "",
-      video: "_G98tu5Ik-M",
-      text: ""
+      name: "Safi Abbas",
+      role: "CSE Data Science Department",
+      video: "_G98tu5Ik-M"
     },
     {
-      name: "",
-      role: "",
-      video: "QDw-a9Z6Z7M",
-      text: ""
+      name: "Mithra",
+      role: "IInd Year Occupational Therapy",
+      video: "QDw-a9Z6Z7M"
     },
     {
-      name: "",
-      role: "",
-      video: "-d3xEdbQ7Z4",
-      text: ""
+      name: "Neha Iyer",
+      role: "IIIrd Year B.Tech CSE",
+      video: "-d3xEdbQ7Z4"
     },
     {
-      name: "",
-      role: "",
-      video: "7tUS9L6ABDw",
-      text: ""
+      name: "Anika",
+      role: "IIIrd Year B.Sc MIT",
+      video: "Yzkg6grH6zg"
     },
     {
-      name: "",
-      role: "",
-      video: "Bxo2ANs9vBU",
-      text: ""
+      name: "Abi Varshini",
+      role: "M.Sc Allied Health Science",
+      video: "Bxo2ANs9vBU"
     },
     {
-      name: "",
-      role: "",
-      video: "B2gPMOT-E0M",
-      text: ""
+      name: "Deepith",
+      role: "B.Tech Cyber Security",
+      video: "B2gPMOT-E0M"
     },
     {
-      name: "",
-      role: "",
-      video: "LIBC9SPOdBE",
-      text: ""
+      name: "Rashmika",
+      role: "BPT",
+      video: "LIBC9SPOdBE"
     }
   ];
   return (
@@ -75,6 +68,7 @@ const VideoTestimonial = () => {
           autoplay={{ delay: 5000 }}
           navigation
           breakpoints={{
+            320: { slidesPerView: 1 },
             640: { slidesPerView: 2 },
             1024: { slidesPerView: 3 }
           }}
@@ -91,7 +85,7 @@ const VideoTestimonial = () => {
                   {/* centered Shorts-style icon overlay */}
                   <div className="shorts-overlay" aria-hidden>
                     <div className="shorts-badge">
-                      <svg width="174" height="64" viewBox="0 0 44 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg width="154" height="64" viewBox="0 0 44 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="54" height="64" rx="8" fill="#FF0000" />
                         <polygon points="18,20 18,44 38,32" fill="#fff" />
                       </svg>
@@ -100,11 +94,10 @@ const VideoTestimonial = () => {
 
                 </div>
 
-                {/* <div className="vc-info">
+                <div className="vc-info">
                   <div className="vc-name">{v.name}</div>
                   <div className="vc-role">{v.role}</div>
-                  <div className="vc-blurb">"{v.text}"</div>
-                </div> */}
+                </div>
               </div>
             </SwiperSlide>
           ))}

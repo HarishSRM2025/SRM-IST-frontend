@@ -37,7 +37,7 @@ const Examcell = () => {
         <div className="wrap">
           <div className="ctrl-wrapper">
             <div className="ctrl-img-box">
-              <img src={ofc} alt="Controller of Examinations" className="ctrl-img" />
+              <img src={ofcx} alt="Controller of Examinations" className="ctrl-img" />
               <div className="ctrl-name">Dr. K. Gunasekaran</div><br/>
               <div className="ctrl-title">Controller of Examinations</div><br/>
               <div className="ctrl-title" style={{fontWeight:800,color:'white'}}>Email: <a href="mailto:coe@srmist.edu.in" style={{fontWeight:800,color:'white'}}>coe@srmist.edu.in</a></div>

@@ -31,6 +31,7 @@ import Sports from './Pages/Sports';
 import NationalCadetCorps from './Pages/NationalCadetCorps';
 import Admission from './Pages/Admission';
 import AcademicCalendar from './Pages/AcademicCalendar';
+import Leadership from './Pages/Leadership';
 
 const App = () => {
   return (
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="/contact" element={<Contact/>} />
         <Route path="/admission" element={<Admission/>} />
         <Route path="/academic_calendar" element={<AcademicCalendar/>} />
+        <Route path="/leadership" element={<Leadership/>} />
         <Route path="/sponsored-research" element={<SponsoredResearch />} />
         <Route path="/library" element={<Library />} />
         <Route path="/sports" element={<Sports />} />

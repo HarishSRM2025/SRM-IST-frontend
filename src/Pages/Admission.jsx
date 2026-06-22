@@ -1,6 +1,6 @@
 import React from "react";
 import "../css/Admission.css";
-import { admissionData } from "./admissionData";
+import { admissionData } from "../Data/admissionData";
 
 const Admission = () => {
   return (
