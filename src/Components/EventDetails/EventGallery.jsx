@@ -9,7 +9,7 @@ const EventGallery = ({ event }) => {
   if (!event.images || event.images.length === 0) return null;
 
   return (
-    <div style={{ marginBottom: '40px', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }}>
+    <div style={{ marginBottom: '40px', borderRadius: '12px', overflow: 'hidden'}}>
       <style>
         {`
           .swiper-pagination-bullet {
@@ -31,7 +31,7 @@ const EventGallery = ({ event }) => {
       >
         {event.images.map((img, index) => (
           <SwiperSlide key={index}>
-            <img src={img} alt={`${event.title} ${index + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src={img} alt={`${event.title} ${index + 1}`} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </SwiperSlide>
         ))}
       </Swiper>
