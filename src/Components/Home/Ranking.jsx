@@ -28,6 +28,7 @@ const Ranking = () => {
       .catch((err) => console.log(err));
   }, []);
 
+
   return (
     <section className="ranking-section rev" style={{ padding: '80px 20px', background: '#f8f6f1' }}>
     
@@ -53,7 +54,7 @@ const Ranking = () => {
               allowTouchMove={false}
             >
               {rankings.map(rank => (
-                <SwiperSlide key={`img-${rank.id}`}>
+                <SwiperSlide key={`img-${rank._id}`}>
                   <div style={{
                     width: '100%',
                     aspectRatio: '4/3',
@@ -63,7 +64,7 @@ const Ranking = () => {
                   }}>
                     <img 
                       src={'http://localhost:3000/public/uploads/'+rank.image} 
-                      alt={rank.title} 
+                      alt={rank._id} 
                       style={{
                         width: '100%',
                         height: '100%',
@@ -93,13 +94,13 @@ const Ranking = () => {
               grabCursor={true}
             >
               {rankings.map(rank => (
-                <SwiperSlide key={`content-${rank.id}`}>
+                <SwiperSlide key={`content-${rank._id}`}>
                   <div style={{ padding: '10px 0' }}>
                  
-                    <h3 style={{ color: 'var(--navy)', fontSize: 'clamp(32px, 4vw, 48px)', marginBottom: '25px', fontFamily: 'var(--font-serif)', lineHeight: 1.1, fontWeight: '700' }}>
+                    <h3 style={{ color: 'var(--navy)', fontSize: 'clamp(32px, 2vw, 48px)', marginBottom: '25px', fontFamily: 'var(--font-serif)', lineHeight: 1.1, fontWeight: '700' }}>
                       {rank.title}
                     </h3>
-                    <p style={{ color: 'var(--gray)', fontSize: 'clamp(16px, 2vw, 19px)', lineHeight: '1.7', margin: 0 }}>
+                    <p style={{ color: 'var(--gray)', fontSize: 'clamp(16px, 1.3vw, 19px)', lineHeight: '1.7', margin: 0 }}>
                       {rank.description}
                     </p>
                   </div>

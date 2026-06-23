@@ -120,7 +120,8 @@ const Navbar = ({ announcements = [] }) => {
             </Link>
             <div className="nav-drop">
               <Link to="/about"><FaInfoCircle />Overview</Link>
-              <Link to="/about"><FaEye />Vision & Mission</Link>
+              <Link to="/governance"><FaUsers />Governance</Link>
+              <Link to="/communication"><FaUsers />Communication</Link>
               <Link to="/leadership?filter=all"><FaUsers />Apex Leadership</Link>
               <Link to="/leadership?filter=admin"><FaUsers />Administrative Heads</Link>
               <Link to="/leadership?filter=academic"><FaUsers />Academics Head</Link>

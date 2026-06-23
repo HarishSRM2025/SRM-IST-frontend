@@ -1,0 +1,170 @@
+/* ==========================================================================
+   Governance & Board Management Section Styling
+   ========================================================================== */
+
+.board-section {
+  padding: 96px 0;
+  background: var(--cream);
+}
+
+/* Page Level Header / Multi-line Subtitle Description */
+.board-main-desc {
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--gray);
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Structural Group Elements
+   ========================================================================== */
+
+.board-group {
+  margin-bottom: 60px;
+}
+
+.board-group-title {
+  font-family: "Playfair Display", serif;
+  color: var(--navy);
+  font-size: 30px;
+  margin-bottom: 30px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(var(--navy-rgb, 0, 43, 91), 0.1);
+}
+
+/* Layout Grid System */
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Individual Staff/Member Identity Cards */
+.board-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  padding: 30px;
+  border-top: 3px solid transparent;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
+              border-color 0.3s ease, 
+              box-shadow 0.3s ease;
+}
+
+.board-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.board-card span {
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+}
+
+.board-card h4 {
+  margin: 12px 0 8px 0;
+  color: var(--navy);
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.board-card p {
+  color: var(--gray);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  margin-top: auto; /* Pushes content down cleanly on uneven text blocks */
+}
+
+/* ==========================================================================
+   Terms of Reference Ordered List Layout
+   ========================================================================== */
+
+.terms-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: term-counter;
+}
+
+.terms-list li {
+  position: relative;
+  padding: 18px 20px 18px 55px;
+  margin-bottom: 16px;
+  background: #ffffff;
+  border-left: 4px solid var(--gold);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  line-height: 1.8;
+  color: var(--gray);
+  transition: transform 0.3s ease, border-left-color 0.3s ease;
+}
+
+.terms-list li::before {
+  content: counter(term-counter);
+  counter-increment: term-counter;
+  position: absolute;
+  left: 15px;
+  top: 18px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--navy);
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.terms-list li:hover {
+  transform: translateX(6px);
+  border-left-color: var(--navy);
+}
+
+/* ==========================================================================
+   Responsive Viewport Breakdown Points
+   ========================================================================== */
+
+@media (max-width: 992px) {
+  .board-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .board-section {
+    padding: 60px 0;
+  }
+
+  .board-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .board-group-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .terms-list li {
+    padding: 16px 16px 16px 48px;
+  }
+
+  .terms-list li::before {
+    left: 10px;
+    top: 16px;
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+  }
+}

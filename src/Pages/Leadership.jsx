@@ -64,7 +64,10 @@ const Leadership = () => {
 
   return (
     <>
-      <Breadcrum title={breadCrumbTitle} />
+      <Breadcrum 
+      title={breadCrumbTitle} 
+      paths={[{ name: 'Home', link: '/' }, { name: 'About', link: '/about' }, { name: breadCrumbTitle}]}
+      />
       <div className="leadership-container">
         <section className="leadership-section">
             <div className="container">

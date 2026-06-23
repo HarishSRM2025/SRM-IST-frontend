@@ -1,0 +1,154 @@
+.governance-section {
+  padding: 96px 0;
+}
+
+/* Header */
+
+.gov-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+/* Featured Block */
+
+.gov-feature {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 70px;
+}
+
+.gov-image {
+  position: relative;
+}
+
+.gov-image img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 4/3;
+}
+
+.gov-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 3px solid var(--gold);
+  transform: translate(14px, 14px);
+  z-index: -1;
+}
+
+.gov-content h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 34px;
+  color: var(--navy);
+  margin-bottom: 18px;
+}
+
+.gov-content p {
+  color: var(--gray);
+  line-height: 1.9;
+  margin-bottom: 28px;
+  font-size: 15px;
+}
+
+/* Governance Cards */
+
+.gov-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.gov-card {
+  background: #fff;
+  border-top: 4px solid transparent;
+  transition: all 0.35s ease;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+}
+
+.gov-card:hover {
+  transform: translateY(-8px);
+  border-top-color: var(--gold);
+}
+
+.gov-card-image {
+  overflow: hidden;
+}
+
+.gov-card-image img {
+  width: 100%;
+  aspect-ratio: 20/18;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.gov-card:hover img {
+  transform: scale(1.05);
+}
+
+.gov-card-body {
+  padding: 24px;
+}
+
+.gov-card-body h4 {
+  font-family: "Playfair Display", serif;
+  color: var(--navy);
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.gov-card-body p {
+  color: var(--gray);
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+/* Responsive */
+
+@media (max-width: 992px) {
+  .gov-feature {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .gov-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .governance-section {
+    padding: 64px 0;
+  }
+
+  .gov-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gov-content h3 {
+    font-size: 28px;
+  }
+}
+
+.gov-card-body .view_link{
+    background:var(--gold);
+    color:var(--navy);
+    text-decoration:none;
+    padding:8px;
+    text-align:center;
+    display:block; 
+    text-transform:uppercase;
+    width:33%;
+    font-size:11px;
+    margin-top:20px;
+    font-weight:bolder;
+}
+.gov-card:hover .view_link{
+    background:var(--navy);
+    color:white;
+    box-shadow:-4px 4px 10px #afcfff;
+}

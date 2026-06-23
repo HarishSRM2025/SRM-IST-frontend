@@ -37,7 +37,7 @@ const Examcell = () => {
         <div className="wrap">
           <div className="ctrl-wrapper">
             <div className="ctrl-img-box">
-              <img src={ofcx} alt="Controller of Examinations" className="ctrl-img" />
+              <img src={ofc} alt="Controller of Examinations" className="ctrl-img" />
               <div className="ctrl-name">Dr. K. Gunasekaran</div><br/>
               <div className="ctrl-title">Controller of Examinations</div><br/>
               <div className="ctrl-title" style={{fontWeight:800,color:'white'}}>Email: <a href="mailto:coe@srmist.edu.in" style={{fontWeight:800,color:'white'}}>coe@srmist.edu.in</a></div>
@@ -83,9 +83,9 @@ const Examcell = () => {
       </section>
 
       {/* 5. Time Table & Seating Plan */}
-      <section className="exam-section exam-light">
+      <section className="exam-section">
         <div className="wrap">
-          <h2 className="exam-section-title">Time Table & Seating Plan</h2>
+          <h2 className="exam-section-title">Time Table & <em style={{color:'var(--gold)'}}>Seating Plan</em></h2>
           <p className="exam-desc">Access examination schedules and venue details for the current semester.</p>
           <div className="exam-card-grid-2">
             <a href="#timetable" className="exam-card">
@@ -112,7 +112,7 @@ const Examcell = () => {
       </section>
 
       {/* 7. Hall Ticket */}
-      <section className="exam-section exam-white text-center">
+      <section className="exam-section text-center">
         <div className="wrap">
           <h2 className="exam-section-title">Hall Ticket</h2>
           <p className="exam-desc">Download your hall ticket for the upcoming end-semester examinations.</p>
@@ -163,7 +163,7 @@ const Examcell = () => {
       </section>
 
       {/* 10. Duplicate Identity Card / Bus Pass */}
-      <section className="exam-section exam-light text-center">
+      <section className="exam-section exam-cream text-center">
         <div className="wrap">
           <h2 className="exam-section-title">Duplicate Identity Card / Bus Pass</h2>
           <p className="exam-desc">Request a duplicate ID card or bus pass by submitting the required forms.</p>
@@ -202,7 +202,7 @@ const Examcell = () => {
       </section>
 
       {/* 12. WES Requirements */}
-      <section className="exam-section exam-light text-center">
+      <section className="exam-section exam-cream text-center">
         <div className="wrap">
           <h2 className="exam-section-title">WES Requirements (USA & Canada)</h2>
           <div className="exam-card-grid-2" style={{ gridTemplateColumns: '1fr' }}>
@@ -230,7 +230,7 @@ const Examcell = () => {
       </section>
 
       {/* 14. Downloads */}
-      <section className="exam-section exam-light text-center">
+      <section className="exam-section exam-cream text-center">
         <div className="wrap">
           <h2 className="exam-section-title">Downloads (Forms / Applications)</h2>
           <div className="exam-card-grid-2" style={{ gridTemplateColumns: '1fr' }}>
@@ -256,7 +256,7 @@ const Examcell = () => {
       </section>
 
       {/* 16. Get In Touch */}
-      {/* <section className="exam-section exam-light">
+      {/* <section className="exam-section exam-cream">
         <div className="wrap">
           <h2 className="exam-section-title">Get In Touch</h2>
           <div className="exam-contact-box">

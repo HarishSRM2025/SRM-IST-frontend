@@ -40,11 +40,13 @@ const academicCalendars = [
     pdf: acdPdf6
   },
 ];
-
+const pgTitle='Academic Calendar'
 const AcademicCalendar = () => {
   return (
     <>
-      <Breadcrum title="Academic Calendar" />
+      <Breadcrum title={pgTitle}
+      paths={[{ name: 'Home', link: '/' }, { name: 'Academics', link: '#' }, { name: pgTitle}]} 
+      />
 
       <div className="admission-page">
         <div className="admission-container">

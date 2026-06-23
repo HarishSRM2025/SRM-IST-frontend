@@ -1,0 +1,134 @@
+.communication-section {
+  padding: 70px 0;
+  background: #f8f9fc;
+}
+
+.communication-section .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Profile Card */
+.communication-profile {
+  background: #fff;
+  border-radius: 20px;
+  padding: 35px;
+  margin-bottom: 40px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  border-left: 5px solid var(--navy);
+}
+
+.communication-profile h2 {
+  font-size: 2rem;
+  color: var(--navy);
+  margin-bottom: 10px;
+  font-family: "Playfair Display", serif;
+}
+
+.communication-profile .designation {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color:#a8a8a8;
+  margin-bottom: 15px;
+}
+
+.communication-profile p {
+  margin: 8px 0;
+  color: #444;
+  line-height: 1.7;
+}
+
+.contact-info {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.contact-info p {
+  margin: 10px 0;
+}
+
+.contact-info a {
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+/* Message Section */
+.communication-message {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.communication-message h3 {
+  font-size: 1.8rem;
+  color: var(--navy);
+  font-family:"Playfair Display", serif;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.communication-message h3::after {
+  content: "";
+  width: 70px;
+  height: 4px;
+  background: var(--gold);
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  border-radius: 10px;
+}
+
+.communication-message p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.9;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.signature {
+  margin-top: 35px;
+  padding-top: 20px;
+  border-top: 1px solid #ececec;
+}
+
+.signature p {
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.signature strong {
+  color: var(--navy);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .communication-section {
+    padding: 50px 0;
+  }
+
+  .communication-profile,
+  .communication-message {
+    padding: 25px;
+  }
+
+  .communication-profile h2 {
+    font-size: 1.6rem;
+  }
+
+  .communication-message h3 {
+    font-size: 1.4rem;
+  }
+
+  .communication-message p {
+    text-align: left;
+  }
+}
