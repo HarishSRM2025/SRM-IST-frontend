@@ -28,6 +28,8 @@ import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { HiOutlineSpeakerphone } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logos/logo.png";
+import mandatory from "../../assets/pdf/mandatory.pdf";
+
 
 const Navbar = ({ announcements = [] }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -118,12 +120,13 @@ const Navbar = ({ announcements = [] }) => {
             </Link>
             <div className="nav-drop">
               <Link to="/about"><FaInfoCircle />Overview</Link>
-              <Link to="/about"><FaEye />Vision & Mission</Link>
-              <Link to="/about"><FaUsers />Leadership</Link>
+              <Link to="/governance"><FaUsers />Governance</Link>
+              <Link to="/communication"><FaUsers />Communication</Link>
+              <Link to="/leadership?filter=all"><FaUsers />Apex Leadership</Link>
+              <Link to="/leadership?filter=admin"><FaUsers />Administrative Heads</Link>
+              <Link to="/leadership?filter=academic"><FaUsers />Academics Head</Link>
+              <a href={mandatory} target="_blank"><FaFileAlt />Mandatory Disclosure</a>
               <Link to="/policy"><FaFileAlt />Policy</Link>
-              <hr />
-              <Link to="/about"><FaMedal />NAAC</Link>
-              <Link to="/about"><FaLandmark />Infrastructure</Link>
             </div>
           </li>
 

@@ -31,6 +31,9 @@ import Sports from './Pages/Sports';
 import NationalCadetCorps from './Pages/NationalCadetCorps';
 import Admission from './Pages/Admission';
 import AcademicCalendar from './Pages/AcademicCalendar';
+import Leadership from './Pages/Leadership';
+import Governance from './Components/AboutUs/Governance';
+import Communication from './Pages/Communication';
 
 const App = () => {
   return (
@@ -49,9 +52,12 @@ const App = () => {
         <Route path="/policy" element={<Policy/>} />
         <Route path="/campus-life" element={<CampusLife/>} />
         <Route path="/news-and-events" element={<NewsAndEvents/>} />
+        <Route path="/governance" element={<Governance/>} />
+        <Route path="/governance" element={<Governance/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/admission" element={<Admission/>} />
         <Route path="/academic_calendar" element={<AcademicCalendar/>} />
+        <Route path="/leadership" element={<Leadership/>} />
         <Route path="/sponsored-research" element={<SponsoredResearch />} />
         <Route path="/library" element={<Library />} />
         <Route path="/sports" element={<Sports />} />
@@ -62,6 +68,7 @@ const App = () => {
         <Route path="/students" element={<Students />} />
         <Route path="/examcell" element={<Examcell />} />
         <Route path="/careers" element={<Careers />} />
+        <Route path="/communication" element={<Communication />} />
         <Route path="/ncc" element={<NationalCadetCorps />} />
       </Routes>
 

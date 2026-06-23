@@ -10,53 +10,24 @@ import '../../css/Department.css';
 
 import awardImg from '../../assets/images/home/award-home.JPG';
 import innovationImg from '../../assets/images/home/innovation-home.jpg';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const Ranking = () => {
   const [firstSwiper, setFirstSwiper] = useState(null);
   const [secondSwiper, setSecondSwiper] = useState(null);
 
-  const rankings = [
-    {
-      id: 1,
-      image: 'https://www.globalinstitutes.edu.in/wp-content/uploads/2022/07/NAACAlogo-1.png',
-      icon: <FaAward />,
-      title: "NAAC A++",
-      subtitle: "Highest Grade",
-      desc: "Accredited with the highest grade of A++ by the National Assessment and Accreditation Council."
-    },
-    {
-      id: 2,
-      image:'https://blog.indiaccess.com/wp-content/uploads/2025/09/nirf-logo.jpg',
-      icon: <FaTrophy />,
-      title: "NIRF Ranking",
-      subtitle: "Top 20 Universities",
-      desc: "Consistently ranked among the top 20 universities in India by the National Institutional Ranking Framework."
-    },
-    {
-      id: 3,
-      image: 'https://mma.prnewswire.com/media/2429773/5597560/QS_Quacquarelli_Symonds_Logo.jpg?w=300', // Reusing image for demonstration
-      icon: <FaMedal />,
-      title: "QS World Rankings",
-      subtitle: "Global Recognition",
-      desc: "Awarded a 4-star rating globally and 5 stars for teaching, employability, and inclusiveness."
-    },
-    {
-      id: 4,
-      image: 'https://cbit.ac.in/wp-content/uploads/2022/03/ariia-2021.jpg', // Reusing image for demonstration
-      icon: <FaStar />,
-      title: "ARIIA",
-      subtitle: "Innovation Leader",
-      desc: "Ranked among the top private universities in the Atal Ranking of Institutions on Innovation Achievements."
-    },
-    {
-      id: 5,
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHUomC5Y9snBQu8fDUvm3QSv_WWsXm3eqZRA&s', // Reusing image for demonstration
-      icon: <FaAward />,
-      title: "NBA Accredited",
-      subtitle: "Engineering Excellence",
-      desc: "Multiple engineering programs accredited by the National Board of Accreditation for maintaining global standards."
-    }
-  ];
+  const [rankings, setRankings] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `${import.meta.env.VITE_API_URL}/about/accreditation/getall`
+      )
+      .then((res) => setRankings(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
 
   return (
     <section className="ranking-section rev" style={{ padding: '80px 20px', background: '#f8f6f1' }}>
@@ -83,7 +54,7 @@ const Ranking = () => {
               allowTouchMove={false}
             >
               {rankings.map(rank => (
-                <SwiperSlide key={`img-${rank.id}`}>
+                <SwiperSlide key={`img-${rank._id}`}>
                   <div style={{
                     width: '100%',
                     aspectRatio: '4/3',
@@ -92,8 +63,8 @@ const Ranking = () => {
                     overflow: 'hidden'
                   }}>
                     <img 
-                      src={rank.image} 
-                      alt={rank.title} 
+                      src={'http://localhost:3000/public/uploads/'+rank.image} 
+                      alt={rank._id} 
                       style={{
                         width: '100%',
                         height: '100%',
@@ -123,16 +94,14 @@ const Ranking = () => {
               grabCursor={true}
             >
               {rankings.map(rank => (
-                <SwiperSlide key={`content-${rank.id}`}>
+                <SwiperSlide key={`content-${rank._id}`}>
                   <div style={{ padding: '10px 0' }}>
-                    <div style={{ display: 'inline-block', padding: '6px 14px', background: 'rgba(200,149,42,0.15)', color: 'var(--gold)', fontSize: '13px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '20px', borderRadius: '30px' }}>
-                      {rank.subtitle}
-                    </div>
-                    <h3 style={{ color: 'var(--navy)', fontSize: 'clamp(32px, 4vw, 48px)', marginBottom: '25px', fontFamily: 'var(--font-serif)', lineHeight: 1.1, fontWeight: '700' }}>
+                 
+                    <h3 style={{ color: 'var(--navy)', fontSize: 'clamp(32px, 2vw, 48px)', marginBottom: '25px', fontFamily: 'var(--font-serif)', lineHeight: 1.1, fontWeight: '700' }}>
                       {rank.title}
                     </h3>
-                    <p style={{ color: 'var(--gray)', fontSize: 'clamp(16px, 2vw, 19px)', lineHeight: '1.7', margin: 0 }}>
-                      {rank.desc}
+                    <p style={{ color: 'var(--gray)', fontSize: 'clamp(16px, 1.3vw, 19px)', lineHeight: '1.7', margin: 0 }}>
+                      {rank.description}
                     </p>
                   </div>
                 </SwiperSlide>

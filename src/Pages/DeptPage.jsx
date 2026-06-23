@@ -50,26 +50,10 @@ export default function DeptPage() {
     });
   };
 
-  // const sections = [
-  //   visibleOptionalSections.about && { label: "About", href: "#about" },
-  //   visibleOptionalSections.divisions && { label: "Divisions", href: "#divisions" },
-  //   visibleOptionalSections.programmes && { label: "Programmes", href: "#programmes" },
-  //   visibleOptionalSections.faculty && { label: "Faculty", href: "#faculty" },
-  //   visibleOptionalSections.events && { label: "Events", href: "#events" },
-  //   visibleOptionalSections.achievements && { label: "Achievements", href: "#achievements" },
-  // ].filter(Boolean);
 
   return (
     <>
-      {/* {sections.length > 0 && (
-        <nav className="dept-subnav">
-          <div className="dept-subnav-inner">
-            {sections.map((s, i) => (
-              <a key={i} href={s.href}>{s.label}</a>
-            ))}
-          </div>
-        </nav>
-      )} */}
+
 
       <DeptHero
         id="about"

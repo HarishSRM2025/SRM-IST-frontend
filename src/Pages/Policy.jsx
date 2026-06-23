@@ -37,11 +37,14 @@ const policyItems = [
   }
 ];
 
+const pgTitle="Policy";
+
 const Policy = () => {
   return (
     <div className="about-page policy-page">
       <Breadcrum
-        title="Policy"
+        title={pgTitle}
+        paths={[{ name: 'Home', link: '/' }, { name: 'About', link: '/about' }, { name: pgTitle}]}
       />
 
       <section className="policy-section">

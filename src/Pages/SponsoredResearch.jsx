@@ -69,7 +69,7 @@ const SponsoredResearch = () => {
     <>
       <Breadcrum 
         title="Sponsored Research" 
-        paths={[{ name: "Home", link: "/" }, { name: "Sponsored Research" }]}
+        paths={[{ name: "Home", link: "/" },{ name: "Research", link: "/research" }, { name: "Sponsored Research" }]}
         bgImage="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1920&auto=format&fit=crop"
       />
       

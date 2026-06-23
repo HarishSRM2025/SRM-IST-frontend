@@ -2268,3 +2268,7 @@ footer{
         font-size: 28px;
     }
 }
+.swiper-wrapper{
+    display:flex;
+    align-items:center;
+}
