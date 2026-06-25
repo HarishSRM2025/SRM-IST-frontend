@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 const API_BASE = API_URL.replace("/api", "");
@@ -267,18 +267,14 @@ const FacultyExperienceSection = ({ experience, loading }) => {
   );
 };
 
-export default function DeptFaculty({ id, onVisibilityChange }) {
+export default function DeptFaculty({ id, onVisibilityChange, page }) {
   const location = useLocation();
+  const navigate = useNavigate();
   const deptName = location.state?.deptName || "Computer Science Engineering";
   const deptSlug = location.state?.deptSlug;
 
   const [faculty, setFaculty] = useState([]);
-  const [selected, setSelected] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [facultyResearch, setFacultyResearch] = useState(null);
-  const [researchLoading, setResearchLoading] = useState(false);
-  const [facultyExperience, setFacultyExperience] = useState([]);
-  const [experienceLoading, setExperienceLoading] = useState(false);
 
   useEffect(() => {
     const fetchFaculty = async () => {
@@ -294,19 +290,16 @@ export default function DeptFaculty({ id, onVisibilityChange }) {
           if (location.state?.schoolId) {
             matchedSchool = schools.find((s) => s._id === location.state.schoolId);
           }
-          // Try slug match first
           if (!matchedSchool && deptSlug) {
             matchedSchool = schools.find(
               (s) => s.slug && s.slug.toLowerCase() === deptSlug.toLowerCase()
             );
           }
-          // Try exact name match
           if (!matchedSchool) {
             matchedSchool = schools.find(
               (s) => s.name && s.name.toLowerCase() === deptName.toLowerCase()
             );
           }
-          // Try inclusion match
           if (!matchedSchool) {
             matchedSchool = schools.find(
               (s) =>
@@ -318,14 +311,12 @@ export default function DeptFaculty({ id, onVisibilityChange }) {
                     deptName.toLowerCase().includes("business")))
             );
           }
-          // Try reverse inclusion
           if (!matchedSchool) {
             matchedSchool = schools.find(
               (s) =>
                 s.name && s.name.toLowerCase().includes(deptName.toLowerCase())
             );
           }
-          // Try first word keyword
           if (!matchedSchool) {
             const firstWord = deptName.split(" ")[0].toLowerCase();
             if (firstWord.length > 2) {
@@ -337,7 +328,6 @@ export default function DeptFaculty({ id, onVisibilityChange }) {
         }
 
         if (matchedSchool) {
-          // 2. Fetch faculty by school
           const facRes = await fetch(
             `${API_URL}/faculty/getfacultybyschool/${matchedSchool._id}`
           );
@@ -350,7 +340,15 @@ export default function DeptFaculty({ id, onVisibilityChange }) {
                 ? facJson.data
                 : [facJson.data]
               : [];
-            setFaculty(list);
+
+            if(page === "Division"){
+              setFaculty(list);
+            }else{
+              const filteredFaculty = list.filter(
+                (faculty) => faculty.schoolDivision == undefined
+              );
+              setFaculty(filteredFaculty);
+            }
           }
         }
       } catch (error) {
@@ -369,51 +367,6 @@ export default function DeptFaculty({ id, onVisibilityChange }) {
     }
   }, [faculty.length, loading, onVisibilityChange]);
 
-  const selectedFaculty = faculty.find((f) => f._id === selected);
-
-  useEffect(() => {
-    const fetchFacultyResearch = async () => {
-      if (!selected) {
-        setFacultyResearch(null);
-        setFacultyExperience([]);
-        setResearchLoading(false);
-        setExperienceLoading(false);
-        return;
-      }
-
-      setResearchLoading(true);
-      setExperienceLoading(true);
-      setFacultyResearch(null);
-      setFacultyExperience([]);
-
-      try {
-        const [researchResponse, experienceResponse] = await Promise.all([
-          fetch(`${API_URL}/faculty/getfacultyresearchbyfaculty/${selected}`),
-          fetch(`${API_URL}/faculty/getfacultyexperiencebyfaculty/${selected}`),
-        ]);
-
-        if (researchResponse.ok) {
-          const data = await researchResponse.json();
-          setFacultyResearch(data);
-        }
-
-        if (experienceResponse.ok) {
-          const data = await experienceResponse.json();
-          setFacultyExperience(Array.isArray(data) ? data : data ? [data] : []);
-        }
-      } catch (error) {
-        console.error("Error fetching faculty details:", error);
-        setFacultyResearch(null);
-        setFacultyExperience([]);
-      } finally {
-        setResearchLoading(false);
-        setExperienceLoading(false);
-      }
-    };
-
-    fetchFacultyResearch();
-  }, [selected]);
-
   const getFacultyImage = (f) => {
     if (f.facultyImage) {
       return `${API_BASE}/${f.facultyImage.replace(/\\/g, "/")}`;
@@ -421,14 +374,22 @@ export default function DeptFaculty({ id, onVisibilityChange }) {
     return "https://img.freepik.com/premium-vector/default-avatar-profile-icon-gray-placeholder-vector-illustration_514344-14757.jpg?w=360";
   };
 
-  // Lock background scroll when modal opens
-  useEffect(() => {
-    if (selected !== null) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [selected]);
+  const handleFacultyClick = (f) => {
+    navigate("/faculty-detail", {
+      state: {
+        facultyId: f._id,
+        backPath: location.pathname,
+        backLabel: "Back to Department",
+        // Preserve current location state for back navigation
+        deptName: location.state?.deptName,
+        deptSlug: location.state?.deptSlug,
+        schoolId: location.state?.schoolId,
+        divisionId: location.state?.divisionId,
+        divisionName: location.state?.divisionName,
+        divisionSlug: location.state?.divisionSlug,
+      },
+    });
+  };
 
   if (loading) {
     return (
@@ -455,170 +416,59 @@ export default function DeptFaculty({ id, onVisibilityChange }) {
   }
 
   return (
-    <>
-      <section id={id} className="dept-faculty">
-        <div className="dept-faculty-inner">
-          <div className="dept-section-header">
-            <div>
-              <div className="dept-section-label">Our Team</div>
-              <h2 className="dept-section-title">
-                Meet Our <em>Faculty</em>
-              </h2>
-            </div>
-          </div>
-
-          <div className="faculty-grid">
-            {faculty.map((f) => (
-              <div
-                className="faculty-card"
-                key={f._id}
-                onClick={() => setSelected(f._id)}
-              >
-                <div className="faculty-photo" />
-                <img
-                  src={getFacultyImage(f)}
-                  alt={f.facultyName}
-                  width={"100%"}
-                  style={{ height: "300px", objectFit: "fill" }}
-                />
-                <div className="faculty-card-body">
-                  <div className="faculty-name">{f.facultyName}</div>
-                  <div className="faculty-designation">{f.designation}</div>
-
-                  <div className="faculty-tags">
-                    {(() => {
-                      const tags = [];
-                      for (let i = 0; i < Math.min((f.subjects || []).length, 3); i++) {
-                        tags.push(
-                          <div className="faculty-tag" key={i}>
-                            {f.subjects[i].subject}
-                          </div>
-                        );
-                      }
-                      return tags;
-                    })()}
-                  </div>
-
-                  <div className="faculty-exp">
-                    <div className="faculty-exp-dot" />
-                    {f.facultyExperience}+ Years Experience
-                  </div>
-                </div>
-              </div>
-            ))}
+    <section id={id} className="dept-faculty">
+      <div className="dept-faculty-inner">
+        <div className="dept-section-header">
+          <div>
+            <div className="dept-section-label">Our Team</div>
+            <h2 className="dept-section-title">
+              Meet Our <em>Faculty</em>
+            </h2>
           </div>
         </div>
-      </section>
 
-      {/* Modal */}
-      {selectedFaculty && (
-        <div
-          className="faculty-modal-overlay"
-          onClick={() => setSelected(null)}
-        >
-          <div
-            className="faculty-modal"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              className="faculty-modal-close"
-              onClick={() => setSelected(null)}
+        <div className="faculty-grid">
+          {faculty.map((f) => (
+            <div
+              className="faculty-card"
+              key={f._id}
+              onClick={() => handleFacultyClick(f)}
             >
-              ×
-            </button>
+              <div className="faculty-photo" />
+              <img
+                src={getFacultyImage(f)}
+                alt={f.facultyName}
+                width={"100%"}
+                style={{ height: "300px", objectFit: "fill" }}
+              />
+              <div className="faculty-card-body">
+                <div className="faculty-name">{f.facultyName}</div>
+                <div className="faculty-designation">{f.designation}</div>
 
-            <div className="faculty-modal-header">
-              <div className="faculty-modal-photo" style={{ overflow: "hidden" }}>
-                <img
-                  src={getFacultyImage(selectedFaculty)}
-                  alt={selectedFaculty.facultyName}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    borderRadius: "50%",
-                  }}
-                />
-              </div>
-
-              <div>
-                <div className="faculty-modal-name">
-                  {selectedFaculty.facultyName}
+                <div className="faculty-tags">
+                  {(() => {
+                    const tags = [];
+                    for (let i = 0; i < Math.min((f.subjects || []).length, 3); i++) {
+                      tags.push(
+                        <div className="faculty-tag" key={i}>
+                          {f.subjects[i].subject}
+                        </div>
+                      );
+                    }
+                    return tags;
+                  })()}
                 </div>
-                <div className="faculty-modal-desig">
-                  {selectedFaculty.designation}
-                </div>
-                <div className="faculty-modal-qual">
-                  {selectedFaculty.facultyExperience} Years Experience
-                </div>
-              </div>
-            </div>
-            
-            
-            <div className="faculty-modal-body">
 
-              {selectedFaculty.areaOfInterest && (
-                <div className="faculty-modal-section">
-                  <div className="fms-label">Area of Interest</div>
-                  <div style={{ fontSize: "14px", color: "var(--gray)", lineHeight: "1.7" }}>
-                    {selectedFaculty.areaOfInterest}
-                  </div>
-                </div>
-              )}
-
-              {selectedFaculty.subjects && selectedFaculty.subjects.length > 0 && (
-                <div className="faculty-modal-section">
-                  <div className="fms-label">Subjects</div>
-                  <div className="fms-chips">
-                    {selectedFaculty.subjects.map((s, i) => (
-                      <div className="fms-chip" key={i}>
-                        {s.subject}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {selectedFaculty.educationDetails && selectedFaculty.educationDetails.length > 0 && (
-                <div className="faculty-modal-section">
-                  <div className="fms-label">Education</div>
-                  <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
-                    <thead>
-                      <tr style={{ background: "var(--navy)", color: "#fff" }}>
-                        <th style={{ padding: "8px 12px", textAlign: "left", fontWeight: "600" }}>Degree</th>
-                        <th style={{ padding: "8px 12px", textAlign: "left", fontWeight: "600" }}>Specialization</th>
-                        <th style={{ padding: "8px 12px", textAlign: "left", fontWeight: "600" }}>Institution</th>
-                        <th style={{ padding: "8px 12px", textAlign: "left", fontWeight: "600" }}>Year</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {selectedFaculty.educationDetails.map((edu, i) => (
-                        <tr key={i} style={{ borderBottom: "1px solid var(--border)", background: i % 2 === 0 ? "var(--lgray)" : "#fff" }}>
-                          <td style={{ padding: "8px 12px", fontWeight: "600", color: "var(--navy)" }}>{edu.degree}</td>
-                          <td style={{ padding: "8px 12px", color: "var(--gray)" }}>{edu.specialization || "-"}</td>
-                          <td style={{ padding: "8px 12px", color: "var(--gray)" }}>{edu.institution || "-"}</td>
-                          <td style={{ padding: "8px 12px", color: "var(--gray)" }}>{edu.year || "-"}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-
-              <FacultyExperienceSection experience={facultyExperience} loading={experienceLoading} />
-
-              <FacultyResearchSections research={facultyResearch} loading={researchLoading} />
-
-              <div className="faculty-modal-section">
-                <div className="fms-label">Contact</div>
-                <div style={{ fontSize: "14px", color: "var(--gray)" }}>
-                  {selectedFaculty.facultyEmail}
+                <div className="faculty-exp">
+                  <div className="faculty-exp-dot" />
+                  {f.facultyExperience}+ Years Experience
                 </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
-      )}
-    </>
+      </div>
+    </section>
   );
 }
+

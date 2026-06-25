@@ -66,6 +66,7 @@ export default function DeptPage() {
       <DeptFaculty
         id="faculty"
         onVisibilityChange={(isVisible) => setOptionalSectionVisible("faculty", isVisible)}
+        page="school"
       />
       <DeptProgrammes
         id="programmes"

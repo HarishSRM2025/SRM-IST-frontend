@@ -34,6 +34,7 @@ import AcademicCalendar from './Pages/AcademicCalendar';
 import Leadership from './Pages/Leadership';
 import Governance from './Components/AboutUs/Governance';
 import Communication from './Pages/Communication';
+import FacultyDetailPage from './Pages/FacultyDetailPage';
 
 const App = () => {
   return (
@@ -70,6 +71,7 @@ const App = () => {
         <Route path="/careers" element={<Careers />} />
         <Route path="/communication" element={<Communication />} />
         <Route path="/ncc" element={<NationalCadetCorps />} />
+        <Route path="/faculty-detail" element={<FacultyDetailPage />} />
       </Routes>
 
       <WhatsAppFloat />

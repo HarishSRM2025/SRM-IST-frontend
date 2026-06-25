@@ -25,7 +25,7 @@ export default function DivisionPage() {
       </nav> */}
 
       <section id="about"><DeptHero /></section>
-      <section id="faculty"><DeptFaculty /></section>
+      <section id="faculty"><DeptFaculty page="Division" /></section>
       <section id="programmes"><DeptProgrammes /></section>
       <section id="events"><DeptEvents /></section>
       <section id="achievements"><DeptAchievements /></section>
