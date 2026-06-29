@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 const API_BASE = API_URL.replace("/api", "");
 
+const PAGE_SIZE = 8;
+
 const formatDate = (value) => {
   if (!value) return "-";
   const date = new Date(value);
@@ -206,7 +208,6 @@ const FacultyResearchSections = ({ research, loading }) => {
   }
 
   if (!research) return null;
-
   if (tabs.length === 0) return null;
 
   const currentTab = tabs.find(tab => tab.key === activeTab) || tabs[0];
@@ -267,20 +268,48 @@ const FacultyExperienceSection = ({ experience, loading }) => {
   );
 };
 
+function Pagination({ page, totalPages, onPrev, onNext, onDot }) {
+  if (totalPages <= 1) return null;
+  return (
+    <div className="faculty-pagination">
+      <button className="faculty-pg-btn" onClick={onPrev} disabled={page === 0}>
+        &#8592; Prev
+      </button>
+      <div className="faculty-pg-center">
+        <div className="faculty-pg-dots">
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i}
+              className={`faculty-pg-dot${i === page ? " active" : ""}`}
+              onClick={() => onDot(i)}
+              aria-label={`Go to page ${i + 1}`}
+            />
+          ))}
+        </div>
+        <span className="faculty-pg-counter"> {page + 1} of {totalPages}</span>
+      </div>
+      <button className="faculty-pg-btn" onClick={onNext} disabled={page === totalPages - 1}>
+        Next &#8594;
+      </button>
+    </div>
+  );
+}
+
 export default function DeptFaculty({ id, onVisibilityChange, page }) {
   const location = useLocation();
   const navigate = useNavigate();
   const deptName = location.state?.deptName || "Computer Science Engineering";
   const deptSlug = location.state?.deptSlug;
+  const DivisionId = location.state?.schoolDivisionId || location.state?.DivisionId || location.state?.divisionId;
 
   const [faculty, setFaculty] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     const fetchFaculty = async () => {
       setLoading(true);
       try {
-        // 1. Fetch all schools to find the matching one
         const schoolRes = await fetch(`${API_URL}/schools/getall`);
         if (!schoolRes.ok) throw new Error("Failed to fetch schools");
         const schools = await schoolRes.json();
@@ -313,8 +342,7 @@ export default function DeptFaculty({ id, onVisibilityChange, page }) {
           }
           if (!matchedSchool) {
             matchedSchool = schools.find(
-              (s) =>
-                s.name && s.name.toLowerCase().includes(deptName.toLowerCase())
+              (s) => s.name && s.name.toLowerCase().includes(deptName.toLowerCase())
             );
           }
           if (!matchedSchool) {
@@ -341,12 +369,22 @@ export default function DeptFaculty({ id, onVisibilityChange, page }) {
                 : [facJson.data]
               : [];
 
-            if(page === "Division"){
-              setFaculty(list);
-            }else{
-              const filteredFaculty = list.filter(
-                (faculty) => faculty.schoolDivision == undefined
-              );
+            if (page === "Division") {
+              const filteredFaculty = list.filter((faculty) => {
+                const fDivisionId = faculty.schoolDivision && typeof faculty.schoolDivision === "object"
+                  ? faculty.schoolDivision?._id
+                  : faculty.schoolDivision;
+                return fDivisionId && DivisionId && String(fDivisionId) === String(DivisionId);
+              });
+              setFaculty(filteredFaculty);
+              console.log("DivisionId:", DivisionId);
+            } else {
+              const filteredFaculty = list.filter((faculty) => {
+                const fDivisionId = faculty.schoolDivision && typeof faculty.schoolDivision === "object"
+                  ? faculty.schoolDivision?._id
+                  : faculty.schoolDivision;
+                return !fDivisionId;
+              });
               setFaculty(filteredFaculty);
             }
           }
@@ -359,13 +397,19 @@ export default function DeptFaculty({ id, onVisibilityChange, page }) {
     };
 
     fetchFaculty();
-  }, [deptName, deptSlug, location.state?.schoolId]);
+  }, [deptName, deptSlug, location.state?.schoolId, DivisionId, page]);
 
   useEffect(() => {
     if (!loading) {
       onVisibilityChange?.(faculty.length > 0);
     }
   }, [faculty.length, loading, onVisibilityChange]);
+
+  // Reset to page 0 when faculty list changes
+  useEffect(() => { setCurrentPage(0); }, [faculty]);
+
+  const totalPages = Math.ceil(faculty.length / PAGE_SIZE);
+  const paginatedFaculty = faculty.slice(currentPage * PAGE_SIZE, currentPage * PAGE_SIZE + PAGE_SIZE);
 
   const getFacultyImage = (f) => {
     if (f.facultyImage) {
@@ -380,11 +424,12 @@ export default function DeptFaculty({ id, onVisibilityChange, page }) {
         facultyId: f._id,
         backPath: location.pathname,
         backLabel: "Back to Department",
-        // Preserve current location state for back navigation
         deptName: location.state?.deptName,
         deptSlug: location.state?.deptSlug,
         schoolId: location.state?.schoolId,
-        divisionId: location.state?.divisionId,
+        schoolDivisionId: DivisionId,
+        divisionId: DivisionId,
+        DivisionId: DivisionId,
         divisionName: location.state?.divisionName,
         divisionSlug: location.state?.divisionSlug,
       },
@@ -428,7 +473,7 @@ export default function DeptFaculty({ id, onVisibilityChange, page }) {
         </div>
 
         <div className="faculty-grid">
-          {faculty.map((f) => (
+          {paginatedFaculty.map((f) => (
             <div
               className="faculty-card"
               key={f._id}
@@ -467,8 +512,15 @@ export default function DeptFaculty({ id, onVisibilityChange, page }) {
             </div>
           ))}
         </div>
+
+        <Pagination
+          page={currentPage}
+          totalPages={totalPages}
+          onPrev={() => setCurrentPage(p => Math.max(0, p - 1))}
+          onNext={() => setCurrentPage(p => Math.min(totalPages - 1, p + 1))}
+          onDot={setCurrentPage}
+        />
       </div>
     </section>
   );
 }
-

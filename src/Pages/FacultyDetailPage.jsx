@@ -355,7 +355,7 @@ export default function FacultyDetailPage() {
             </div>
 
             {/* Research Stats */}
-            <div className="faculty-detail-stats">
+            {/* <div className="faculty-detail-stats">
               <div className="faculty-detail-stat">
                 <div className="faculty-detail-stat-value">
                   {facultyResearch?.publications?.length ?? 0}
@@ -374,7 +374,7 @@ export default function FacultyDetailPage() {
                 </div>
                 <div className="faculty-detail-stat-label">Funded Projects</div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

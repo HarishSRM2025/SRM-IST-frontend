@@ -64,6 +64,51 @@ const getCategoryIcon = (category) => {
   }
 };
 
+const PAGE_SIZE = 4;
+
+function usePaginator(list) {
+  const [page, setPage] = useState(0);
+  useEffect(() => { setPage(0); }, [list]);
+  const totalPages = Math.ceil(list.length / PAGE_SIZE);
+  const items = list.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
+  return {
+    items,
+    page,
+    totalPages,
+    total: list.length,
+    prev: () => setPage(p => Math.max(0, p - 1)),
+    next: () => setPage(p => Math.min(totalPages - 1, p + 1)),
+    goto: setPage,
+  };
+}
+
+function Pagination({ page, totalPages, onPrev, onNext, onDot }) {
+  if (totalPages <= 1) return null;
+  return (
+    <div className="achieve-pagination">
+      <button className="pg-btn" onClick={onPrev} disabled={page === 0}>
+        &#8592; Prev
+      </button>
+      <div className="pg-center">
+        <div className="pg-dots">
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i}
+              className={`pg-dot${i === page ? ' active' : ''}`}
+              onClick={() => onDot(i)}
+              aria-label={`Go to page ${i + 1}`}
+            />
+          ))}
+        </div>
+        <span className="pg-counter"> {page + 1} of {totalPages}</span>
+      </div>
+      <button className="pg-btn" onClick={onNext} disabled={page === totalPages - 1}>
+        Next &#8594;
+      </button>
+    </div>
+  );
+}
+
 export default function DeptAchievements({ id, onVisibilityChange }) {
   const location = useLocation();
   const deptName = location.state?.deptName || "Computer Science Engineering";
@@ -73,16 +118,17 @@ export default function DeptAchievements({ id, onVisibilityChange }) {
   const [studentList, setStudentList] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const fa = usePaginator(facultyList);
+  const sa = usePaginator(studentList);
+
   useEffect(() => {
     const fetchAchievements = async () => {
       setLoading(true);
       try {
-        // Fetch all schools
         const schoolRes = await fetch(`${import.meta.env.VITE_API_URL}/schools/getall`);
         if (!schoolRes.ok) throw new Error("Failed to fetch schools");
         const schools = await schoolRes.json();
 
-        // Find matching school (using cascading fuzzy matching)
         let matchedSchool = null;
         if (Array.isArray(schools)) {
           if (location.state?.schoolId) {
@@ -112,12 +158,16 @@ export default function DeptAchievements({ id, onVisibilityChange }) {
         const entityId = isDivision ? schoolDivisionId : matchedSchool?._id;
 
         if (entityId) {
-          const achievementsRes = await fetch(`${import.meta.env.VITE_API_URL}/${isDivision ? 'school-division' : 'schools'}/achievements/getall`);
+          const achievementsRes = await fetch(
+            `${import.meta.env.VITE_API_URL}/${isDivision ? 'school-division' : 'schools'}/achievements/getall`
+          );
           if (achievementsRes.ok) {
             const achievementsJson = await achievementsRes.json();
             const allAchievements = Array.isArray(achievementsJson)
               ? achievementsJson
-              : (achievementsJson.data ? (Array.isArray(achievementsJson.data) ? achievementsJson.data : [achievementsJson.data]) : []);
+              : (achievementsJson.data
+                ? (Array.isArray(achievementsJson.data) ? achievementsJson.data : [achievementsJson.data])
+                : []);
 
             const activeAchievements = allAchievements.filter(item => {
               const itemEntity = isDivision ? item.schoolDivisionId : item.school;
@@ -131,7 +181,6 @@ export default function DeptAchievements({ id, onVisibilityChange }) {
               return `${import.meta.env.VITE_API_URL.replace('/api', '')}/public/uploads/${fileName}`;
             };
 
-            // Map and separate faculty/student achievements
             const mappedFaculty = activeAchievements
               .filter(item => item.achieverDesignation === 'faculty')
               .map(item => ({
@@ -203,17 +252,15 @@ export default function DeptAchievements({ id, onVisibilityChange }) {
             </div>
           </div>
 
-          {/* Top Layout */}
-          <div className="achieve-layout" style={{ gridTemplateColumns: (facultyList.length === 0 || studentList.length === 0) ? '1fr' : '1fr 1fr' }}>
+          {/* Faculty */}
+          {facultyList.length > 0 && (
+            <div className="achieve-section">
+              <div className="achieve-col-title">Faculty Achievements</div>
 
-            {/* Faculty */}
-            {facultyList.length > 0 && (
-              <div>
-                <div className="achieve-col-title">Faculty Achievements</div>
-
-                {facultyList.map((a, i) => (
-                  <div className="fa-card" key={i} style={{ flexDirection: 'column', gap: '12px' }}>
-                    <div style={{ display: 'flex', gap: '14px', width: '100%' }}>
+              <div className="achieve-grid">
+                {fa.items.map((a, i) => (
+                  <div className="fa-card" key={i}>
+                    <div className="fa-card-top">
                       <div className="fa-icon">{a.icon}</div>
                       <div className="fa-content">
                         <div className="fa-title">{a.title}</div>
@@ -225,25 +272,35 @@ export default function DeptAchievements({ id, onVisibilityChange }) {
                       <img
                         src={a.image}
                         alt={a.title}
-                        style={{ width: '100%', maxHeight: '180px', objectFit: 'cover', borderRadius: '4px', border: '1px solid var(--border)' }}
+                        className="achieve-img"
                       />
                     )}
-                    <div className="fa-desc" style={{ width: '100%' }}>{a.desc}</div>
+                    {a.desc && <div className="fa-desc">{a.desc}</div>}
                   </div>
                 ))}
               </div>
-            )}
 
-            {/* Students */}
-            {studentList.length > 0 && (
-              <div>
-                <div className="achieve-col-title">Student Achievements</div>
+              <Pagination
+                page={fa.page}
+                totalPages={fa.totalPages}
+                onPrev={fa.prev}
+                onNext={fa.next}
+                onDot={fa.goto}
+              />
+            </div>
+          )}
 
-                {studentList.map((s, i) => (
-                  <div className="sa-card" key={i} style={{ flexDirection: 'column', alignItems: 'stretch', gap: '12px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '14px', width: '100%' }}>
+          {/* Students */}
+          {studentList.length > 0 && (
+            <div className="achieve-section">
+              <div className="achieve-col-title">Student Achievements</div>
+
+              <div className="achieve-grid">
+                {sa.items.map((s, i) => (
+                  <div className="sa-card" key={i}>
+                    <div className="sa-card-top">
                       <div className="sa-medal">{s.icon}</div>
-                      <div className="sa-content" style={{ flex: 1 }}>
+                      <div className="sa-content">
                         <div className="sa-student">{s.student}</div>
                         <div className="sa-title">{s.title}</div>
                         <div className="sa-event">{s.event}</div>
@@ -254,59 +311,23 @@ export default function DeptAchievements({ id, onVisibilityChange }) {
                       <img
                         src={s.image}
                         alt={s.title}
-                        style={{ width: '100%', maxHeight: '180px', objectFit: 'cover', borderRadius: '4px', border: '1px solid var(--border)' }}
+                        className="achieve-img"
                       />
                     )}
                   </div>
                 ))}
               </div>
-            )}
 
-          </div>
+              <Pagination
+                page={sa.page}
+                totalPages={sa.totalPages}
+                onPrev={sa.prev}
+                onNext={sa.next}
+                onDot={sa.goto}
+              />
+            </div>
+          )}
 
-          {/* Bottom Layout */}
-          {/* <div className="achieve-bottom"> */}
-
-          {/* Awards */}
-          {/* <div>
-              <div className="achieve-col-title">Awards</div>
-
-              {awards.map((a, i) => (
-                <div className="award-card" key={i}>
-                  <div className="award-star">
-                    <FaStar />
-                  </div>
-                  <div>
-                    <div className="award-title">{a.title}</div>
-                    <div className="award-recipient">{a.recipient}</div>
-                    <div className="award-org">{a.org}</div>
-                  </div>
-                </div>
-              ))}
-            </div> */}
-
-          {/* Newsletter */}
-          {/* <div>
-              <div className="achieve-col-title">Newsletter</div>
-
-              {newsletters.map((n, i) => (
-                <div className="newsletter-card" key={i}>
-                  <div className="newsletter-cover"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" width="100%" height="100%" alt="" /></div>
-                  <div style={{ flex: 1 }}>
-                    <div className="newsletter-title">{n.title}</div>
-                    <div className="newsletter-edition">{n.edition}</div>
-
-                    <button className="newsletter-dl">
-                      <FaDownload size={12} />
-                      Download PDF
-                    </button>
-                  </div>
-                </div>
-              ))}
-
-            </div> */}
-
-          {/* </div> */}
         </div>
       </section>
     </>
