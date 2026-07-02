@@ -13,11 +13,41 @@ import {
   FaBuilding
 } from "react-icons/fa";
 
+const PAGE_SIZE = 6;
+
+function Pagination({ page, totalPages, onPrev, onNext, onDot }) {
+  if (totalPages <= 1) return null;
+  return (
+    <div className="achieve-pagination" style={{ marginTop: '32px' }}>
+      <button className="event-pg-btn" onClick={onPrev} disabled={page === 0}>
+        &#8592; Prev
+      </button>
+      <div className="pg-center">
+        <div className="pg-dots">
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i}
+              className={`pg-dot${i === page ? ' active' : ''}`}
+              onClick={() => onDot(i)}
+              aria-label={`Go to page ${i + 1}`}
+            />
+          ))}
+        </div>
+        <span className="pg-counter"> {page + 1} of {totalPages}</span>
+      </div>
+      <button className="event-pg-btn" onClick={onNext} disabled={page === totalPages - 1}>
+        Next &#8594;
+      </button>
+    </div>
+  );
+}
+
 export default function InstituteEvents({ institutionId }) {
   const [eventsList, setEventsList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("All");
   const [expandedDescriptions, setExpandedDescriptions] = useState({});
+  const [page, setPage] = useState(0);
 
   const descriptionLimit = 150;
   const categoryOrder = ['competition', 'activity', 'visit', 'workshop', 'seminar', 'conference', 'other'];
@@ -153,10 +183,6 @@ export default function InstituteEvents({ institutionId }) {
     }));
   };
 
-  if (!loading && eventsList.length === 0) {
-    return null;
-  }
-
   const eventCategories = Array.from(new Set(eventsList.map((event) => event.type).filter(Boolean)))
     .sort((a, b) => {
       const aIndex = categoryOrder.indexOf(a);
@@ -185,6 +211,18 @@ export default function InstituteEvents({ institutionId }) {
     ? eventsList
     : eventsList.filter((e) => e.type === activeFilter);
 
+  // Reset to page 0 when active filter or institutionId changes
+  useEffect(() => {
+    setPage(0);
+  }, [activeFilter, institutionId]);
+
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+  const paginatedEvents = filtered.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
+
+  if (!loading && eventsList.length === 0) {
+    return null;
+  }
+
   return (
     <section className="dept-events" id="events-activities">
       <div className="dept-events-inner">
@@ -210,59 +248,36 @@ export default function InstituteEvents({ institutionId }) {
             <span style={{ fontSize: '18px', fontWeight: '500' }}>Loading events and activities...</span>
           </div>
         ) : (
-          <div className="events-grid">
-            {filtered.length > 0 ? (
-              filtered.map((e, index) => {
-                const eventKey = getEventKey(e, index);
-                const imageUrl = getImageUrl(e.eventImage);
-                const description = e.description || '';
-                const isExpanded = Boolean(expandedDescriptions[eventKey]);
-                const shouldShowReadMore = description.length > descriptionLimit;
+          <>
+            <div className="events-grid">
+              {paginatedEvents.length > 0 ? (
+                paginatedEvents.map((e, index) => {
+                  const eventKey = getEventKey(e, index);
+                  const imageUrl = getImageUrl(e.eventImage);
+                  const description = e.description || '';
+                  const isExpanded = Boolean(expandedDescriptions[eventKey]);
+                  const shouldShowReadMore = description.length > descriptionLimit;
 
-                return (
-                  <Link to={`/event/${e._id || e.id}`} key={eventKey} style={{ textDecoration: 'none', display: 'block' }}>
-                  <div className="event-card" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                    <div
-                      className="event-img"
-                      style={imageUrl ? {
-                        backgroundImage: `url(${imageUrl})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        backgroundRepeat: 'no-repeat'
-                      } : {}}
-                    >
-                      {!imageUrl && <div className="event-icon">{getEventIcon(e.type)}</div>}
-
-                      {/* Status Badge */}
+                  return (
+                    <Link to={`/event/${e._id || e.id}`} key={eventKey} style={{ textDecoration: 'none', display: 'block' }}>
+                    <div className="event-card" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                       <div
-                        className="event-status-badge"
-                        style={{
-                          position: 'absolute',
-                          top: '10px',
-                          left: '10px',
-                          fontSize: '9px',
-                          padding: '3px 8px',
-                          borderRadius: '2px',
-                          textTransform: 'uppercase',
-                          fontWeight: '700',
-                          letterSpacing: '0.05em',
-                          boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-                          ...getStatusBadgeStyle(e.status)
-                        }}
+                        className="event-img"
+                        style={imageUrl ? {
+                          backgroundImage: `url(${imageUrl})`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          backgroundRepeat: 'no-repeat'
+                        } : {}}
                       >
-                        {e.status || 'upcoming'}
-                      </div>
+                        {!imageUrl && <div className="event-icon">{getEventIcon(e.type)}</div>}
 
-                      {/* Type Badge */}
-                      <div className="event-type-badge" style={{ textTransform: 'uppercase', fontWeight: '700', borderRadius: '2px' }}>
-                        {e.type}
-                      </div>
-
-                      {e.announcement && (
+                        {/* Status Badge */}
                         <div
+                          className="event-status-badge"
                           style={{
                             position: 'absolute',
-                            bottom: '10px',
+                            top: '10px',
                             left: '10px',
                             fontSize: '9px',
                             padding: '3px 8px',
@@ -270,100 +285,132 @@ export default function InstituteEvents({ institutionId }) {
                             textTransform: 'uppercase',
                             fontWeight: '700',
                             letterSpacing: '0.05em',
-                            background: 'var(--gold)',
-                            color: 'var(--navy)',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+                            boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                            ...getStatusBadgeStyle(e.status)
                           }}
                         >
-                          Announcement
+                          {e.status || 'upcoming'}
                         </div>
-                      )}
-                    </div>
 
-                    <div className="event-body" style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '20px' }}>
-                      <div className="event-date" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: 'var(--gold2)', fontWeight: '600', marginBottom: '8px' }}>
-                        <FaCalendarAlt />
-                        <span>{formatDateTime(e.eventDateTime)}</span>
-                      </div>
+                        {/* Type Badge */}
+                        <div className="event-type-badge" style={{ textTransform: 'uppercase', fontWeight: '700', borderRadius: '2px' }}>
+                          {e.type}
+                        </div>
 
-                      <div className="event-title" style={{ fontSize: '16px', fontWeight: '700', color: 'var(--white)', marginBottom: '8px', lineHeight: '1.4' }}>
-                        {e.name}
-                      </div>
-
-                      <div className="event-desc" style={{ fontSize: '13px', color: 'rgba(255, 255, 255, 0.65)', lineHeight: '1.5', marginBottom: '16px' }}>
-                        {getDescriptionPreview(description, isExpanded)}
-                        {shouldShowReadMore && (
-                          <button
-                            type="button"
-                            className="event-read-more"
-                            onClick={(ev) => { ev.preventDefault(); ev.stopPropagation(); toggleDescription(eventKey); }}
+                        {e.announcement && (
+                          <div
+                            style={{
+                              position: 'absolute',
+                              bottom: '10px',
+                              left: '10px',
+                              fontSize: '9px',
+                              padding: '3px 8px',
+                              borderRadius: '2px',
+                              textTransform: 'uppercase',
+                              fontWeight: '700',
+                              letterSpacing: '0.05em',
+                              background: 'var(--gold)',
+                              color: 'var(--navy)',
+                              boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+                            }}
                           >
-                            {isExpanded ? "Show less" : "Read more"}
-                          </button>
+                            Announcement
+                          </div>
                         )}
                       </div>
 
-                      {/* Metadata Section */}
-                      <div style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '8px',
-                        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-                        paddingTop: '12px',
-                        marginTop: 'auto',
-                        fontSize: '12px',
-                        color: 'rgba(255, 255, 255, 0.55)'
-                      }}>
-                        {/* Location */}
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <FaMapMarkerAlt style={{ color: 'var(--gold)', flexShrink: 0 }} />
-                          <span style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                            <strong>Venue:</strong> {e.location}
-                          </span>
+                      <div className="event-body" style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '20px' }}>
+                        <div className="event-date" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: 'var(--gold2)', fontWeight: '600', marginBottom: '8px' }}>
+                          <FaCalendarAlt />
+                          <span>{formatDateTime(e.eventDateTime)}</span>
                         </div>
 
-                        {/* Conducted By */}
-                        {e.conductedBy && (
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <FaBuilding style={{ color: 'var(--gold)', flexShrink: 0 }} />
-                            <span style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                              <strong>Conducted by:</strong> {e.conductedBy}
-                            </span>
-                          </div>
-                        )}
+                        <div className="event-title" style={{ fontSize: '16px', fontWeight: '700', color: 'var(--white)', marginBottom: '8px', lineHeight: '1.4' }}>
+                          {e.name}
+                        </div>
 
-                        {/* Coordinator Name */}
-                        {e.co_ordinator && (
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <FaUser style={{ color: 'var(--gold)', flexShrink: 0 }} />
-                            <span style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                              <strong>Coordinator:</strong> {e.co_ordinator}
-                            </span>
-                          </div>
-                        )}
+                        <div className="event-desc" style={{ fontSize: '13px', color: 'rgba(255, 255, 255, 0.65)', lineHeight: '1.5', marginBottom: '16px' }}>
+                          {getDescriptionPreview(description, isExpanded)}
+                          {shouldShowReadMore && (
+                            <button
+                              type="button"
+                              className="event-read-more"
+                              onClick={(ev) => { ev.preventDefault(); ev.stopPropagation(); toggleDescription(eventKey); }}
+                            >
+                              {isExpanded ? "Show less" : "Read more"}
+                            </button>
+                          )}
+                        </div>
 
-                        {/* Resource Person Name */}
-                        {e.resourcePerson && (
+                        {/* Metadata Section */}
+                        <div style={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '8px',
+                          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+                          paddingTop: '12px',
+                          marginTop: 'auto',
+                          fontSize: '12px',
+                          color: 'rgba(255, 255, 255, 0.55)'
+                        }}>
+                          {/* Location */}
                           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <FaUserTie style={{ color: 'var(--gold)', flexShrink: 0 }} />
+                            <FaMapMarkerAlt style={{ color: 'var(--gold)', flexShrink: 0 }} />
                             <span style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                              <strong>Speaker:</strong> {e.resourcePerson}
-                              {e.resourcePersonDesignation && ` (${e.resourcePersonDesignation})`}
+                              <strong>Venue:</strong> {e.location}
                             </span>
                           </div>
-                        )}
+
+                          {/* Conducted By */}
+                          {e.conductedBy && (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                              <FaBuilding style={{ color: 'var(--gold)', flexShrink: 0 }} />
+                              <span style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+                                <strong>Conducted by:</strong> {e.conductedBy}
+                              </span>
+                            </div>
+                          )}
+
+                          {/* Coordinator Name */}
+                          {e.co_ordinator && (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                              <FaUser style={{ color: 'var(--gold)', flexShrink: 0 }} />
+                              <span style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+                                <strong>Coordinator:</strong> {e.co_ordinator}
+                              </span>
+                            </div>
+                          )}
+
+                          {/* Resource Person Name */}
+                          {e.resourcePerson && (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                              <FaUserTie style={{ color: 'var(--gold)', flexShrink: 0 }} />
+                              <span style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+                                <strong>Speaker:</strong> {e.resourcePerson}
+                                {e.resourcePersonDesignation && ` (${e.resourcePersonDesignation})`}
+                              </span>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  </Link>
-                );
-              })
-            ) : (
-              <div style={{ gridColumn: 'span 3', textAlign: 'center', padding: '48px', color: 'rgba(255,255,255,0.5)' }}>
-                No events found under this category.
-              </div>
-            )}
-          </div>
+                    </Link>
+                  );
+                })
+              ) : (
+                <div style={{ gridColumn: 'span 3', textAlign: 'center', padding: '48px', color: 'rgba(255,255,255,0.5)' }}>
+                  No events found under this category.
+                </div>
+              )}
+            </div>
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+              onPrev={() => setPage(p => Math.max(0, p - 1))}
+              onNext={() => setPage(p => Math.min(totalPages - 1, p + 1))}
+              onDot={setPage}
+            />
+          </>
         )}
       </div>
     </section>

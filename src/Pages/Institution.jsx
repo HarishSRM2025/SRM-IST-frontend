@@ -11,6 +11,7 @@ import InstituteFacilities from '../Components/Institution/InstituteFacilities';
 import InstituteGallery from '../Components/Institution/InstituteGallery';
 import InstituteEvents from '../Components/Institution/InstituteEvents';
 import InstituteProgrammes from '../Components/Institution/InstituteProgrammes';
+import InstituteFaculty from '../Components/Institution/InstituteFaculty';
 
 const Institution = () => {
   const location = useLocation();
@@ -101,6 +102,7 @@ const Institution = () => {
       <VisionMission vision={instData?.vision} mission={instData?.mission} />
       <Stats institutionId={instData?._id} />
       {schoolsData.length > 0 && <Departments schools={schoolsData} />}
+      {instData && <InstituteFaculty institutionId={instData._id} />}
       {instData && <InstituteProgrammes institutionId={instData._id} />}
       {infrastructureData.length > 0 && <InstituteFacilities facilities={infrastructureData} />}
       {instData && <InstituteEvents institutionId={instData._id} />}

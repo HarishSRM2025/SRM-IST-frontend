@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -6,47 +6,75 @@ import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { FaPlay } from "react-icons/fa";
 
+// Default/fallback testimonials if none are found in the database
+const DEFAULT_VIDEOS = [
+  {
+    name: "Safi Abbas",
+    role: "CSE Data Science Department",
+    video: "_G98tu5Ik-M"
+  },
+  {
+    name: "Mithra",
+    role: "IInd Year Occupational Therapy",
+    video: "QDw-a9Z6Z7M"
+  },
+  {
+    name: "Neha Iyer",
+    role: "IIIrd Year B.Tech CSE",
+    video: "-d3xEdbQ7Z4"
+  },
+  {
+    name: "Anika",
+    role: "IIIrd Year B.Sc MIT",
+    video: "Yzkg6grH6zg"
+  },
+  {
+    name: "Abi Varshini",
+    role: "M.Sc Allied Health Science",
+    video: "Bxo2ANs9vBU"
+  },
+  {
+    name: "Deepith",
+    role: "B.Tech Cyber Security",
+    video: "B2gPMOT-E0M"
+  },
+  {
+    name: "Rashmika",
+    role: "BPT",
+    video: "LIBC9SPOdBE"
+  }
+];
+
 const VideoTestimonial = () => {
   const [videoId, setVideoId] = useState(null);
+  const [videosList, setVideosList] = useState([]);
 
-  // Use YouTube video IDs and show YouTube thumbnails so all slides are same size
-  const videos = [
-    {
-      name: "Safi Abbas",
-      role: "CSE Data Science Department",
-      video: "_G98tu5Ik-M"
-    },
-    {
-      name: "Mithra",
-      role: "IInd Year Occupational Therapy",
-      video: "QDw-a9Z6Z7M"
-    },
-    {
-      name: "Neha Iyer",
-      role: "IIIrd Year B.Tech CSE",
-      video: "-d3xEdbQ7Z4"
-    },
-    {
-      name: "Anika",
-      role: "IIIrd Year B.Sc MIT",
-      video: "Yzkg6grH6zg"
-    },
-    {
-      name: "Abi Varshini",
-      role: "M.Sc Allied Health Science",
-      video: "Bxo2ANs9vBU"
-    },
-    {
-      name: "Deepith",
-      role: "B.Tech Cyber Security",
-      video: "B2gPMOT-E0M"
-    },
-    {
-      name: "Rashmika",
-      role: "BPT",
-      video: "LIBC9SPOdBE"
-    }
-  ];
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+        const response = await fetch(`${apiUrl}/student/getAll`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.studentTestimonials && data.studentTestimonials.length > 0) {
+            const mapped = data.studentTestimonials.map(t => ({
+              name: t.name,
+              role: t.role,
+              video: t.videoId
+            }));
+            setVideosList(mapped);
+            return;
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching testimonials from API, using default list:", error);
+      }
+      setVideosList(DEFAULT_VIDEOS);
+    };
+
+    fetchTestimonials();
+  }, []);
+
   return (
     <div className="video-section">
       <div className="wrap">
@@ -64,7 +92,7 @@ const VideoTestimonial = () => {
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
           spaceBetween={20}
-          loop
+          loop={videosList.length > 0}
           autoplay={{ delay: 5000 }}
           navigation
           breakpoints={{
@@ -73,7 +101,7 @@ const VideoTestimonial = () => {
             1024: { slidesPerView: 3 }
           }}
         >
-          {videos.map((v, i) => (
+          {videosList.map((v, i) => (
             <SwiperSlide key={i}>
               <div className="vc" onClick={() => setVideoId(v.video)}>
                 <div className="vc-thumb">
@@ -125,7 +153,7 @@ const VideoTestimonial = () => {
 
         {/* Inline styles to keep thumbnails consistent and place Shorts icon */}
         <style>{`\
-          .vc-thumb{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; border-radius:8px; }\
+          .vc-thumb{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; border-radius:8px 8px 0 0; }\
           .vc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }\
           .shorts-overlay{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none }\
           .shorts-badge{ opacity:0.95; transform:scale(1); }\
