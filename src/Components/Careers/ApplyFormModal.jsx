@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaTimes, FaCloudUploadAlt, FaPaperPlane } from 'react-icons/fa';
+import { submitJobApplication } from '../../api/careers';
 import './Careers.css';
 
 const ApplyFormModal = ({ job, onClose }) => {
@@ -11,6 +12,9 @@ const ApplyFormModal = ({ job, onClose }) => {
     });
 
     const [fileName, setFileName] = useState('');
+    const [resumeFile, setResumeFile] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [message, setMessage] = useState({ type: '', text: '' });
 
     const handleChange = (e) => {
         setFormData({
@@ -22,14 +26,31 @@ const ApplyFormModal = ({ job, onClose }) => {
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
             setFileName(e.target.files[0].name);
+            setResumeFile(e.target.files[0]);
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Here you would normally send the data to a backend
-        alert(`Application for ${job.title} submitted successfully!`);
-        onClose();
+        setIsSubmitting(true);
+        setMessage({ type: '', text: '' });
+
+        try {
+            await submitJobApplication({
+                positionId: job._id,
+                name: formData.fullName,
+                email: formData.email,
+                phone: formData.phone,
+                resume: resumeFile,
+                coverLetter: formData.coverLetter,
+            });
+            setMessage({ type: 'success', text: 'Application submitted successfully.' });
+            window.setTimeout(onClose, 1000);
+        } catch (err) {
+            setMessage({ type: 'error', text: err.message || 'Unable to submit application.' });
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -47,6 +68,11 @@ const ApplyFormModal = ({ job, onClose }) => {
                 
                 <div className="apply-modal-body">
                     <form className="apply-form" onSubmit={handleSubmit}>
+                        {message.text && (
+                            <div className={`careers-form-message ${message.type}`}>
+                                {message.text}
+                            </div>
+                        )}
                         <div className="form-group">
                             <label htmlFor="position">Position</label>
                             <input 
@@ -126,8 +152,8 @@ const ApplyFormModal = ({ job, onClose }) => {
                         </div>
 
                         <div className="form-actions">
-                            <button type="submit" className="btn btn-gold">
-                                <FaPaperPlane /> Submit Application
+                            <button type="submit" className="btn btn-gold" disabled={isSubmitting}>
+                                <FaPaperPlane /> {isSubmitting ? 'Submitting...' : 'Submit Application'}
                             </button>
                         </div>
                     </form>

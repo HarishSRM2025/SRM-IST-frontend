@@ -8,7 +8,7 @@ const JobCard = ({ job, onApply }) => {
             <h3 className="job-card-title">{job.title}</h3>
             
             <div className="job-card-meta">
-                <span><FaBriefcase /> {job.department}</span>
+                <span><FaBriefcase /> {job.Institute}</span>
                 <span><FaMapMarkerAlt /> {job.location}</span>
                 <span><FaClock /> {job.type}</span>
             </div>

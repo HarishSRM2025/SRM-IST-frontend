@@ -39,6 +39,36 @@
     gap: 30px;
 }
 
+.careers-state {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
+    text-align: center;
+    color: var(--gray);
+    background: var(--lgray);
+}
+
+.careers-state-error,
+.careers-form-message.error {
+    color: #9b1c1c;
+    background: #fde8e8;
+    border-color: #f8b4b4;
+}
+
+.careers-form-message {
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid transparent;
+}
+
+.careers-form-message.success {
+    color: #03543f;
+    background: #def7ec;
+    border-color: #84e1bc;
+}
+
 /* Job Card */
 .job-card {
     background: var(--white);
