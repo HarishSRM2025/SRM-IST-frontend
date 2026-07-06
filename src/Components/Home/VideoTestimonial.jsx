@@ -12,6 +12,11 @@ const VideoTestimonial = () => {
   // Use YouTube video IDs and show YouTube thumbnails so all slides are same size
   const videos = [
     {
+      name: "Drishya",
+      role: "III ",
+      video: "NnTvO44n-HE"
+    },
+     {
       name: "Safi Abbas",
       role: "CSE Data Science Department",
       video: "_G98tu5Ik-M"
