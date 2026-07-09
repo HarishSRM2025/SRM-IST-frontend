@@ -16,6 +16,7 @@ const Management = () => {
       .then((res) => setLeaders(res.data))
       .catch((err) => console.log(err));
   }, []);
+  const API_BASE = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';  
   return (
     <section className="mgmt-section">
       <div className="wrap">
@@ -32,7 +33,7 @@ const Management = () => {
           {leaders.map((leader, index) => (
             <div key={index}>
               <div className="mgmt-card">
-                <img className="mgmt-photo" src={'http://localhost:3000/public/uploads/'+leader.image} alt={leader.name} />
+                <img className="mgmt-photo" src={API_BASE+'/public/uploads/'+leader.image} alt={leader.name} />
 
                 <div>
                   <div className="mgmt-role">{leader.role}</div>

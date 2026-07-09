@@ -28,7 +28,7 @@ const Ranking = () => {
       .catch((err) => console.log(err));
   }, []);
 
-
+    const API_BASE = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';  
   return (
     <section className="ranking-section rev" style={{ padding: '80px 20px', background: '#f8f6f1' }}>
     
@@ -63,7 +63,7 @@ const Ranking = () => {
                     overflow: 'hidden'
                   }}>
                     <img 
-                      src={'http://localhost:3000/public/uploads/'+rank.image} 
+                      src={API_BASE+'/public/uploads/'+rank.image} 
                       alt={rank._id} 
                       style={{
                         width: '100%',

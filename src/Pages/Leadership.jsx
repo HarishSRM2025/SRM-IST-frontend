@@ -62,6 +62,8 @@ const Leadership = () => {
         admin: "Administrative Heads",
     }[filter] || "Leadership";
 
+  const API_BASE = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';  
+
   return (
     <>
       <Breadcrum 
@@ -82,7 +84,7 @@ const Leadership = () => {
                     {apexLeaders.map((leader) => (
                         <div className="apex-card" key={leader._id}>
                         <img
-                            src={'http://localhost:3000/public/uploads/'+leader.image}
+                            src={API_BASE+'/public/uploads/'+leader.image}
                             alt={leader.name}
                         />
 
@@ -109,7 +111,7 @@ const Leadership = () => {
                     <div className="leader-card" key={leader._id}>
                         <div className="leader-image">
                         <img
-                            src={'http://localhost:3000/public/uploads/'+leader.image}
+                            src={API_BASE+'/public/uploads/'+leader.image}
                             alt={leader.name}
                         />
                         </div>
