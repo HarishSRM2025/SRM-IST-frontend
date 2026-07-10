@@ -141,7 +141,7 @@ export default function InstituteFaculty({ institutionId }) {
                 src={getFacultyImage(f)}
                 alt={f.facultyName}
                 width={"100%"}
-                style={{ height: "300px", objectFit: "fill" }}
+                style={{ height: "260px", objectFit: "contain" }}
               />
               <div className="faculty-card-body">
                 <div className="faculty-name">{f.facultyName}</div>

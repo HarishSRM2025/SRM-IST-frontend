@@ -484,7 +484,7 @@ export default function DeptFaculty({ id, onVisibilityChange, page }) {
                 src={getFacultyImage(f)}
                 alt={f.facultyName}
                 width={"100%"}
-                style={{ height: "300px", objectFit: "fill" }}
+                style={{ height: "230px", objectFit: "contain" }}
               />
               <div className="faculty-card-body">
                 <div className="faculty-name">{f.facultyName}</div>
