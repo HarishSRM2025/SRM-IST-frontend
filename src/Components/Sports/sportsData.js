@@ -1,4 +1,4 @@
-import ptSir from '../../assets/images/ptSir.webp';
+import ptSir from '../../assets/images/ptsir.webp';
 import ach1 from '../../assets/images/sports/achievements/1.webp';
 import ach2 from '../../assets/images/sports/achievements/2.webp';
 import ach3 from '../../assets/images/sports/achievements/3.webp';
