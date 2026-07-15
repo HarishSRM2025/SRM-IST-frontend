@@ -46,25 +46,34 @@ const Academics = () => {
       setLoading(true);
       setError(null);
       try {
-        const [institutionRes, schoolsRes, programmesRes] = await Promise.all([
+        const [institutionRes, schoolsRes, schoolProgrammesRes, institutionProgrammesRes, schoolDivisionsRes, schoolDivisionProgrammesRes] = await Promise.all([
           fetch(`${apiUrl}/institution/getall`),
           fetch(`${apiUrl}/schools/getall`),
           fetch(`${apiUrl}/schools/programmes/getall`),
+          fetch(`${apiUrl}/institution/programmes/getall`),
+          fetch(`${apiUrl}/school-division/getall`),
+          fetch(`${apiUrl}/school-division/programmes/getall`),
         ]);
 
-        if (!institutionRes.ok || !schoolsRes.ok || !programmesRes.ok) {
+        if (!institutionRes.ok || !schoolsRes.ok || !schoolProgrammesRes.ok || !institutionProgrammesRes.ok || !schoolDivisionsRes.ok || !schoolDivisionProgrammesRes.ok) {
           throw new Error('Unable to fetch academics data');
         }
 
-        const [institutionJson, schoolsJson, programmesJson] = await Promise.all([
+        const [institutionJson, schoolsJson, schoolProgrammesJson, institutionProgrammesJson, schoolDivisionsJson, schoolDivisionProgrammesJson] = await Promise.all([
           institutionRes.json(),
           schoolsRes.json(),
-          programmesRes.json(),
+          schoolProgrammesRes.json(),
+          institutionProgrammesRes.json(),
+          schoolDivisionsRes.json(),
+          schoolDivisionProgrammesRes.json(),
         ]);
 
         const institutionList = getArrayPayload(institutionJson);
         const schoolList = getArrayPayload(schoolsJson);
-        const programmeList = getArrayPayload(programmesJson);
+        const schoolProgrammeList = getArrayPayload(schoolProgrammesJson);
+        const institutionProgrammeList = getArrayPayload(institutionProgrammesJson);
+        const schoolDivisionList = getArrayPayload(schoolDivisionsJson);
+        const schoolDivisionProgrammeList = getArrayPayload(schoolDivisionProgrammesJson);
 
         const schoolsByInstitution = schoolList.reduce((acc, school) => {
           const institutionId = getSchoolInstitutionId(school);
@@ -74,7 +83,7 @@ const Academics = () => {
           return acc;
         }, {});
 
-        const programmesBySchool = programmeList.reduce((acc, programme) => {
+        const schoolProgrammesBySchool = schoolProgrammeList.reduce((acc, programme) => {
           const schoolId = getProgrammeSchoolId(programme);
           if (!schoolId) return acc;
           if (!acc[schoolId]) acc[schoolId] = [];
@@ -82,18 +91,57 @@ const Academics = () => {
           return acc;
         }, {});
 
-        const groupedInstitutions = institutionList.map((institution) => {
-          const institutionId = getId(institution);
-          const schools = (schoolsByInstitution[institutionId] || []).map((school) => ({
-            ...school,
-            programmes: programmesBySchool[getId(school)] || [],
-          }));
+        const schoolDivisionsById = schoolDivisionList.reduce((acc, division) => {
+          const divisionId = getId(division);
+          if (divisionId) acc[divisionId] = division;
+          return acc;
+        }, {});
 
-          return {
-            ...institution,
-            schools,
-          };
-        });
+        const schoolDivisionProgrammesBySchool = schoolDivisionProgrammeList.reduce((acc, programme) => {
+          const divisionId = getId(programme.schoolDivisionId);
+          const division = schoolDivisionsById[divisionId];
+          const schoolId = division ? getId(division.schoolId) || getId(division.school) : '';
+          if (!schoolId) return acc;
+          if (!acc[schoolId]) acc[schoolId] = [];
+          acc[schoolId].push(programme);
+          return acc;
+        }, {});
+
+        const institutionProgrammesByInstitution = institutionProgrammeList.reduce((acc, programme) => {
+          const institutionId = getId(programme.institutionId) || getId(programme.institution) || getId(programme.instituteId);
+          if (!institutionId) return acc;
+          if (!acc[institutionId]) acc[institutionId] = [];
+          acc[institutionId].push(programme);
+          return acc;
+        }, {});
+
+        const groupedInstitutions = institutionList
+          .map((institution) => {
+            const institutionId = getId(institution);
+            const schools = (schoolsByInstitution[institutionId] || [])
+              .map((school) => {
+                const schoolId = getId(school);
+                const programmes = [
+                  ...(schoolProgrammesBySchool[schoolId] || []),
+                  ...(schoolDivisionProgrammesBySchool[schoolId] || []),
+                ];
+
+                return {
+                  ...school,
+                  programmes,
+                };
+              })
+              .filter((school) => school.programmes.length > 0);
+
+            const institutionProgrammes = institutionProgrammesByInstitution[institutionId] || [];
+            const programmeCount = schools.reduce(
+              (sum, school) => sum + school.programmes.length,
+              0
+            ) + institutionProgrammes.length;
+
+            return { ...institution, schools, institutionProgrammes, programmeCount };
+          })
+          .filter((institution) => institution.schools.length > 0 || institution.institutionProgrammes.length > 0);
 
         setInstitutions(groupedInstitutions);
       } catch (err) {
@@ -128,72 +176,111 @@ const Academics = () => {
 
           {/* Programmes List */}
           <div className="prog-list rev">
-            {loading && <div className="prog-panel ac-status">Loading academic programmes...</div>}
-            {error && <div className="prog-panel ac-status ac-error">{error}</div>}
-            {!loading && !error && institutions.length === 0 && (
-              <div className="prog-panel ac-status">No academic programmes available at the moment.</div>
+            {loading && (
+              <div className="ac-status ac-loading">
+                <span className="ac-spinner" aria-hidden="true"></span>
+                Loading academic programmes…
+              </div>
             )}
 
-            {!loading && !error && institutions.map((institution, index) => (
-              <div key={institution._id || institution.id || index} className="prog-panel">
-                <button
-                  type="button"
-                  className={`prog-item ${activeIndex === index ? 'on' : ''}`}
-                  onClick={() => handleToggle(index)}
-                  aria-expanded={activeIndex === index}
-                >
-                  <div className="prog-l">
-                    <span className="prog-dot"></span>
-                    <span className="prog-name">{institution.name || 'Untitled Institution'}</span>
-                  </div>
-                  <div className="prog-r">
-                    <span className="prog-ct">View Programs</span>
-                    {activeIndex === index ? <FaChevronUp /> : <FaChevronRight />}
-                  </div>
-                </button>
+            {!loading && error && (
+              <div className="ac-status ac-error">{error}</div>
+            )}
 
-                {activeIndex === index && (
-                  <div className={`prog-content ac-institution-content ${activeIndex === index ? 'open' : ''}`}>
-                    {institution.description && <p>{institution.description}</p>}
+            {!loading && !error && institutions.length === 0 && (
+              <div className="ac-status">
+                Academic programmes will be published here soon.
+              </div>
+            )}
 
-                    {institution.schools.length > 0 ? (
-                      <div className="ac-school-list">
-                        {institution.schools.map((school) => (
-                          <div className="ac-school-block" key={school._id || school.id || school.name}>
-                            <h3>{school.name || 'Untitled School'}</h3>
-                            {school.programmes.length > 0 ? (
+            {!loading && !error && institutions.map((institution, index) => {
+              const isOpen = activeIndex === index;
+              return (
+                <div key={institution._id || institution.id || index} className="prog-panel">
+                  <button
+                    type="button"
+                    className={`prog-item ${isOpen ? 'on' : ''}`}
+                    onClick={() => handleToggle(index)}
+                    aria-expanded={isOpen}
+                  >
+                    <div className="prog-l">
+                      <span className="prog-dot"></span>
+                      <span className="prog-name">{institution.name || 'Untitled Institution'}</span>
+                    </div>
+                    <div className="prog-r">
+                      <span className="prog-ct">
+                        {institution.programmeCount} program{institution.programmeCount === 1 ? '' : 's'}
+                      </span>
+                      {isOpen ? <FaChevronUp /> : <FaChevronRight />}
+                    </div>
+                  </button>
+
+                  <div className={`ac-collapse ${isOpen ? 'open' : ''}`}>
+                    <div className="ac-collapse-inner">
+                      <div className="ac-institution-content">
+                        {institution.description && <p className="ac-inst-desc">{institution.description}</p>}
+
+                        <div className="ac-school-list">
+                          {institution.institutionProgrammes.length > 0 && (
+                            <div className="ac-school-block">
+                              <div className="ac-school-head">
+                                <h3>Institution Programmes</h3>
+                                <span className="ac-school-count">{institution.institutionProgrammes.length}</span>
+                              </div>
                               <div className="dept-list ac-programme-list">
-                                {school.programmes.map((programme, programmeIndex) => (
-                                  <span className="dept-tile ac-programme-chip" key={programme._id || programme.id || programmeIndex}>
+                                {institution.institutionProgrammes.map((programme, programmeIndex) => (
+                                  <span
+                                    className="dept-tile ac-programme-chip"
+                                    key={programme._id || programme.id || `institution-${programmeIndex}`}
+                                  >
                                     {getProgrammeName(programme)}
                                   </span>
                                 ))}
                               </div>
-                            ) : (
-                              <p className="ac-empty-text">Programmes will be updated soon.</p>
-                            )}
-                          </div>
-                        ))}
+                            </div>
+                          )}
+
+                          {institution.schools.map((school) => (
+                            <div className="ac-school-block" key={school._id || school.id || school.name}>
+                              <div className="ac-school-head">
+                                <h3>{school.name || 'Untitled School'}</h3>
+                                <span className="ac-school-count">{school.programmes.length}</span>
+                              </div>
+                              <div className="dept-list ac-programme-list">
+                                {school.programmes.map((programme, programmeIndex) => (
+                                  <span
+                                    className="dept-tile ac-programme-chip"
+                                    key={programme._id || programme.id || programmeIndex}
+                                  >
+                                    {getProgrammeName(programme)}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    ) : (
-                      <p className="ac-empty-text">Schools and programmes will be updated soon.</p>
-                    )}
+                    </div>
                   </div>
-                )}
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
 
           {/* Image Side */}
           <div className="ac-img-side rev d2">
-            <img src={AcademicsImage} alt="Students in an academic lab" />
+            <div className="ac-img-frame">
+              <img src={AcademicsImage} alt="Students in an academic lab" />
+              <span className="ac-corner ac-corner-tl" aria-hidden="true"></span>
+              <span className="ac-corner ac-corner-br" aria-hidden="true"></span>
+            </div>
 
             <div className="ac-hl">
               <div className="ac-hl-title">
                 Industry-Integrated Curriculum
               </div>
               <p>
-                Programs developed with industry partners - real-world projects
+                Programs developed with industry partners — real-world projects
                 and internships embedded in every course.
               </p>
             </div>
