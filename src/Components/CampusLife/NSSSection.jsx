@@ -38,7 +38,7 @@ const motto= {
     "The motto of NSS, 'Not Me But You', reflects the essence of democratic living and emphasizes the importance of selfless service. It encourages students to develop empathy, appreciate the perspectives of others, and show compassion towards all living beings. The philosophy of NSS is deeply rooted in this motto, highlighting the belief that the welfare of an individual is ultimately dependent on the welfare of society as a whole. Therefore, NSS volunteers strive to contribute to the well-being and progress of the community through dedicated service and social responsibility."
 }
 const NSSSection = ({ image }) => (
-  <section className="cl-sec cl-sec--cream">
+  <section className="cl-sec cl-sec--cream" id='nss'>
     <div className="cl-container">
       <SectionHeading label="Service" prefix="National Service" highlight="Scheme (NSS)" />
       <div className="cl-split">

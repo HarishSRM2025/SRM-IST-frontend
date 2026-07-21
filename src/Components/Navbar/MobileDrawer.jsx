@@ -63,16 +63,7 @@ const MobileDrawer = ({ open, setOpen }) => {
             Placement <i className="fa-solid fa-chevron-down"></i>
           </div>
 
-          <div
-            className="mob-sub"
-            style={{
-              maxHeight: openMenu === 'pl' ? '300px' : '0px',
-            }}
-          >
-            <a href="#placement" onClick={() => setOpen(false)}>Statistics</a>
-            <a href="#placement" onClick={() => setOpen(false)}>Top Recruiters</a>
-            <a href="#placement" onClick={() => setOpen(false)}>Career Guidance</a>
-          </div>
+         
         </div>
 
         {/* Campus */}

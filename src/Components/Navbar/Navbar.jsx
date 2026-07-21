@@ -22,7 +22,8 @@ import {
   FaFileAlt,
   FaTrophy,
   FaLeaf,
-  FaArrowCircleRight
+  FaArrowCircleRight,
+  FaHandsHelping
 } from "react-icons/fa";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { HiOutlineSpeakerphone } from "react-icons/hi";
@@ -155,13 +156,8 @@ const Navbar = ({ announcements = [] }) => {
           {/* Placement */}
           <li>
             <Link to='/placement'>
-              Placement <FaChevronDown className="chev" />
+              Placement
             </Link>
-            <div className="nav-drop">
-              <a href="#placement"><FaChartLine />Statistics</a>
-              <a href="#placement"><FaBuilding />Recruiters</a>
-              <a href="#placement"><FaCompass />Guidance</a>
-            </div>
           </li>
 
           {/* Campus */}
@@ -175,6 +171,7 @@ const Navbar = ({ announcements = [] }) => {
               <Link to="/library"><FaBook />Library</Link>
               <Link to="/sports"><FaTrophy />Sports</Link>
               <Link to="/ncc"><FaLeaf />NCC</Link>
+              <Link to="/campus-life#nss"><FaHandsHelping/>NSS</Link>
               <Link to="/campus-life#transport"><FaCompass />Transport</Link>
             </div>
           </li>
