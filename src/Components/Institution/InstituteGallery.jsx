@@ -165,7 +165,7 @@ export default function InstituteGallery({ institutionId }) {
                         onClick={() => setSelectedPhoto(item)}
                         style={{ 
                           backgroundImage: `url(${getAssetUrl(item.galleryImage)})`,
-                          backgroundSize: 'cover',
+                          backgroundSize: 'contain',
                           backgroundPosition: 'center',
                           cursor: 'pointer',
                           position: 'relative',
@@ -331,11 +331,11 @@ export default function InstituteGallery({ institutionId }) {
           <div 
             style={{
               position: 'relative',
-              maxWidth: '90%',
-              maxHeight: '90%',
+              maxWidth: '5%',
+              maxHeight: '70%',
               backgroundColor: 'white',
               borderRadius: '8px',
-              overflow: 'hidden',
+              overflow: 'auto',
               boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
             }}
             onClick={(e) => e.stopPropagation()}
