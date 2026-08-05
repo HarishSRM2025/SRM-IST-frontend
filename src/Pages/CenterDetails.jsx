@@ -6,8 +6,10 @@ const apiRoot = import.meta.env.VITE_API_URL || `${import.meta.env.VITE_API_BASE
 const apiBase = apiRoot.replace('/api', '');
 
 const getFacultyImage = (f) => {
-  if (f.facultyImage) {
-    return `${apiBase}/${f.facultyImage.replace(/\\/g, '/')}`;
+  if (f?.facultyImage) {
+    const cleanPath = f.facultyImage.replace(/\\/g, '/');
+    const fullPath = cleanPath.startsWith('public/') ? cleanPath : `public/uploads/${cleanPath}`;
+    return `${apiBase}/${fullPath}`;
   }
   return "https://img.freepik.com/premium-vector/default-avatar-profile-icon-gray-placeholder-vector-illustration_514344-14757.jpg?w=360";
 };
