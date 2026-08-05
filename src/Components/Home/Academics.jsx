@@ -27,9 +27,9 @@ const getProgrammeSchoolId = (programme) => (
 );
 
 const getProgrammeName = (programme) => (
-  programme.shortName ||
   programme.name ||
   programme.programmeName ||
+  programme.shortName ||
   'Untitled Programme'
 );
 
