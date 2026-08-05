@@ -1,9 +1,23 @@
 import React, { useState } from "react";
 
-const DeanMessage = ({ data }) => {
+const DeanMessage = ({ data, instName, deptName }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (!data?.deanName || !data?.deanImage || !data?.message) return null;
+
+  const targetName = [
+    instName,
+    deptName,
+    data?.institutionName,
+    data?.departmentName,
+    typeof data?.institutionId === 'object' ? data?.institutionId?.name : data?.institutionId,
+    data?.institution,
+    data?.school
+  ].filter(Boolean).join(' ');
+
+  const isAlliedHealth = /allied\s*health/i.test(targetName);
+  const roleTitle = isAlliedHealth ? "Principal" : "Dean";
+  const badgeText = isAlliedHealth ? "PRINCIPAL OF INSTITUTION" : "DEAN OF INSTITUTION";
 
   const MAX_LENGTH = 850;
   const isLongMessage = data.message && data.message.length > MAX_LENGTH;
@@ -56,7 +70,7 @@ const DeanMessage = ({ data }) => {
           }}>
             <img
               src={imageUrl}
-              alt={data.deanName || "Dean Profile"}
+              alt={data.deanName || `${roleTitle} Profile`}
               style={{
                 width: '280px',
                 height: '280px',
@@ -87,7 +101,7 @@ const DeanMessage = ({ data }) => {
               textTransform: 'uppercase',
               fontFamily: 'sans-serif'
             }}>
-              DEAN OF INSTITUTION
+              {badgeText}
             </div>
           </div>
 
@@ -100,7 +114,7 @@ const DeanMessage = ({ data }) => {
             <h2 className="s-title" style={{ 
               color: '#ffffffff',
             }}>
-              Message from <em>Dean</em> 
+              Message from <em>{roleTitle}</em> 
             </h2>
             <div style={{ 
               fontSize: '16px', 

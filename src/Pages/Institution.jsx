@@ -98,7 +98,7 @@ const Institution = () => {
         bgImage="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?q=80&w=1920&auto=format&fit=crop"
       />
 
-      {deanMsg && <DeanMessage data={deanMsg} />}
+      {deanMsg && <DeanMessage data={deanMsg} instName={instName} />}
       <VisionMission vision={instData?.vision} mission={instData?.mission} />
       <Stats institutionId={instData?._id} />
       {schoolsData.length > 0 && <Departments schools={schoolsData} />}
