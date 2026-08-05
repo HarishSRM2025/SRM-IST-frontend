@@ -240,24 +240,36 @@ const Academics = () => {
                             </div>
                           )}
 
-                          {institution.schools.map((school) => (
-                            <div className="ac-school-block" key={school._id || school.id || school.name}>
-                              <div className="ac-school-head">
-                                <h3>{school.name || 'Untitled School'}</h3>
-                                <span className="ac-school-count">{school.programmes.length}</span>
+                          {institution.schools.map((school, schoolIndex) => {
+                            const key = `${index}-${schoolIndex}`;
+                            const isSchoolOpen = activeSchool[key];
+                                                    
+                            return (
+                              <div className="ac-school-block" key={school._id || school.id}>
+                                <button
+                                  type="button"
+                                  className={`ac-school-head ${isSchoolOpen ? "open" : ""}`}
+                                  onClick={() => handleSchoolToggle(index, schoolIndex)}
+                                >
+                                  <h3>{school.name}</h3>
+                                  {isSchoolOpen ? <FaChevronUp /> : <FaChevronRight />}
+                                </button>
+                            
+                                {isSchoolOpen && (
+                                  <div className="dept-list ac-programme-list">
+                                    {school.programmes.map((programme, programmeIndex) => (
+                                      <span
+                                        className="dept-tile ac-programme-chip"
+                                        key={programme._id || programme.id || programmeIndex}
+                                      >
+                                        {getProgrammeName(programme)}
+                                      </span>
+                                    ))}
+                                  </div>
+                                )}
                               </div>
-                              <div className="dept-list ac-programme-list">
-                                {school.programmes.map((programme, programmeIndex) => (
-                                  <span
-                                    className="dept-tile ac-programme-chip"
-                                    key={programme._id || programme.id || programmeIndex}
-                                  >
-                                    {getProgrammeName(programme)}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
-                          ))}
+                            );
+                          })}
                         </div>
                       </div>
                     </div>
