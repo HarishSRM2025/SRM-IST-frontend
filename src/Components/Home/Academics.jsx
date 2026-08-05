@@ -258,28 +258,40 @@ const [activeSchool, setActiveSchool] = useState({});
                             const isSchoolOpen = activeSchool[key];
 
                             return (
-                              <div className="ac-school-block" key={school._id || school.id}>
-                                <button
-                                  type="button"
-                                  className={`ac-school-head ${isSchoolOpen ? "open" : ""}`}
-                                  onClick={() => handleSchoolToggle(index, schoolIndex)}
-                                >
-                                  <h3>{school.name}</h3>
-                                  {isSchoolOpen ? <FaChevronUp /> : <FaChevronRight />}
-                                </button>
-                            
-                                {isSchoolOpen && (
-                                  <div className="dept-list ac-programme-list">
-                                    {school.programmes.map((programme, programmeIndex) => (
-                                      <span
-                                        className="dept-tile ac-programme-chip"
-                                        key={programme._id || programme.id || programmeIndex}
-                                      >
-                                        {getProgrammeName(programme)}
-                                      </span>
-                                    ))}
+                              <div className="ac-school-block">
+
+                                  <button
+                                      className={`ac-school-head ${isOpen ? "open" : ""}`}
+                                      onClick={toggle}
+                                  >
+                                      <h3>{school.name}</h3>
+                                                          
+                                      <div className="ac-school-right">
+                                          <span className="ac-school-count">12</span>
+                                          {isOpen ? <FaChevronUp /> : <FaChevronRight />}
+                                      </div>
+                                  </button>
+                                                          
+                                  <div className={`ac-programme-collapse ${isOpen ? "open" : ""}`}>
+                                      <div className="ac-programme-body">
+                                                          
+                                          <div className="ac-programme-list">
+                                              <span className="ac-programme-chip">
+                                                  B.Tech Computer Science & Engineering
+                                              </span>
+                                                          
+                                              <span className="ac-programme-chip">
+                                                  B.Tech Artificial Intelligence
+                                              </span>
+                                                          
+                                              <span className="ac-programme-chip">
+                                                  MCA
+                                              </span>
+                                          </div>
+                                                          
+                                      </div>
                                   </div>
-                                )}
+                                                          
                               </div>
                             );
                           })}
