@@ -38,6 +38,8 @@ const Academics = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [activeInstitution, setActiveInstitution] = useState(null);
+const [activeSchool, setActiveSchool] = useState({});
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
@@ -158,7 +160,18 @@ const Academics = () => {
   const handleToggle = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
+  const handleInstitutionToggle = (index) => {
+    setActiveInstitution(activeInstitution === index ? null : index);
+  };
 
+  const handleSchoolToggle = (institutionIndex, schoolIndex) => {
+    const key = `${institutionIndex}-${schoolIndex}`;
+
+    setActiveSchool((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
   return (
     <div className="ac-section" id="academics">
       <div className="wrap">
@@ -243,7 +256,7 @@ const Academics = () => {
                           {institution.schools.map((school, schoolIndex) => {
                             const key = `${index}-${schoolIndex}`;
                             const isSchoolOpen = activeSchool[key];
-                                                    
+
                             return (
                               <div className="ac-school-block" key={school._id || school.id}>
                                 <button
