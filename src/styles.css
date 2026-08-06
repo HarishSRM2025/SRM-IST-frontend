@@ -1401,7 +1401,7 @@ body{
 }
 
 .ac-collapse-inner {
-    padding: 24px;
+    padding: 10px;
 }
 
 .ac-inst-desc {
@@ -1605,7 +1605,7 @@ body{
 @media (max-width:768px){
 
     .ac-collapse-inner{
-        padding:18px;
+        padding:10px;
     }
 
     .ac-school-head{
@@ -1692,14 +1692,14 @@ body{
     font-weight:500;
     cursor:default;
     transition:background .2s ease, border-color .2s ease, color .2s ease;
-    border: 1px solid var(--navy);
+    border: 1px solid var(--border);
     border-bottom: none;
     margin: 0;
     transform: none;
 
 }
 .dept-tile:last-child{
-    border-bottom: 1px solid var(--navy);
+    border-bottom: 1px solid var(--border);
 }
 
 /* ---------- Image column ---------- */
