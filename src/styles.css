@@ -1422,10 +1422,10 @@ body{
 }
 
 .ac-school-block{
-    border:1px solid #d8d8d8;
-    border-radius:8px;
+    /* border:1px solid #d8d8d8; */
+    /* border-radius:8px; */
     overflow:hidden;
-    background:#fff;
+    /* background:#fff; */
     transition:.3s;
 }
 
@@ -1440,17 +1440,35 @@ body{
     align-items:center;
     padding:18px 22px;
     border:none;
-    background:#f9f9f9;
+    /* background:#f9f9f9; */
     cursor:pointer;
     transition:.3s;
 }
 
 .ac-school-head:hover{
-    background:#f2f2f2;
+    /* background:#f2f2f2; */
+    box-shadow: none !important;
 }
 
 .ac-school-head.open{
-    background:var(--gold);
+    background:var(--navy);
+}
+.ac-chevron {
+  transition: transform 0.25s ease;
+}
+
+.ac-chevron-open {
+  transform: rotate(90deg);
+}
+
+.ac-collapse-inner-school {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.ac-collapse-inner-school.open {
+  max-height: 1000px; /* comfortably larger than the tallest programme list you expect */
 }
 
 .ac-school-head h3{
@@ -1528,10 +1546,10 @@ body{
     display:flex;
     align-items:center;
     padding:10px 18px;
-    border-radius:30px;
+    /* border-radius:30px;
     background:#f4f7fb;
     color:var(--navy);
-    border:1px solid #d9e1ec;
+    border:1px solid #d9e1ec; */
     font-size:14px;
     font-weight:500;
     transition:.25s;
@@ -1623,9 +1641,9 @@ body{
     overflow:hidden;
     min-height:0;
 }
-.ac-institution-content{
+/* .ac-institution-content{
     padding:22px 24px 26px;
-}
+} */
 .ac-inst-desc{
     font-size:14px;
     line-height:1.6;
@@ -1636,23 +1654,21 @@ body{
 .ac-school-list{
     display:flex;
     flex-direction:column;
-    gap:22px;
+    gap:0;
 }
 .ac-school-block + .ac-school-block{
-    padding-top:20px;
     border-top:1px solid rgba(255,255,255,.08);
 }
 .ac-school-head{
     display:flex;
     align-items:baseline;
     gap:10px;
-    margin-bottom:12px;
 }
 .ac-school-block h3{
     font-family:'Playfair Display',serif;
     font-size:15px;
     font-weight:600;
-    color:var(--gold);
+    color:var(--navy);
     letter-spacing:.02em;
 }
 .ac-school-count{
@@ -1662,24 +1678,28 @@ body{
 
 .dept-list{
     display:flex;
-    flex-wrap:wrap;
-    gap:10px;
+    flex-direction: column;
+    gap:0px;
+    padding: 10px;
 }
-.dept-tile{
+.dept-tile,.dept-tile:hover{
     padding:9px 15px;
-    border-radius:999px;
-    border:1px solid var(--navy);
-    background:var(--cream);
+    /* border-radius:999px;
+    border:1px solid var(--navy);*/
+    background:white; 
     color:var(--navy);
     font-size:12.5px;
     font-weight:500;
     cursor:default;
     transition:background .2s ease, border-color .2s ease, color .2s ease;
+    border: 1px solid var(--navy);
+    border-bottom: none;
+    margin: 0;
+    transform: none;
+
 }
-.dept-tile:hover{
-    background:var(--gold);
-    border-color:var(--gold);
-    color:var(--navy);
+.dept-tile:last-child{
+    border-bottom: 1px solid var(--navy);
 }
 
 /* ---------- Image column ---------- */

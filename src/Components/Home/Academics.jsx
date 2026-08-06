@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaChevronRight, FaChevronUp } from "react-icons/fa";
+import { FaChevronRight } from "react-icons/fa";
 import AcademicsImage from '../../assets/images/home/academic-program.JPG';
 
 const getArrayPayload = (payload) => {
@@ -39,7 +39,9 @@ const Academics = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [activeInstitution, setActiveInstitution] = useState(null);
-const [activeSchool, setActiveSchool] = useState({});
+  // activeSchool now stores at most one open school PER institution:
+  // { [institutionIndex]: schoolIndex | null }
+  const [activeSchool, setActiveSchool] = useState({});
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
@@ -158,20 +160,39 @@ const [activeSchool, setActiveSchool] = useState({});
   }, []);
 
   const handleToggle = (index) => {
-    setActiveIndex(activeIndex === index ? null : index);
+    setActiveIndex((prev) => {
+      const next = prev === index ? null : index;
+
+      // Whenever an institution panel closes (either collapsed itself,
+      // or swapped out for a different one opening), reset its inner
+      // school accordion so it doesn't reopen already-expanded next time.
+      const closedIndex = prev !== null && prev !== next ? prev : null;
+      if (closedIndex !== null) {
+        setActiveSchool((prevSchools) => {
+          if (!(closedIndex in prevSchools)) return prevSchools;
+          const updated = { ...prevSchools };
+          delete updated[closedIndex];
+          return updated;
+        });
+      }
+
+      return next;
+    });
   };
   const handleInstitutionToggle = (index) => {
     setActiveInstitution(activeInstitution === index ? null : index);
   };
 
+  // Accordion behaviour: opening a school closes any other open school
+  // within the SAME institution. Each institution keeps its own
+  // independent "which school is open" state.
   const handleSchoolToggle = (institutionIndex, schoolIndex) => {
-    const key = `${institutionIndex}-${schoolIndex}`;
-
     setActiveSchool((prev) => ({
       ...prev,
-      [key]: !prev[key],
+      [institutionIndex]: prev[institutionIndex] === schoolIndex ? null : schoolIndex,
     }));
   };
+
   return (
     <div className="ac-section" id="academics">
       <div className="wrap">
@@ -224,7 +245,7 @@ const [activeSchool, setActiveSchool] = useState({});
                       <span className="prog-ct">
                         {institution.programmeCount} program{institution.programmeCount === 1 ? '' : 's'}
                       </span>
-                      {isOpen ? <FaChevronUp /> : <FaChevronRight />}
+                      <FaChevronRight className={`ac-chevron ${isOpen ? 'ac-chevron-open' : ''}`} />
                     </div>
                   </button>
 
@@ -254,35 +275,36 @@ const [activeSchool, setActiveSchool] = useState({});
                           )}
 
                           {institution.schools.map((school, schoolIndex) => {
-                          const key = `${index}-${schoolIndex}`;
-                          const isSchoolOpen = activeSchool[key];                       
+                            const isSchoolOpen = activeSchool[index] === schoolIndex;
 
-                          return (
-                            <div className="ac-school-block" key={school._id || school.id}>
-                              <button
-                                type="button"
-                                className={`ac-school-head ${isSchoolOpen ? "open" : ""}`}
-                                onClick={() => handleSchoolToggle(index, schoolIndex)}
-                              >
-                                <h3>{school.name}</h3>
-                                {isSchoolOpen ? <FaChevronUp /> : <FaChevronRight />}
-                              </button>                       
+                            return (
+                              <div className="ac-school-block" key={school._id || school.id}>
+                                <button
+                                  type="button"
+                                  className={`ac-school-head ${isSchoolOpen ? "open" : ""}`}
+                                  onClick={() => handleSchoolToggle(index, schoolIndex)}
+                                >
+                                  <h3>{school.name}</h3>
+                                  <FaChevronRight className={`ac-chevron ${isSchoolOpen ? 'ac-chevron-open' : ''}`} />
+                                </button>
 
-                              {isSchoolOpen && (
-                                <div className="dept-list ac-programme-list">
-                                  {school.programmes.map((programme, programmeIndex) => (
-                                    <span
-                                      className="dept-tile ac-programme-chip"
-                                      key={programme._id || programme.id || programmeIndex}
-                                    >
-                                      {getProgrammeName(programme)}
-                                    </span>
-                                  ))}
+                                <div className={`ac-collapse ac-collapse-inner-school ${isSchoolOpen ? 'open' : ''}`}>
+                                  <div className="ac-collapse-inner">
+                                    <div className="dept-list ac-programme-list">
+                                      {school.programmes.map((programme, programmeIndex) => (
+                                        <span
+                                          className="dept-tile ac-programme-chip"
+                                          key={programme._id || programme.id || programmeIndex}
+                                        >
+                                          {getProgrammeName(programme)}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  </div>
                                 </div>
-                              )}
-                            </div>
-                          );
-                        })}
+                              </div>
+                            );
+                          })}
                         </div>
                       </div>
                     </div>
