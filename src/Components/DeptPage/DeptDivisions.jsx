@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { FaLayerGroup, FaArrowRight } from "react-icons/fa";
 
 const toArray = (json) => {
   if (Array.isArray(json)) return json;
@@ -65,8 +66,8 @@ export default function DeptDivisions({ id, onVisibilityChange }) {
 
   if (loading) {
     return (
-      <section id={id} className="dept-programmes">
-        <div className="dept-programmes-inner">
+      <section id={id} className="school-div-section">
+        <div className="school-div-inner">
           <div style={{ textAlign: "center", padding: "40px 0", color: "var(--gray)" }}>
             Loading divisions...
           </div>
@@ -78,29 +79,47 @@ export default function DeptDivisions({ id, onVisibilityChange }) {
   if (divisions.length === 0) return null;
 
   return (
-    <section id={id} className="dept-programmes" style={{ background: "var(--cream)" }}>
-      <div className="dept-programmes-inner">
-        <div className="dept-section-header">
-          <div>
-            <div className="section-label">Academic Divisions</div>
-            <h2 className="section-title">
-              Explore Our <em>Divisions</em>
-            </h2>
-          </div>
+    <section id={id} className="school-div-section">
+      <div className="school-div-inner">
+        <div className="school-div-header">
+          <span className="s-tag">Academic Divisions</span>
+          <h2 className="s-title">
+            Explore Our <em>Divisions</em>
+          </h2>
+          <div className="gold-bar"></div>
         </div>
 
-        <div className="dept-list" style={{ gap: "15px", marginTop: "28px" }}>
-          {divisions.map((division) => (
-            <button
-              key={division._id}
+        <div className="school-div-grid">
+          {divisions.map((division, index) => (
+            <div
+              key={division._id || index}
+              className="school-div-card"
               onClick={() => openDivision(division)}
-              type="button"
-              className="dept-tile"
-              title={division.about || division.name}
-              style={{ padding: "16px 24px", fontSize: "15px" }}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === 'Enter' && openDivision(division)}
             >
-              {division.name}
-            </button>
+              <div className="school-div-card-top">
+                <div className="school-div-icon-box">
+                  <FaLayerGroup className="school-div-icon" />
+                </div>
+                <span className="school-div-tag">Division</span>
+              </div>
+
+              <div className="school-div-card-body">
+                <h3 className="school-div-name">{division.name}</h3>
+                <p className="school-div-about">
+                  {division.about || 'Specialized academic division offering focused curricula and hands-on learning.'}
+                </p>
+              </div>
+
+              <div className="school-div-card-footer">
+                <span className="school-div-cta">View Division Details</span>
+                <div className="school-div-arrow-box">
+                  <FaArrowRight className="school-div-arrow" />
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>

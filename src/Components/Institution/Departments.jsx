@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { FaGraduationCap, FaArrowRight } from 'react-icons/fa';
 
 const Departments = ({ schools = [] }) => {
   const navigate = useNavigate();
@@ -21,9 +22,9 @@ const Departments = ({ schools = [] }) => {
   }
 
   return (
-    <section className="ac-section" id="departments" style={{ backgroundColor: "var(--cream)" }}>
+    <section className="inst-schools-section" id="departments">
       <div className="wrap">
-        <div>
+        <div className="inst-schools-header">
           <span className="s-tag">Academic Schools</span>
           <h2 className="s-title">
             Explore Our <em>Schools</em>
@@ -31,21 +32,38 @@ const Departments = ({ schools = [] }) => {
           <div className="gold-bar"></div>
         </div>
 
-        <div style={{ marginTop: '40px', display: 'grid', gap: '28px' }}>
-          <div className="dept-list" style={{ gap: '15px' }}>
-            {schools.map((school) => (
-              <button
-                key={school._id}
-                onClick={() => openDepartment(school)}
-                type="button"
-                className="dept-tile"
-                title={school.about || school.name}
-                style={{ padding: '16px 24px', fontSize: '15px' }}
-              >
-                {school.name}
-              </button>
-            ))}
-          </div>
+        <div className="inst-school-grid">
+          {schools.map((school, index) => (
+            <div
+              key={school._id || index}
+              className="inst-school-card"
+              onClick={() => openDepartment(school)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === 'Enter' && openDepartment(school)}
+            >
+              <div className="inst-school-card-top">
+                <div className="inst-school-icon-wrapper">
+                  <FaGraduationCap className="inst-school-icon" />
+                </div>
+                <span className="inst-school-badge">School</span>
+              </div>
+
+              <div className="inst-school-card-body">
+                <h3 className="inst-school-name">{school.name}</h3>
+                <p className="inst-school-about">
+                  {school.about || 'Explore degree programmes, faculty experts, and research initiatives within this school.'}
+                </p>
+              </div>
+
+              <div className="inst-school-card-footer">
+                <span className="inst-school-cta">Explore School</span>
+                <div className="inst-school-arrow-box">
+                  <FaArrowRight className="inst-school-arrow" />
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

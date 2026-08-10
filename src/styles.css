@@ -2636,3 +2636,328 @@ footer{
     display:flex;
     align-items:center;
 }
+
+/* ==========================================================================
+   INSTITUTION SCHOOLS LISTING (Listing Schools in Institute Page)
+   ========================================================================== */
+.inst-schools-section {
+  padding: 60px 0;
+  background-color: var(--cream, #fdfbf7);
+}
+
+.inst-schools-header {
+  margin-bottom: 36px;
+}
+
+.inst-school-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.inst-school-card {
+  background: #ffffff;
+  /* border-radius: 16px; */
+  padding: 28px 24px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.inst-school-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold, #d97706), var(--navy, #1e3a8a));
+  opacity: 0.8;
+  transition: opacity 0.3s ease, height 0.3s ease;
+}
+
+.inst-school-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(30, 58, 138, 0.12);
+  border-color: rgba(30, 58, 138, 0.2);
+}
+
+.inst-school-card:hover::before {
+  opacity: 1;
+  height: 6px;
+}
+
+.inst-school-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.inst-school-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(30, 58, 138, 0.08), rgba(217, 119, 6, 0.12));
+  color: var(--navy, #1e3a8a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.inst-school-card:hover .inst-school-icon-wrapper {
+  transform: scale(1.1) rotate(-3deg);
+  background: var(--navy, #1e3a8a);
+  color: #ffffff;
+}
+
+.inst-school-badge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.inst-school-card-body {
+  flex: 1;
+  margin-bottom: 24px;
+}
+
+.inst-school-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy, #1e3a8a);
+  margin-bottom: 10px;
+  line-height: 1.35;
+  transition: color 0.2s ease;
+}
+
+.inst-school-card:hover .inst-school-name {
+  color: var(--gold, #d97706);
+}
+
+.inst-school-about {
+  font-size: 13.5px;
+  color: #64748b;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.inst-school-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.inst-school-cta {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy, #1e3a8a);
+  letter-spacing: 0.2px;
+}
+
+.inst-school-arrow-box {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f8fafc;
+  color: var(--navy, #1e3a8a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.inst-school-card:hover .inst-school-arrow-box {
+  background: var(--navy, #1e3a8a);
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   SCHOOL DIVISIONS LISTING (Listing Divisions in School Page)
+   ========================================================================== */
+.school-div-section {
+  padding: 60px 0;
+  background-color: #f8fafc;
+}
+
+.school-div-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.school-div-header {
+  margin-bottom: 36px;
+}
+
+.school-div-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.school-div-card {
+  background: #ffffff;
+  /* border-radius: 16px; */
+  padding: 26px 24px;
+  /* border: 1px solid rgba(226, 232, 240, 0.8); */
+  border-left: 4px solid var(--navy, #1e3a8a);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-left-color 0.3s ease;
+}
+
+.school-div-card:hover {
+  transform: translateY(-5px);
+  border-left-color: var(--gold, #d97706);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.school-div-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.school-div-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(30, 58, 138, 0.06);
+  color: var(--navy, #1e3a8a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.school-div-card:hover .school-div-icon-box {
+  background: var(--gold, #d97706);
+  color: #ffffff;
+}
+
+.school-div-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #eff6ff;
+  color: #1e40af;
+}
+
+.school-div-card-body {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.school-div-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+  line-height: 1.35;
+  transition: color 0.2s ease;
+}
+
+.school-div-card:hover .school-div-name {
+  color: var(--navy, #1e3a8a);
+}
+
+.school-div-about {
+  font-size: 13.5px;
+  color: #64748b;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.school-div-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.school-div-cta {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #475569;
+  transition: color 0.2s ease;
+}
+
+.school-div-card:hover .school-div-cta {
+  color: var(--navy, #1e3a8a);
+}
+
+.school-div-arrow-box {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.school-div-card:hover .school-div-arrow-box {
+  background: var(--navy, #1e3a8a);
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   VISION & MISSION (No Image - Template Native 2-Card Layout)
+   ========================================================================== */
+.vis-cards-no-img {
+  grid-template-columns: 1fr 1fr !important;
+  align-items: stretch !important;
+  gap: 32px;
+}
+
+.vis-cards-no-img .vis-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .vis-cards-no-img {
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+}
