@@ -12,6 +12,7 @@ export default function DeptDivisions({ id, onVisibilityChange }) {
   const location = useLocation();
   const navigate = useNavigate();
   const schoolId = location.state?.schoolId;
+  const isElectricalAndElectronics = /electrical and electronics engineering/i.test(location.state?.deptName || '');
   const sourceType = location.state?.sourceType;
   const [divisions, setDivisions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -82,9 +83,9 @@ export default function DeptDivisions({ id, onVisibilityChange }) {
     <section id={id} className="school-div-section">
       <div className="school-div-inner">
         <div className="school-div-header">
-          <span className="s-tag">Academic Divisions</span>
+          <span className="s-tag">{isElectricalAndElectronics ? 'Academic Departments' : 'Academic Divisions'}</span>
           <h2 className="s-title">
-            Explore Our <em>Divisions</em>
+            Explore Our <em>{isElectricalAndElectronics ? 'Department' : 'Divisions'}</em>
           </h2>
           <div className="gold-bar"></div>
         </div>
@@ -103,7 +104,7 @@ export default function DeptDivisions({ id, onVisibilityChange }) {
                 <div className="school-div-icon-box">
                   <FaLayerGroup className="school-div-icon" />
                 </div>
-                <span className="school-div-tag">Division</span>
+                <span className="school-div-tag">{isElectricalAndElectronics ? 'Department' : 'Division'}</span>
               </div>
 
               <div className="school-div-card-body">
@@ -114,7 +115,7 @@ export default function DeptDivisions({ id, onVisibilityChange }) {
               </div>
 
               <div className="school-div-card-footer">
-                <span className="school-div-cta">View Division Details</span>
+                <span className="school-div-cta">View {isElectricalAndElectronics ? 'Department' : 'Division'} Details</span>
                 <div className="school-div-arrow-box">
                   <FaArrowRight className="school-div-arrow" />
                 </div>

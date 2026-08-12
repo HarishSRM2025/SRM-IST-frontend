@@ -1887,6 +1887,7 @@ body{
     color:var(--gray);
     font-size:14px;
     line-height:1.8;
+    text-align:justify;
 }
 .vis-img{
     position:relative;
@@ -2743,6 +2744,7 @@ footer{
   margin-bottom: 10px;
   line-height: 1.35;
   transition: color 0.2s ease;
+  font-family:'Playfair Display';
 }
 
 .inst-school-card:hover .inst-school-name {
@@ -2885,6 +2887,7 @@ footer{
   color: #0f172a;
   margin-bottom: 8px;
   line-height: 1.35;
+  font-family:'Playfair Display';
   transition: color 0.2s ease;
 }
 

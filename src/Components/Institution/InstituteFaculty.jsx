@@ -6,6 +6,35 @@ const API_BASE = API_URL.replace("/api", "");
 
 const PAGE_SIZE = 8;
 
+const getDesignationRank = (designation = "") => {
+  const normalized = String(designation || "").trim().toLowerCase();
+
+  if (normalized.includes("director")) return 0;
+  if (normalized.includes("dean") || normalized.includes("hod")) return 1;
+  if (normalized.includes("head")) return 2;
+  if (normalized.includes("associate professor")) return 3;
+  if (normalized.includes("professor") && !normalized.includes("assistant") && !normalized.includes("associate")) return 4;
+  if (normalized.includes("assistant professor")) return 5;
+  return 6;
+};
+
+const getExperienceValue = (value) => {
+  const parsed = Number(String(value ?? "").replace(/[^\d.-]/g, ""));
+  return Number.isFinite(parsed) ? parsed : 0;
+};
+
+const sortFacultyByDesignationAndExperience = (list = []) => {
+  return [...list].sort((a, b) => {
+    const rankDifference = getDesignationRank(a?.designation) - getDesignationRank(b?.designation);
+    if (rankDifference !== 0) return rankDifference;
+
+    const experienceDifference = getExperienceValue(b?.facultyExperience) - getExperienceValue(a?.facultyExperience);
+    if (experienceDifference !== 0) return experienceDifference;
+
+    return String(a?.facultyName || "").localeCompare(String(b?.facultyName || ""));
+  });
+};
+
 function Pagination({ page, totalPages, onPrev, onNext, onDot }) {
   if (totalPages <= 1) return null;
   return (
@@ -58,7 +87,7 @@ export default function InstituteFaculty({ institutionId }) {
               ? facJson.data
               : [facJson.data]
             : [];
-          setFaculty(list);
+          setFaculty(sortFacultyByDesignationAndExperience(list));
         }
       } catch (error) {
         console.error("Error fetching institute faculty:", error);
@@ -73,8 +102,9 @@ export default function InstituteFaculty({ institutionId }) {
   // Reset to page 0 when faculty list changes
   useEffect(() => { setCurrentPage(0); }, [faculty]);
 
-  const totalPages = Math.ceil(faculty.length / PAGE_SIZE);
-  const paginatedFaculty = faculty.slice(currentPage * PAGE_SIZE, currentPage * PAGE_SIZE + PAGE_SIZE);
+  const sortedFaculty = sortFacultyByDesignationAndExperience(faculty);
+  const totalPages = Math.ceil(sortedFaculty.length / PAGE_SIZE);
+  const paginatedFaculty = sortedFaculty.slice(currentPage * PAGE_SIZE, currentPage * PAGE_SIZE + PAGE_SIZE);
 
   const getFacultyImage = (f) => {
     if (f?.facultyImage) {
@@ -143,7 +173,7 @@ export default function InstituteFaculty({ institutionId }) {
                 src={getFacultyImage(f)}
                 alt={f.facultyName}
                 width={"100%"}
-                style={{ height: "260px", objectFit: "contain" }}
+                style={{ height: "260px", objectFit: "cover" }}
               />
               <div className="faculty-card-body">
                 <div className="faculty-name">{f.facultyName}</div>

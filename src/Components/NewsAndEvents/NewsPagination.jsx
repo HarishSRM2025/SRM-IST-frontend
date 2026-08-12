@@ -23,7 +23,9 @@ const NewsPagination = ({ totalPages, currentPage, handlePageChange }) => {
         <FaChevronLeft style={{ fontSize: '12px' }} />
       </button>
 
-      {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+      {getPageItems(totalPages, currentPage).map((page, index) => page === 'ellipsis' ? (
+        <span key={`ellipsis-${index}`} style={{ padding: '0 4px', color: 'var(--gray)' }}>…</span>
+      ) : (
         <button
           key={page}
           onClick={() => handlePageChange(page)}
@@ -64,6 +66,15 @@ const NewsPagination = ({ totalPages, currentPage, handlePageChange }) => {
       </button>
     </div>
   );
+};
+
+const getPageItems = (totalPages, currentPage) => {
+  if (totalPages <= 7) return Array.from({ length: totalPages }, (_, i) => i + 1);
+  const items = [1, 2, 3];
+  if (currentPage > 4 && currentPage < totalPages - 3) items.push('ellipsis', currentPage);
+  else items.push('ellipsis');
+  items.push(totalPages - 2, totalPages - 1, totalPages);
+  return [...new Set(items)];
 };
 
 export default NewsPagination;

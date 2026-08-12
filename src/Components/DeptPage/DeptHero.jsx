@@ -345,7 +345,7 @@ export default function DeptHero({ id, onVisibilityChange }) {
           <div className="dept-section-header">
             <div>
               <div className="section-label">Message from Head</div>
-              <h2 className="section-title">Our <em>Head of Department</em></h2>
+              <h2 className="section-title">Our <em>Head of the Department</em></h2>
             </div>
           </div>
 
@@ -366,13 +366,22 @@ export default function DeptHero({ id, onVisibilityChange }) {
               </div>
               <div className="hod-body-content">
                 <strong>{hodName}</strong>
-                <p>{hodDesignation}</p>
+                <p>
+                  {hodDesignation}
+                </p>
               </div>
             </div>
 
             <div>
               <h2 className="section-title"><em>Welcome</em> Message</h2>
-              <p style={{ textAlign: 'justify', whiteSpace: 'pre-wrap' }}>
+              <p 
+                  style={{
+                    fontSize: '1.1rem',
+                    lineHeight: 1.8,
+                    color: 'var(--gray)',
+                    textAlign: 'justify',
+                    whiteSpace: 'pre-wrap',
+                  }}>
                 {displayMessage}
                 {isLongMessage && (
                   <button 

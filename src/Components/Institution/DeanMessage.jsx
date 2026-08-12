@@ -93,7 +93,16 @@ const DeanMessage = ({ data, instName, deptName }) => {
             }}>
               {data.deanName}
             </h3>
-            <div style={{ 
+            {(data.deanName==='Prof. Balasundaram R')? <div style={{ 
+              color: '#facc15', // Yellow/Gold
+              fontSize: '13px', 
+              fontWeight: '600', 
+              letterSpacing: '2px', 
+              textTransform: 'uppercase',
+              fontFamily: 'sans-serif'
+            }}>
+              Dean In Charge
+            </div>:<div style={{ 
               color: '#facc15', // Yellow/Gold
               fontSize: '13px', 
               fontWeight: '600', 
@@ -102,7 +111,8 @@ const DeanMessage = ({ data, instName, deptName }) => {
               fontFamily: 'sans-serif'
             }}>
               {badgeText}
-            </div>
+            </div>}
+           
           </div>
 
           {/* Right Content Container */}
@@ -123,6 +133,7 @@ const DeanMessage = ({ data, instName, deptName }) => {
               fontStyle: 'italic',
               whiteSpace: 'pre-wrap',
               fontFamily: 'sans-serif',
+              textAlign:'justify',
               fontWeight: '300'
             }}>
               {displayMessage}

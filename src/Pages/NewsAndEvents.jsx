@@ -200,8 +200,8 @@ const NewsAndEvents = () => {
     <>
       <Breadcrum title="News & Events" />
       
-      <div className="dept-events" style={{ background: '#f3f4f6', minHeight: '80vh', padding: '60px 20px' }}>
-        <div className="dept-events-inner" style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '50px', alignItems: 'start', maxWidth: '1200px', margin: '0 auto' }}>
+      <div className="dept-events latest-news-page">
+        <div className="dept-events-inner latest-news-layout">
           
           <NewsSidebar 
             years={years} 
@@ -213,7 +213,7 @@ const NewsAndEvents = () => {
           />
 
           {/* Main Content */}
-          <div>
+          <div className="latest-news-content">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '25px', flexWrap: 'wrap', gap: '20px' }}>
                <div>
                  <span className="s-tag" style={{ color: 'var(--navy)', marginBottom: '8px', display: 'inline-block' }}>HAPPENINGS</span>
