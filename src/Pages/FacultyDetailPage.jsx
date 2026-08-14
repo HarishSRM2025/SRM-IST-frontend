@@ -22,153 +22,199 @@ const formatAmount = (value) => {
   return amount.toLocaleString("en-IN");
 };
 
-const hasItems = (items) => Array.isArray(items) && items.length > 0;
-
-const formatDateRange = (startDate, endDate) => {
-  const start = formatDate(startDate);
-  const end = endDate ? formatDate(endDate) : "Present";
-  if (start === "-" && end === "Present") return "-";
-  return `${start} - ${end}`;
+const formatItemToString = (item) => {
+  if (!item) return "";
+  if (typeof item === "string") return item.trim();
+  if (item.title) {
+    return [item.title, item.journal, item.year, item.coAuthors].filter(Boolean).join(" - ");
+  }
+  if (item.awardName) {
+    return [item.awardName, item.awardBy, item.awardDate ? formatDate(item.awardDate) : "", item.awardLocation].filter(Boolean).join(" - ");
+  }
+  if (item.projectName) {
+    return [item.projectName, item.fundingAgency, item.amount ? `₹${formatAmount(item.amount)}` : "", item.year, item.status].filter(Boolean).join(" - ");
+  }
+  if (item.role || item.companyName) {
+    return [item.role, item.companyName, item.startDate ? formatDate(item.startDate) : ""].filter(Boolean).join(" at ");
+  }
+  if (item.patentName) {
+    return [item.patentName, item.patentNumber ? `Pat No: ${item.patentNumber}` : "", item.country, item.year, item.status].filter(Boolean).join(" - ");
+  }
+  if (item.conferenceName) {
+    return [item.conferenceName, item.conferenceLocation, item.conferenceDate ? formatDate(item.conferenceDate) : "", item.paperPresented].filter(Boolean).join(" - ");
+  }
+  if (item.workshopName) {
+    return [item.workshopName, item.workshopLocation, item.workshopDate ? formatDate(item.workshopDate) : ""].filter(Boolean).join(" - ");
+  }
+  if (item.grantTitle) {
+    return [item.grantTitle, item.fundingAgency, item.amount ? `₹${formatAmount(item.amount)}` : "", item.year, item.status].filter(Boolean).join(" - ");
+  }
+  return Object.values(item).filter((v) => typeof v === "string" && v.trim() !== "").join(" - ");
 };
 
-/* ─── Reusable sub-components ────────────────────────────────────── */
+const extractPoints = (arr) => {
+  if (!Array.isArray(arr)) return [];
+  return arr.map(formatItemToString).filter((s) => Boolean(s && s.trim()));
+};
 
-const FacultyResearchTable = ({ columns, rows }) => (
-  <div className="faculty-research-table-wrap">
-    <table className="faculty-research-table">
-      <thead>
-        <tr>
-          {columns.map((column) => (
-            <th key={column.key}>{column.label}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((row, index) => (
-          <tr key={row._id || index}>
-            {columns.map((column) => (
-              <td key={column.key}>{column.render ? column.render(row) : row[column.key] || "-"}</td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-);
+/* ─── List Component for Points ──────────────────────────────────── */
 
-const FacultyResearchCards = ({ rows, getTitle, getMeta, getDescription }) => (
-  <div className="faculty-research-card-grid">
-    {rows.map((row, index) => (
-      <div className="faculty-research-card" key={row._id || index}>
-        <div className="faculty-research-card-title">{getTitle(row)}</div>
-        <div className="faculty-research-card-meta">{getMeta(row)}</div>
-        {getDescription && getDescription(row) && (
-          <div className="faculty-research-card-desc">{getDescription(row)}</div>
-        )}
-      </div>
-    ))}
-  </div>
-);
+const FacultyPointsList = ({ points }) => {
+  if (!points || points.length === 0) return null;
+
+  return (
+    <div className="faculty-points-list" style={{ display: "flex", flexDirection: "column", gap: "10px", marginTop: "8px" }}>
+      {points.map((point, index) => (
+        <div
+          key={index}
+          className="faculty-point-item"
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            gap: "12px",
+            background: "#ffffff",
+            border: "1px solid #e2e8f0",
+            borderLeft: "4px solid #1e3a8a",
+            borderRadius: "8px",
+            padding: "12px 16px",
+            fontSize: "14px",
+            lineHeight: "1.6",
+            color: "#334155",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+            transition: "all 0.2s ease"
+          }}
+        >
+          <span
+            style={{
+              width: "22px",
+              height: "22px",
+              borderRadius: "50%",
+              background: "#eff6ff",
+              color: "#1d4ed8",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "12px",
+              fontWeight: "700",
+              flexShrink: 0,
+              marginTop: "2px"
+            }}
+          >
+            {index + 1}
+          </span>
+          <span style={{ flex: 1, wordBreak: "break-word" }}>{point}</span>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+/* ─── Faculty Research Sections ──────────────────────────────────── */
 
 const FacultyResearchSections = ({ research, loading }) => {
   const [activeTab, setActiveTab] = useState("");
 
-  const tabs = research
-    ? [
-      hasItems(research.awards_and_achievements) && {
-        key: "awards", label: "Awards", count: research.awards_and_achievements.length,
-        content: (
-          <FacultyResearchCards rows={research.awards_and_achievements}
-            getTitle={(item) => item.awardName || "-"}
-            getMeta={(item) => [formatDate(item.awardDate), item.awardBy].filter(Boolean).join(" | ")}
-            getDescription={(item) => item.awardLocation} />
-        ),
-      },
-      hasItems(research.publications) && {
-        key: "publications", label: "Publications", count: research.publications.length,
-        content: (
-          <FacultyResearchTable rows={research.publications} columns={[
-            { key: "title", label: "Title" }, { key: "journal", label: "Journal" },
-            { key: "year", label: "Year" }, { key: "coAuthors", label: "Co-Authors" },
-          ]} />
-        ),
-      },
-      hasItems(research.patents) && {
-        key: "patents", label: "Patents", count: research.patents.length,
-        content: (
-          <FacultyResearchTable rows={research.patents} columns={[
-            { key: "patentName", label: "Name" }, { key: "patentNumber", label: "Number" },
-            { key: "country", label: "Country" }, { key: "year", label: "Year" }, { key: "status", label: "Status" },
-          ]} />
-        ),
-      },
-      hasItems(research.grants) && {
-        key: "grants", label: "Grants", count: research.grants.length,
-        content: (
-          <FacultyResearchTable rows={research.grants} columns={[
-            { key: "grantTitle", label: "Title" }, { key: "fundingAgency", label: "Agency" },
-            { key: "amount", label: "Amount", render: (item) => formatAmount(item.amount) },
-            { key: "year", label: "Year" }, { key: "status", label: "Status" },
-          ]} />
-        ),
-      },
-      hasItems(research.conferences) && {
-        key: "conferences", label: "Conferences", count: research.conferences.length,
-        content: (
-          <FacultyResearchCards rows={research.conferences}
-            getTitle={(item) => item.conferenceName || "-"}
-            getMeta={(item) => [item.conferenceLocation, formatDate(item.conferenceDate)].filter(Boolean).join(" | ")}
-            getDescription={(item) => item.paperPresented} />
-        ),
-      },
-      hasItems(research.workshop) && {
-        key: "workshop", label: "Workshops", count: research.workshop.length,
-        content: (
-          <FacultyResearchCards rows={research.workshop}
-            getTitle={(item) => item.workshopName || "-"}
-            getMeta={(item) => [item.workshopLocation, formatDate(item.workshopDate)].filter(Boolean).join(" | ")} />
-        ),
-      },
-      hasItems(research.fundedProject) && {
-        key: "fundedProject", label: "Funded Projects", count: research.fundedProject.length,
-        content: (
-          <FacultyResearchTable rows={research.fundedProject} columns={[
-            { key: "projectName", label: "Name" }, { key: "fundingAgency", label: "Agency" },
-            { key: "amount", label: "Amount", render: (item) => formatAmount(item.amount) },
-            { key: "year", label: "Year" }, { key: "status", label: "Status" },
-          ]} />
-        ),
-      },
-    ].filter(Boolean)
-    : [];
-
-  useEffect(() => {
-    if (tabs.length > 0 && !tabs.some((tab) => tab.key === activeTab)) {
-      setActiveTab(tabs[0].key);
-    }
-  }, [activeTab, research]);
-
   if (loading) {
     return (
       <div className="faculty-modal-section">
-        <div className="fms-label">Research</div>
+        <div className="fms-label">Research & Achievements</div>
         <div className="faculty-research-empty">Loading research details...</div>
       </div>
     );
   }
 
-  if (!research || tabs.length === 0) return null;
+  if (!research) return null;
+
+  const publications = extractPoints(research.publications);
+  const awards = extractPoints(research.awards_and_achievements);
+  const invitedLectures = extractPoints(research.invited_lectures || research.invitedLectures);
+  const fundedProjects = extractPoints(research.fundedProject || research.fundedProjects);
+  const memberships = extractPoints(research.professional_memberships || research.professionalMemberships);
+  const patents = extractPoints(research.patents);
+  const grants = extractPoints(research.grants);
+  const conferences = extractPoints(research.conferences);
+  const workshops = extractPoints(research.workshop);
+
+  const tabs = [
+    publications.length > 0 && {
+      key: "publications",
+      label: "Publications",
+      count: publications.length,
+      content: <FacultyPointsList points={publications} />,
+    },
+    awards.length > 0 && {
+      key: "awards",
+      label: "Awards / Achievements",
+      count: awards.length,
+      content: <FacultyPointsList points={awards} />,
+    },
+    invitedLectures.length > 0 && {
+      key: "invited_lectures",
+      label: "Invited Lectures",
+      count: invitedLectures.length,
+      content: <FacultyPointsList points={invitedLectures} />,
+    },
+    fundedProjects.length > 0 && {
+      key: "funded_projects",
+      label: "Funded Projects",
+      count: fundedProjects.length,
+      content: <FacultyPointsList points={fundedProjects} />,
+    },
+    memberships.length > 0 && {
+      key: "memberships",
+      label: "Professional Society Membership",
+      count: memberships.length,
+      content: <FacultyPointsList points={memberships} />,
+    },
+    patents.length > 0 && {
+      key: "patents",
+      label: "Patents",
+      count: patents.length,
+      content: <FacultyPointsList points={patents} />,
+    },
+    grants.length > 0 && {
+      key: "grants",
+      label: "Grants",
+      count: grants.length,
+      content: <FacultyPointsList points={grants} />,
+    },
+    conferences.length > 0 && {
+      key: "conferences",
+      label: "Conferences",
+      count: conferences.length,
+      content: <FacultyPointsList points={conferences} />,
+    },
+    workshops.length > 0 && {
+      key: "workshops",
+      label: "Workshops",
+      count: workshops.length,
+      content: <FacultyPointsList points={workshops} />,
+    },
+  ].filter(Boolean);
+
+  useEffect(() => {
+    if (tabs.length > 0 && !tabs.some((tab) => tab.key === activeTab)) {
+      setActiveTab(tabs[0].key);
+    }
+  }, [activeTab, tabs]);
+
+  if (tabs.length === 0) return null;
 
   const currentTab = tabs.find((tab) => tab.key === activeTab) || tabs[0];
 
   return (
     <div className="faculty-modal-section">
-      <div className="fms-label">Research</div>
-      <div className="faculty-research-tabs">
+      <div className="fms-label">Research & Professional Activities</div>
+      <div className="faculty-research-tabs" style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "16px" }}>
         {tabs.map((tab) => (
-          <button type="button" className={`faculty-research-tab ${currentTab.key === tab.key ? "active" : ""}`}
-            key={tab.key} onClick={() => setActiveTab(tab.key)}>
-            {tab.label}<span>{tab.count}</span>
+          <button
+            type="button"
+            className={`faculty-research-tab ${currentTab.key === tab.key ? "active" : ""}`}
+            key={tab.key}
+            onClick={() => setActiveTab(tab.key)}
+          >
+            {tab.label}
+            <span>{tab.count}</span>
           </button>
         ))}
       </div>
@@ -177,35 +223,34 @@ const FacultyResearchSections = ({ research, loading }) => {
   );
 };
 
+/* ─── Faculty Experience Section ─────────────────────────────────── */
+
 const FacultyExperienceSection = ({ experience, loading }) => {
   if (loading) {
     return (
       <div className="faculty-modal-section">
-        <div className="fms-label">Industry Experience</div>
+        <div className="fms-label">Work Experience</div>
         <div className="faculty-research-empty">Loading experience details...</div>
       </div>
     );
   }
 
-  const rows = Array.isArray(experience)
-    ? experience.flatMap((record) => record.industryExperience || [])
+  const rawRows = Array.isArray(experience)
+    ? experience.flatMap((record) => {
+        const work = record.workExperience || [];
+        const ind = record.industryExperience || [];
+        return work.length > 0 ? work : ind;
+      })
     : [];
 
-  if (rows.length === 0) return null;
+  const points = extractPoints(rawRows);
+
+  if (points.length === 0) return null;
 
   return (
     <div className="faculty-modal-section">
-      <div className="fms-label">Industry Experience</div>
-      <div className="faculty-research-card-grid">
-        {rows.map((item, index) => (
-          <div className="faculty-research-card" key={item._id || index}>
-            <div className="faculty-research-card-title">{item.role || "-"}</div>
-            <div className="faculty-research-card-meta">
-              {[item.companyName, formatDateRange(item.startDate, item.endDate)].filter(Boolean).join(" | ")}
-            </div>
-          </div>
-        ))}
-      </div>
+      <div className="fms-label">Work Experience</div>
+      <FacultyPointsList points={points} />
     </div>
   );
 };
@@ -355,28 +400,6 @@ export default function FacultyDetailPage() {
                 <div className="faculty-detail-email">{faculty.facultyEmail}</div>
               </div>
             </div>
-
-            {/* Research Stats */}
-            {/* <div className="faculty-detail-stats">
-              <div className="faculty-detail-stat">
-                <div className="faculty-detail-stat-value">
-                  {facultyResearch?.publications?.length ?? 0}
-                </div>
-                <div className="faculty-detail-stat-label">Publications</div>
-              </div>
-              <div className="faculty-detail-stat">
-                <div className="faculty-detail-stat-value">
-                  {(facultyResearch?.conferences?.length ?? 0) + (facultyResearch?.workshop?.length ?? 0)}
-                </div>
-                <div className="faculty-detail-stat-label">Workshops</div>
-              </div>
-              <div className="faculty-detail-stat">
-                <div className="faculty-detail-stat-value">
-                  {facultyResearch?.fundedProject?.length ?? 0}
-                </div>
-                <div className="faculty-detail-stat-label">Funded Projects</div>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
@@ -401,7 +424,7 @@ export default function FacultyDetailPage() {
               <div className="fms-label">Subjects</div>
               <div className="fms-chips">
                 {faculty.subjects.map((s, i) => (
-                  <div className="fms-chip" key={i}>{s.subject}</div>
+                  <div className="fms-chip" key={i}>{s.subject || s}</div>
                 ))}
               </div>
             </div>
@@ -436,10 +459,10 @@ export default function FacultyDetailPage() {
             </div>
           )}
 
-          {/* Experience */}
+          {/* Work Experience */}
           <FacultyExperienceSection experience={facultyExperience} loading={experienceLoading} />
 
-          {/* Research */}
+          {/* Research & Activities */}
           <FacultyResearchSections research={facultyResearch} loading={researchLoading} />
         </div>
       </div>
