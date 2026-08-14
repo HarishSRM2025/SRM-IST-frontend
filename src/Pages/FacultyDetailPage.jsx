@@ -57,54 +57,221 @@ const extractPoints = (arr) => {
   return arr.map(formatItemToString).filter((s) => Boolean(s && s.trim()));
 };
 
-/* ─── List Component for Points ──────────────────────────────────── */
+/* ─── List Component for Points with 5 per page pagination & instant nav ── */
+
+const getVisiblePageNumbers = (currentPage, totalPages, maxVisible = 5) => {
+  if (totalPages <= maxVisible) {
+    return Array.from({ length: totalPages }, (_, i) => i + 1);
+  }
+
+  let start = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+  let end = start + maxVisible - 1;
+
+  if (end > totalPages) {
+    end = totalPages;
+    start = Math.max(1, end - maxVisible + 1);
+  }
+
+  const pages = [];
+  for (let i = start; i <= end; i++) {
+    pages.push(i);
+  }
+  return pages;
+};
 
 const FacultyPointsList = ({ points }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 5;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [points]);
+
   if (!points || points.length === 0) return null;
 
+  const totalPages = Math.ceil(points.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentSlice = points.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  const visiblePages = getVisiblePageNumbers(currentPage, totalPages, 5);
+
   return (
-    <div className="faculty-points-list" style={{ display: "flex", flexDirection: "column", gap: "10px", marginTop: "8px" }}>
-      {points.map((point, index) => (
+    <div style={{ width: "100%" }}>
+      <div className="faculty-points-list" style={{ display: "flex", flexDirection: "column", gap: "10px", marginTop: "8px" }}>
+        {currentSlice.map((point, index) => {
+          const pointNumber = startIndex + index + 1;
+          return (
+            <div
+              key={startIndex + index}
+              className="faculty-point-item"
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: "12px",
+                background: "#ffffff",
+                border: "1px solid #e2e8f0",
+                borderLeft: "4px solid #1e3a8a",
+                borderRadius: "8px",
+                padding: "12px 16px",
+                fontSize: "14px",
+                lineHeight: "1.6",
+                color: "#334155",
+                boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+                transition: "all 0.2s ease"
+              }}
+            >
+              <span
+                style={{
+                  width: "24px",
+                  height: "24px",
+                  borderRadius: "50%",
+                  background: "#eff6ff",
+                  color: "#1d4ed8",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "12px",
+                  fontWeight: "700",
+                  flexShrink: 0,
+                  marginTop: "2px"
+                }}
+              >
+                {pointNumber}
+              </span>
+              <span style={{ flex: 1, wordBreak: "break-word" }}>{point}</span>
+            </div>
+          );
+        })}
+      </div>
+
+      {points.length > ITEMS_PER_PAGE && (
         <div
-          key={index}
-          className="faculty-point-item"
+          className="faculty-points-pagination"
           style={{
             display: "flex",
-            alignItems: "flex-start",
-            gap: "12px",
-            background: "#ffffff",
-            border: "1px solid #e2e8f0",
-            borderLeft: "4px solid #1e3a8a",
-            borderRadius: "8px",
-            padding: "12px 16px",
-            fontSize: "14px",
-            lineHeight: "1.6",
-            color: "#334155",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
-            transition: "all 0.2s ease"
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: "16px",
+            paddingTop: "12px",
+            borderTop: "1px solid #e2e8f0",
+            flexWrap: "wrap",
+            gap: "10px"
           }}
         >
-          <span
-            style={{
-              width: "22px",
-              height: "22px",
-              borderRadius: "50%",
-              background: "#eff6ff",
-              color: "#1d4ed8",
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "12px",
-              fontWeight: "700",
-              flexShrink: 0,
-              marginTop: "2px"
-            }}
-          >
-            {index + 1}
-          </span>
-          <span style={{ flex: 1, wordBreak: "break-word" }}>{point}</span>
+          <div style={{ fontSize: "13px", color: "#64748b" }}>
+            Showing <strong>{startIndex + 1}</strong> to <strong>{Math.min(startIndex + ITEMS_PER_PAGE, points.length)}</strong> of <strong>{points.length}</strong> points
+          </div>
+
+          <div style={{ display: "flex", gap: "5px", alignItems: "center", flexWrap: "wrap" }}>
+            {/* First Page Button */}
+            <button
+              type="button"
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(1)}
+              title="First Page"
+              style={{
+                padding: "6px 10px",
+                fontSize: "12px",
+                borderRadius: "6px",
+                border: "1px solid #cbd5e1",
+                background: currentPage === 1 ? "#f8fafc" : "#ffffff",
+                color: currentPage === 1 ? "#94a3b8" : "#1e293b",
+                cursor: currentPage === 1 ? "not-allowed" : "pointer",
+                fontWeight: "600",
+                transition: "all 0.15s"
+              }}
+            >
+              « First
+            </button>
+
+            {/* Prev Button */}
+            <button
+              type="button"
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              title="Previous Page"
+              style={{
+                padding: "6px 10px",
+                fontSize: "12px",
+                borderRadius: "6px",
+                border: "1px solid #cbd5e1",
+                background: currentPage === 1 ? "#f8fafc" : "#ffffff",
+                color: currentPage === 1 ? "#94a3b8" : "#1e293b",
+                cursor: currentPage === 1 ? "not-allowed" : "pointer",
+                fontWeight: "500",
+                transition: "all 0.15s"
+              }}
+            >
+              ‹ Prev
+            </button>
+
+            {/* Visible Page Numbers (Max 5) */}
+            {visiblePages.map((pageNum) => (
+              <button
+                key={pageNum}
+                type="button"
+                onClick={() => setCurrentPage(pageNum)}
+                style={{
+                  minWidth: "32px",
+                  height: "32px",
+                  padding: "0 8px",
+                  fontSize: "13px",
+                  borderRadius: "6px",
+                  border: pageNum === currentPage ? "1px solid #1e3a8a" : "1px solid #cbd5e1",
+                  background: pageNum === currentPage ? "#1e3a8a" : "#ffffff",
+                  color: pageNum === currentPage ? "#ffffff" : "#1e293b",
+                  cursor: "pointer",
+                  fontWeight: pageNum === currentPage ? "700" : "500",
+                  transition: "all 0.15s"
+                }}
+              >
+                {pageNum}
+              </button>
+            ))}
+
+            {/* Next Button */}
+            <button
+              type="button"
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              title="Next Page"
+              style={{
+                padding: "6px 10px",
+                fontSize: "12px",
+                borderRadius: "6px",
+                border: "1px solid #cbd5e1",
+                background: currentPage === totalPages ? "#f8fafc" : "#ffffff",
+                color: currentPage === totalPages ? "#94a3b8" : "#1e293b",
+                cursor: currentPage === totalPages ? "not-allowed" : "pointer",
+                fontWeight: "500",
+                transition: "all 0.15s"
+              }}
+            >
+              Next ›
+            </button>
+
+            {/* Last Page Button */}
+            <button
+              type="button"
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage(totalPages)}
+              title="Last Page"
+              style={{
+                padding: "6px 10px",
+                fontSize: "12px",
+                borderRadius: "6px",
+                border: "1px solid #cbd5e1",
+                background: currentPage === totalPages ? "#f8fafc" : "#ffffff",
+                color: currentPage === totalPages ? "#94a3b8" : "#1e293b",
+                cursor: currentPage === totalPages ? "not-allowed" : "pointer",
+                fontWeight: "600",
+                transition: "all 0.15s"
+              }}
+            >
+              Last »
+            </button>
+          </div>
         </div>
-      ))}
+      )}
     </div>
   );
 };
@@ -114,26 +281,15 @@ const FacultyPointsList = ({ points }) => {
 const FacultyResearchSections = ({ research, loading }) => {
   const [activeTab, setActiveTab] = useState("");
 
-  if (loading) {
-    return (
-      <div className="faculty-modal-section">
-        <div className="fms-label">Research & Achievements</div>
-        <div className="faculty-research-empty">Loading research details...</div>
-      </div>
-    );
-  }
-
-  if (!research) return null;
-
-  const publications = extractPoints(research.publications);
-  const awards = extractPoints(research.awards_and_achievements);
-  const invitedLectures = extractPoints(research.invited_lectures || research.invitedLectures);
-  const fundedProjects = extractPoints(research.fundedProject || research.fundedProjects);
-  const memberships = extractPoints(research.professional_memberships || research.professionalMemberships);
-  const patents = extractPoints(research.patents);
-  const grants = extractPoints(research.grants);
-  const conferences = extractPoints(research.conferences);
-  const workshops = extractPoints(research.workshop);
+  const publications = extractPoints(research?.publications);
+  const awards = extractPoints(research?.awards_and_achievements);
+  const invitedLectures = extractPoints(research?.invited_lectures || research?.invitedLectures);
+  const fundedProjects = extractPoints(research?.fundedProject || research?.fundedProjects);
+  const memberships = extractPoints(research?.professional_memberships || research?.professionalMemberships);
+  const patents = extractPoints(research?.patents);
+  const grants = extractPoints(research?.grants);
+  const conferences = extractPoints(research?.conferences);
+  const workshops = extractPoints(research?.workshop);
 
   const tabs = [
     publications.length > 0 && {
@@ -196,11 +352,21 @@ const FacultyResearchSections = ({ research, loading }) => {
     if (tabs.length > 0 && !tabs.some((tab) => tab.key === activeTab)) {
       setActiveTab(tabs[0].key);
     }
-  }, [activeTab, tabs]);
+  }, [activeTab, tabs.length]);
 
-  if (tabs.length === 0) return null;
+  if (loading) {
+    return (
+      <div className="faculty-modal-section">
+        <div className="fms-label">Research & Professional Activities</div>
+        <div className="faculty-research-empty">Loading research details...</div>
+      </div>
+    );
+  }
+
+  if (!research || tabs.length === 0) return null;
 
   const currentTab = tabs.find((tab) => tab.key === activeTab) || tabs[0];
+
 
   return (
     <div className="faculty-modal-section">
