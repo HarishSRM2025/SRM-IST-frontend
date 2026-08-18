@@ -8,6 +8,7 @@ export default function DeptProgrammes({ id, onVisibilityChange }) {
   const [programmesList, setProgrammesList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [active, setActive] = useState(0);
+  const selectedProgrammeId = location.state?.selectedProgrammeId;
 
   useEffect(() => {
     const fetchProgrammes = async () => {
@@ -114,6 +115,17 @@ export default function DeptProgrammes({ id, onVisibilityChange }) {
   }, [deptName, location.state?.deptSlug, location.state?.schoolId, location.state?.schoolDivisionId, location.state?.sourceType]);
 
   const activeProgrammes = programmesList;
+
+  useEffect(() => {
+    if (!loading && activeProgrammes.length > 0) {
+      const matchedIndex = selectedProgrammeId
+        ? activeProgrammes.findIndex((p) => (p._id || p.id) === selectedProgrammeId)
+        : -1;
+      setActive(matchedIndex >= 0 ? matchedIndex : 0);
+    } else if (!loading && activeProgrammes.length === 0) {
+      setActive(0);
+    }
+  }, [loading, activeProgrammes, selectedProgrammeId]);
 
   useEffect(() => {
     if (!loading) {

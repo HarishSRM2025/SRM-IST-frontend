@@ -94,7 +94,7 @@ const Leadership = () => {
                             <h4>{leader.role}</h4>
 
                             {leader.leadershipMessage && (
-                            <p>{leader.leadershipMessage}</p>
+                            <p style={{fontSize: '1rem',lineHeight:1.3,color:'var(--gray)',textAlign:'justify',whiteSpace:'pre-wrap'}}>{leader.leadershipMessage}</p>
                             )}
                         </div>
                         </div>

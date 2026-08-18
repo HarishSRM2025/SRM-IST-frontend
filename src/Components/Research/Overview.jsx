@@ -1,5 +1,5 @@
 import React from "react";
-
+import overviewImg from "../../assets/images/research/overview.png"
 const Overview = () => {
   return (
     <section className="dept-hod">
@@ -7,7 +7,7 @@ const Overview = () => {
         <div className="hod-card">
           <div className="hod-img-placeholder" style={{ padding: '20px', background: 'var(--white)', height: 'auto', borderBottom: '1px solid var(--border)' }}>
             <img 
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/English_dialects1997_modified.svg/512px-English_dialects1997_modified.svg.png" 
+              src={overviewImg}
               style={{ width: '100%', height: 'auto', display: 'block' }} 
               alt="Research Areas Pie Chart" 
             />

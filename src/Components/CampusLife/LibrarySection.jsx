@@ -3,7 +3,7 @@ import { FaBook, FaCheckCircle, FaLaptop, FaSearch } from 'react-icons/fa';
 import { HItem, SectionHeading } from './Shared';
 
 const LibrarySection = ({ image }) => (
-  <section className="cl-sec cl-sec--cream" id="library">
+  <section className="cl-sec" id="library">
     <div className="cl-container">
       <SectionHeading label="Learning Resources" prefix="Central" highlight="Library" />
       <div className="cl-split">

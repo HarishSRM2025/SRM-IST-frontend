@@ -31,21 +31,7 @@ const VisionandMission = () => {
               </p>
             </div>
                {/* Image */}
-            <div className="vis-img">
-              <img
-                src={vissionImage}
-                alt="Students"
-                loading="lazy"   // ✅ performance fix
-              />
-
-              <div className="vis-badge">
-                Est. 2002
-                <br />
-                <small style={{ fontWeight: 400, fontSize: "11px" }}>
-                  20+ Years Excellence
-                </small>
-              </div>
-            </div>
+            
             <div className="vis-card">
               <div className="vis-card-ico">
                 <FaRocket color="#e4b316"/>

@@ -3,7 +3,6 @@ import Hero from '../Components/Home/Hero'
 import About from '../Components/Home/About'
 import Stats from '../Components/Home/Stats'
 import Ranking from '../Components/Home/Ranking'
-import News from '../Components/Home/News'
 import Placements from '../Components/Home/Placements'
 import Academics from '../Components/Home/Academics'
 import CampusLife from '../Components/Home/CampusLife'
@@ -50,7 +49,6 @@ const Home = () => {
       <Academics/>
       <Placements/>
       <CampusLife/>
-      <News/>
       <VideoTestimonial/>
       <AluminiVoice/>
       <Broucher/>

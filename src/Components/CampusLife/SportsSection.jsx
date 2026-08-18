@@ -21,7 +21,7 @@ const sportsList = [
 ];
 
 const SportsSection = ({ image }) => (
-  <section className="cl-sec">
+  <section className="cl-sec cl-sec--cream" id="sports">
     <div className="cl-container">
       <SectionHeading label="Fitness & Recreation" prefix="Sports &" highlight="Athletics" />
       <div className="cl-split">

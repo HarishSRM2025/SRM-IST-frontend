@@ -1491,7 +1491,7 @@ body{
 
 .ac-school-count{
     font-size:13px;
-    color:#666;
+    color:#363636;
     background:#ececec;
     padding:4px 10px;
     border-radius:20px;
@@ -1673,7 +1673,6 @@ body{
 }
 .ac-school-count{
     font-size:11px;
-    color:rgba(255,255,255,.45);
 }
 
 .dept-list{
@@ -1829,7 +1828,7 @@ body{
 }
 .vis-cards{
     display:grid;
-    grid-template-columns:1.5fr 1.3fr 1.5fr;
+    grid-template-columns:1.5fr 1.5fr;
     justify-items:center;
     align-items:center;
     gap:20px;

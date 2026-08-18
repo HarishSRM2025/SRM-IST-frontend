@@ -10,7 +10,7 @@ const routes = [
 ];
 
 const TransportSection = ({ image }) => (
-  <section className="cl-sec">
+  <section className="cl-sec  cl-sec--cream" id='transport'>
     <div className="cl-container">
       <SectionHeading label="Commute" prefix="Campus" highlight="Transport" />
       <div className="cl-split">

@@ -57,7 +57,7 @@ const hostelData = [
 ];
 
 const ResidentialSection = ({ image }) => (
-  <section className="cl-sec cl-sec--cream">
+  <section className="cl-sec cl-sec--cream" id='accommodation'>
     <div className="cl-container">
       <SectionHeading label="Residential Life" prefix="Campus" highlight="Accommodation" />
       <div className="cl-residential-hero">

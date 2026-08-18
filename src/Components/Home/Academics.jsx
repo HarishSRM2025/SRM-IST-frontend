@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaChevronRight } from "react-icons/fa";
 import AcademicsImage from '../../assets/images/home/academic-program.JPG';
 
@@ -34,6 +35,7 @@ const getProgrammeName = (programme) => (
 );
 
 const Academics = () => {
+  const navigate = useNavigate();
   const [institutions, setInstitutions] = useState([]);
   const [activeIndex, setActiveIndex] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -183,6 +185,28 @@ const Academics = () => {
     setActiveInstitution(activeInstitution === index ? null : index);
   };
 
+  const handleProgrammeClick = (programme, school, institution) => {
+    const programmeId = programme?._id || programme?.id;
+    const targetSchool = school || null;
+    const deptName = targetSchool?.name || institution?.name || 'Department';
+    const deptSlug = targetSchool?.slug || institution?.slug || '';
+    const sourceType = targetSchool ? 'school' : 'institution';
+
+    if (!programmeId) return;
+
+    navigate('/departments', {
+      state: {
+        deptName,
+        deptSlug,
+        deptCode: targetSchool?.code || deptSlug,
+        sourceType,
+        schoolId: targetSchool?._id || null,
+        schoolDivisionId: null,
+        selectedProgrammeId: programmeId,
+      },
+    });
+  };
+
   // Accordion behaviour: opening a school closes any other open school
   // within the SAME institution. Each institution keeps its own
   // independent "which school is open" state.
@@ -266,6 +290,16 @@ const Academics = () => {
                                   <span
                                     className="dept-tile ac-programme-chip"
                                     key={programme._id || programme.id || `institution-${programmeIndex}`}
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={() => handleProgrammeClick(programme, null, institution)}
+                                    onKeyDown={(event) => {
+                                      if (event.key === 'Enter' || event.key === ' ') {
+                                        event.preventDefault();
+                                        handleProgrammeClick(programme, null, institution);
+                                      }
+                                    }}
+                                    style={{ cursor: 'pointer' }}
                                   >
                                     {getProgrammeName(programme)}
                                   </span>
@@ -295,6 +329,16 @@ const Academics = () => {
                                         <span
                                           className="dept-tile ac-programme-chip"
                                           key={programme._id || programme.id || programmeIndex}
+                                          role="button"
+                                          tabIndex={0}
+                                          onClick={() => handleProgrammeClick(programme, school, institution)}
+                                          onKeyDown={(event) => {
+                                            if (event.key === 'Enter' || event.key === ' ') {
+                                              event.preventDefault();
+                                              handleProgrammeClick(programme, school, institution);
+                                            }
+                                          }}
+                                          style={{ cursor: 'pointer' }}
                                         >
                                           {getProgrammeName(programme)}
                                         </span>

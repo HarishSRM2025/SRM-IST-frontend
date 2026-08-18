@@ -10,12 +10,18 @@ const getDesignationRank = (designation = "") => {
   const normalized = String(designation || "").trim().toLowerCase();
 
   if (normalized.includes("director")) return 0;
-  if (normalized.includes("dean") || normalized.includes("hod")) return 1;
-  if (normalized.includes("head")) return 2;
-  if (normalized.includes("associate professor")) return 3;
+  if (normalized.includes("dean")) return 1;
+  if (normalized.includes("principal")) return 2;
+  if (
+    normalized.includes("head of the department") ||
+    normalized.includes("head of the dept") ||
+    normalized.includes("hod") ||
+    normalized.includes("head")
+  ) return 3;
   if (normalized.includes("professor") && !normalized.includes("assistant") && !normalized.includes("associate")) return 4;
-  if (normalized.includes("assistant professor")) return 5;
-  return 6;
+  if (normalized.includes("associate professor")) return 5;
+  if (normalized.includes("assistant professor")) return 6;
+  return 7;
 };
 
 const getExperienceValue = (value) => {

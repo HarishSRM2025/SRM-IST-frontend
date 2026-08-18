@@ -167,7 +167,6 @@ const Navbar = ({ announcements = [] }) => {
             </Link>
             <div className="nav-drop">
               <Link to="/campus-life#accommodation"><FaHome />Hostels</Link>
-              <Link to="/campus-life#art-culture"><FaMusic />Events</Link>
               <Link to="/library"><FaBook />Library</Link>
               <Link to="/sports"><FaTrophy />Sports</Link>
               <Link to="/ncc"><FaLeaf />NCC</Link>
@@ -183,11 +182,10 @@ const Navbar = ({ announcements = [] }) => {
           </li>
           <li><Link to="/international-relations">International Affairs</Link></li>
           <li>
-            <Link to="/students">
+            <Link>
               Students <FaChevronDown className="chev" />
             </Link>
             <div className="nav-drop">
-              <Link to="/students"><FaGraduationCap />Students Home</Link>
               <Link to="/examcell"><FaBookOpen />Examcell</Link>
             </div>
           </li>
