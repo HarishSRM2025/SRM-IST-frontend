@@ -18,10 +18,10 @@ const academicCalendars = [
     title: 'Engineering & Technology',
     pdf: acdPdf1,
     listOfPdf:[
-      {name:"Academic Calendar -AY 2026-27 Odd Semester (I Year)",pdf:acdPdf1_1},
-      {name:"Academic Calendar  – AY 2026 - 27 (ODD SEMESTER)",pdf:acdPdf1_2},
-      {name:"Academic Calendar  – AY 2025 - 26 (EVEN SEMESTER)",pdf:acdPdf1_3},
-      {name:"Academic Calendar 2025 Odd Semester (II, III and IV Year)",pdf:acdPdf1_4}
+      {title:"Academic Calendar -AY 2026-27 Odd Semester (I Year)",pdf:acdPdf1_1},
+      {title:"Academic Calendar  – AY 2026 - 27 (ODD SEMESTER)",pdf:acdPdf1_2},
+      {title:"Academic Calendar  – AY 2025 - 26 (EVEN SEMESTER)",pdf:acdPdf1_3},
+      {title:"Academic Calendar 2025 Odd Semester (II, III and IV Year)",pdf:acdPdf1_4}
     ]
   },
   {
@@ -146,7 +146,7 @@ const AcademicCalendar = () => {
               </button>
             </div>
             <div className="academic-pdf-list">
-              {academicCalendars.map((pdfItem) => (
+              {academicCalendars[0].listOfPdf.map((pdfItem) => (
                 <a
                   key={pdfItem.id}
                   href={pdfItem.pdf}
