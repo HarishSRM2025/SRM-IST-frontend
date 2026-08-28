@@ -1,6 +1,10 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import Breadcrum from '../Components/Common/Breadcrum';
 import acdPdf1 from '../assets/pdf/acd/1.pdf';
+import acdPdf1_1 from '../assets/pdf/acd/1_1.pdf';
+import acdPdf1_2 from '../assets/pdf/acd/1_2.pdf';
+import acdPdf1_3 from '../assets/pdf/acd/1_3.pdf';
+import acdPdf1_4 from '../assets/pdf/acd/1_4.pdf';
 import acdPdf2 from '../assets/pdf/acd/2.pdf';
 import acdPdf3 from '../assets/pdf/acd/3.pdf';
 import acdPdf4 from '../assets/pdf/acd/4.pdf';
@@ -12,7 +16,10 @@ const academicCalendars = [
   {
     id: 1,
     title: 'Engineering & Technology',
-    pdf: acdPdf1
+    pdf: acdPdf1,
+    listOfPdf:[
+      {name:"Academic Calendar -AY 2026-27 Odd Semester (I Year)",pdf:acdPdf1_1}
+    ]
   },
   {
     id: 2,
@@ -42,6 +49,24 @@ const academicCalendars = [
 ];
 const pgTitle='Academic Calendar'
 const AcademicCalendar = () => {
+  const [isEngineeringPdfListOpen, setIsEngineeringPdfListOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isEngineeringPdfListOpen) return undefined;
+
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setIsEngineeringPdfListOpen(false);
+    };
+
+    document.addEventListener('keydown', closeOnEscape);
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.removeEventListener('keydown', closeOnEscape);
+      document.body.style.overflow = '';
+    };
+  }, [isEngineeringPdfListOpen]);
+
   return (
     <>
       <Breadcrum title={pgTitle}
@@ -67,6 +92,7 @@ const AcademicCalendar = () => {
                 <h4>{item.title}</h4>
 
                 <div className="admission-actions">
+                  {item.id !== 1 &&
                   <a
                     href={item.pdf}
                     target="_blank"
@@ -74,7 +100,16 @@ const AcademicCalendar = () => {
                     className="btn-gold"
                   >
                     View PDF
-                  </a>
+                  </a>}
+                  {item.id === 1 && (
+                    <button
+                      type="button"
+                      className="btn-outline"
+                      onClick={() => setIsEngineeringPdfListOpen(true)}
+                    >
+                      View List of PDFs
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
@@ -82,6 +117,48 @@ const AcademicCalendar = () => {
 
         </div>
       </div>
+
+      {isEngineeringPdfListOpen && (
+        <div
+          className="academic-pdf-modal-overlay"
+          role="presentation"
+          onClick={() => setIsEngineeringPdfListOpen(false)}
+        >
+          <div
+            className="academic-pdf-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="academic-pdf-list-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="academic-pdf-modal-header">
+              <h3 id="academic-pdf-list-title">Academic Calendar PDFs</h3>
+              <button
+                type="button"
+                className="academic-pdf-modal-close"
+                aria-label="Close PDF list"
+                onClick={() => setIsEngineeringPdfListOpen(false)}
+              >
+                &times;
+              </button>
+            </div>
+            <div className="academic-pdf-list">
+              {academicCalendars.map((pdfItem) => (
+                <a
+                  key={pdfItem.id}
+                  href={pdfItem.pdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="academic-pdf-list-button"
+                >
+                  {pdfItem.title}
+                  <span>Open PDF</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

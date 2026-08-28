@@ -102,6 +102,90 @@ gap: 12px;
 flex-wrap: wrap;
 }
 
+.academic-pdf-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.academic-pdf-modal {
+    width: min(100%, 1000px);
+    height: min(90vh, 800px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.academic-pdf-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 20px;
+    background: #030b58;
+    color: #fff;
+}
+
+.academic-pdf-modal-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.academic-pdf-modal-close {
+    padding: 0 4px;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.academic-pdf-list {
+    display: grid;
+    gap: 12px;
+    overflow-y: auto;
+    padding: 24px;
+}
+
+.academic-pdf-list-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: var(--navy);
+    background: #f8f8f8;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.academic-pdf-list-button span {
+    color: var(--gold);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.academic-pdf-list-button:hover {
+    color: #fff;
+    background: var(--navy);
+}
+
+.academic-pdf-list-button:hover span {
+    color: #fff;
+}
+
 
 .btn-outline {
 display: inline-flex;
