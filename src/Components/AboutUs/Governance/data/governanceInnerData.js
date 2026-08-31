@@ -1,5 +1,4 @@
 // src/components/About/Governance/data/governanceInnerData.js
-
 export const governanceInnerData = {
   "board-management": {
     title: "Board of Management",
