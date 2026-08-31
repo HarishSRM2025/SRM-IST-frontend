@@ -1957,6 +1957,7 @@ body{
     font-style:italic;
     border-left:2px solid var(--gold);
     padding-left:16px;
+    text-align:justify;
 }
 
 /* TESTIMONIALS SWIPER */

@@ -60,10 +60,9 @@ export const governanceInnerData = {
       {
         title: "Deans",
         items: [
-          { name: "Dr. R. Jagadeesh Kannan", role: "Dean [E&T]", designation: "SRMIST, Tiruchirappalli" },
+          { name: "Prof.Balasundaram R", role: "Dean in Charge [SOC]", designation: "SRMIST, Tiruchirappalli" },
           { name: "Dr. D. Francis Xavier Christopher", role: "Dean [S&H]", designation: "SRMIST, Tiruchirappalli" },
           { name: "Dr. V. P. R. Sivakumar", role: "Dean I/c [Physiotherapy]", designation: "Assistant Director - Medical Health Science, SRMIST, Tiruchirappalli" },
-          { name: "Dr. D. Suresh", role: "Dean [Occupational Therapy]", designation: "SRMIST, Tiruchirappalli" }
         ]
       },
       {

@@ -1,5 +1,6 @@
 import React from 'react';
 import aboutImage from '../../assets/images/home/about-home.JPG';
+import { Link } from 'react-router-dom';
 
 const About = () => {
   return (
@@ -26,9 +27,9 @@ const About = () => {
               Our programs blend theoretical knowledge with practical application, preparing graduates to excel in global careers and contribute meaningfully to society.
             </p>
 
-            <button className="btn btn-gold">
+            <Link to='/about' className="btn btn-gold">
               Learn More 
-            </button>
+            </Link>
           </div>
 
           <div className="wc-img rev d2">

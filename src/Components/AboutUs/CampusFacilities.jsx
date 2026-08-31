@@ -49,7 +49,7 @@ const CampusFacilities = () => {
             />
           </div>
           <div>
-            <p className="muted" style={{ lineHeight: '1.8', fontSize: '16px' }}>
+            <p className="muted" style={{ lineHeight: '1.8', fontSize: '16px' ,textAlign:'justify'}}>
               {tabs[activeTab].text}
             </p>
           </div>
