@@ -27,7 +27,6 @@ const Institution = () => {
 
   useEffect(() => {
     if (!slug || location.state?.instName) {
-      setRouteReady(true);
       return;
     }
     let cancelled = false;
@@ -44,8 +43,6 @@ const Institution = () => {
       .finally(() => { if (!cancelled) setRouteReady(true); });
     return () => { cancelled = true; };
   }, [slug, location.pathname, location.state?.instName, navigate]);
-
-  if (!routeReady) return null;
 
   useEffect(() => {
     const fetchInst = async () => {
@@ -115,6 +112,8 @@ const Institution = () => {
     };
     fetchInst();
   }, [instName]);
+
+  if (!routeReady && !(slug && location.state?.instName)) return null;
 
   return (
     <div className="institution-page">
