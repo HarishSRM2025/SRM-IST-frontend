@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaChevronRight } from "react-icons/fa";
 import AcademicsImage from '../../assets/images/home/academic-program.JPG';
+import { getRecordPath } from '../../utils/academicRoutes';
 
 const getArrayPayload = (payload) => {
   if (Array.isArray(payload)) return payload;
@@ -194,7 +195,7 @@ const Academics = () => {
 
     if (!programmeId) return;
 
-    navigate('/departments', {
+    navigate(`${targetSchool ? '/departments' : '/institution'}/${getRecordPath(targetSchool || institution)}`, {
       state: {
         deptName,
         deptSlug,

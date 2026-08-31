@@ -44,7 +44,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/departments" element={<DeptPage />} />
+        <Route path="/departments/:slug" element={<DeptPage />} />
         <Route path="/division-details" element={<DivisionPage />} />
+        <Route path="/division-details/:slug" element={<DivisionPage />} />
         <Route path="/research" element={<Research/>} />
         <Route path="/placement" element={<Placement/>} />
         <Route path='/placement/captapulating-careers' element={<PlacementPage/>} />
@@ -63,6 +65,7 @@ const App = () => {
         <Route path="/library" element={<Library />} />
         <Route path="/sports" element={<Sports />} />
         <Route path="/institution" element={<Institution />} />
+        <Route path="/institution/:slug" element={<Institution />} />
         <Route path="/center/:id" element={<CenterDetails />} />
         <Route path="/event/:id" element={<EventDetails />} />
         <Route path="/international-relations" element={<InternationalRelations />} />

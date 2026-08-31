@@ -1836,6 +1836,7 @@ section {
 
 .dept-events-inner {
   max-width: 1200px;
+  min-width: 0;
   margin: 0 auto;
 }
 
@@ -1873,8 +1874,9 @@ section {
 
 .events-grid {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
+  min-width: 0;
 }
 
 .event-card {
@@ -1882,6 +1884,7 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   overflow: hidden;
+  min-width: 0;
   transition: 0.3s;
 }
 
@@ -1922,6 +1925,13 @@ section {
 
 .event-body {
   padding: 15px;
+  min-width: 0;
+}
+
+/* Keep long institution metadata from expanding the event grid. */
+.event-body > div,
+.event-body span {
+  min-width: 0;
 }
 
 .event-date {

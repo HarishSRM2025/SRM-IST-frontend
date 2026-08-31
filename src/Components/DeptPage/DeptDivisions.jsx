@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaLayerGroup, FaArrowRight } from "react-icons/fa";
+import { getRecordPath } from "../../utils/academicRoutes";
 
 const toArray = (json) => {
   if (Array.isArray(json)) return json;
@@ -53,7 +54,7 @@ export default function DeptDivisions({ id, onVisibilityChange }) {
   }, [divisions.length, loading, onVisibilityChange]);
 
   const openDivision = (division) => {
-    navigate("/division-details", {
+    navigate(`/division-details/${getRecordPath(division)}`, {
       state: {
         deptName: division.name,
         deptSlug: division.slug,

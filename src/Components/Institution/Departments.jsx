@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { FaGraduationCap, FaArrowRight } from 'react-icons/fa';
+import { getRecordPath } from '../../utils/academicRoutes';
 
 const Departments = ({ schools = [] }) => {
   const navigate = useNavigate();
 
   const openDepartment = (school) => {
-    navigate('/departments', {
+    navigate(`/departments/${getRecordPath(school)}`, {
       state: {
         deptName: school.name,
         deptSlug: school.slug,

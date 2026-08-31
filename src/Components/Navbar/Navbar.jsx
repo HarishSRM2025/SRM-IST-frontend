@@ -30,6 +30,7 @@ import { HiOutlineSpeakerphone } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logos/logo.png";
 import mandatory from "../../assets/pdf/mandatory.pdf";
+import { getRecordPath } from "../../utils/academicRoutes";
 
 
 const Navbar = ({ announcements = [] }) => {
@@ -142,7 +143,7 @@ const Navbar = ({ announcements = [] }) => {
               </Link>
               {institutions.length > 0 ? (
                 institutions.map((inst, idx) => (
-                  <Link key={idx} to="/institution" state={{ instName: inst.name }}>
+                  <Link key={idx} to={`/institution/${getRecordPath(inst)}`} state={{ instName: inst.name }}>
                     <FaGraduationCap />{inst.name}
                   </Link>
                 ))
@@ -404,7 +405,7 @@ const Navbar = ({ announcements = [] }) => {
             >
               {institutions.length > 0 ? (
                 institutions.map((inst, idx) => (
-                  <Link key={idx} to="/institution" state={{ instName: inst.name }} onClick={closeDrawer}>{inst.name}</Link>
+                  <Link key={idx} to={`/institution/${getRecordPath(inst)}`} state={{ instName: inst.name }} onClick={closeDrawer}>{inst.name}</Link>
                 ))
               ) : (
                 <Link to="/departments" onClick={closeDrawer}>Departments</Link>

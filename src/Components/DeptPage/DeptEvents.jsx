@@ -42,7 +42,7 @@ function Pagination({ page, totalPages, onPrev, onNext, onDot }) {
   );
 }
 
-export default function DeptEvents({ id, onVisibilityChange }) {
+export default function DeptEvents({ id, onVisibilityChange, institutionId }) {
   const location = useLocation();
   const deptName = location.state?.deptName || "Computer Science Engineering";
   const [eventsList, setEventsList] = useState([]);
@@ -58,6 +58,24 @@ export default function DeptEvents({ id, onVisibilityChange }) {
     const fetchEvents = async () => {
       setLoading(true);
       try {
+        if (institutionId) {
+          const eventsRes = await fetch(`${import.meta.env.VITE_API_URL}/institution/events-and-activities/getall`);
+          if (!eventsRes.ok) throw new Error("Failed to fetch institution events");
+          const eventsJson = await eventsRes.json();
+          const allEvents = Array.isArray(eventsJson)
+            ? eventsJson
+            : (eventsJson.data ? (Array.isArray(eventsJson.data) ? eventsJson.data : [eventsJson.data]) : []);
+          const filtered = allEvents.filter((event) => {
+            const institutionReference = event.institutionId || event.institution || event.instituteId;
+            const eventInstitutionId = typeof institutionReference === 'object'
+              ? institutionReference?._id || institutionReference?.id
+              : institutionReference;
+            return String(eventInstitutionId) === String(institutionId);
+          });
+          setEventsList(filtered);
+          return;
+        }
+
         const schoolRes = await fetch(`${import.meta.env.VITE_API_URL}/schools/getall`);
         if (!schoolRes.ok) throw new Error("Failed to fetch schools");
         const schools = await schoolRes.json();
@@ -136,7 +154,7 @@ export default function DeptEvents({ id, onVisibilityChange }) {
     };
 
     fetchEvents();
-  }, [deptName, location.state?.deptSlug, location.state?.schoolId, location.state?.schoolDivisionId, location.state?.sourceType]);
+  }, [deptName, location.state?.deptSlug, location.state?.schoolId, location.state?.schoolDivisionId, location.state?.sourceType, institutionId]);
 
   const getCategoryLabel = (type) => {
     switch (type) {

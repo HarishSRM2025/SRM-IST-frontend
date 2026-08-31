@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { getArrayPayload } from '../utils/academicRoutes';
 import Breadcrum from '../Components/Common/Breadcrum';
 import DeanMessage from '../Components/Institution/DeanMessage';
 import VisionMission from '../Components/Institution/VisionMission';
@@ -15,11 +16,36 @@ import InstituteFaculty from '../Components/Institution/InstituteFaculty';
 
 const Institution = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { slug } = useParams();
+  const [routeReady, setRouteReady] = useState(!slug || Boolean(location.state?.instName));
   const instName = location.state?.instName || "Institution Overview";
   const [instData, setInstData] = useState(null);
   const [deanMsg, setDeanMsg] = useState(null);
   const [infrastructureData, setInfrastructureData] = useState([]);
   const [schoolsData, setSchoolsData] = useState([]);
+
+  useEffect(() => {
+    if (!slug || location.state?.instName) {
+      setRouteReady(true);
+      return;
+    }
+    let cancelled = false;
+    fetch(`${import.meta.env.VITE_API_URL}/institution/getall`)
+      .then((response) => response.json())
+      .then((payload) => {
+        const key = decodeURIComponent(slug).toLowerCase();
+        const institution = getArrayPayload(payload).find((item) =>
+          String(item.slug || item._id || item.id || '').toLowerCase() === key
+        );
+        if (institution) navigate(location.pathname, { replace: true, state: { instName: institution.name } });
+      })
+      .catch((error) => console.error('Failed to resolve institution URL', error))
+      .finally(() => { if (!cancelled) setRouteReady(true); });
+    return () => { cancelled = true; };
+  }, [slug, location.pathname, location.state?.instName, navigate]);
+
+  if (!routeReady) return null;
 
   useEffect(() => {
     const fetchInst = async () => {
