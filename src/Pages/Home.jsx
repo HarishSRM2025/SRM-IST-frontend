@@ -47,10 +47,10 @@ const Home = () => {
       <VisionandMission/>
       <Management/>
       <Academics/>
-      <Placements/>
+      {/* <Placements/> */}
       <CampusLife/>
       <VideoTestimonial/>
-      <AluminiVoice/>
+      {/* <AluminiVoice/> */}
       <Broucher/>
       <Contact/>
     </>
