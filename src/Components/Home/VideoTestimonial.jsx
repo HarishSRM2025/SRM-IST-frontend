@@ -153,7 +153,7 @@ const VideoTestimonial = () => {
 
         {/* Inline styles to keep thumbnails consistent and place Shorts icon */}
         <style>{`\
-          .vc-thumb{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; border-radius:8px 8px 0 0; }\
+          .vc-thumb{ position:relative; width:100%; aspect-ratio:16/15; overflow:hidden; border-radius:8px 8px 0 0; }\
           .vc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }\
           .shorts-overlay{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none }\
           .shorts-badge{ opacity:0.95; transform:scale(1); }\

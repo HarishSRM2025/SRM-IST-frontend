@@ -2057,7 +2057,6 @@ body{
 }
 .vc-thumb img{
     width:100%;
-    aspect-ratio:16/9;
     object-fit:cover;
     display:block;
     transition:transform .5s,opacity .4s;
