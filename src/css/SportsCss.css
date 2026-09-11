@@ -60,7 +60,7 @@
 }
 .two-col {
   display: grid;
-  grid-template-columns: .75fr 1.5fr;
+  grid-template-columns: .35fr 1.5fr;
   gap: 50px;
   align-items: center;
 }
@@ -78,7 +78,6 @@
 }
 
 .two-col p {
-  margin-bottom: 16px;
   line-height: 1.9;
   color: var(--gray);
   text-align: justify;
