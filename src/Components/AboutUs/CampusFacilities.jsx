@@ -40,7 +40,7 @@ const CampusFacilities = () => {
           ))}
         </div>
 
-        <div className="tab-content" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', alignItems: 'center' }}>
+        <div className="tab-content">
           <div>
             <img 
               src={tabs[activeTab].image} 
