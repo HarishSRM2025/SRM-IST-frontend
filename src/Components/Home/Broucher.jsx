@@ -1,6 +1,6 @@
 import React from "react";
 import { FaDownload } from "react-icons/fa";
-
+import brouchure from "../../assets/pdf/brouchure.pdf";
 const Brochure = () => {
   return (
     <section className="brochure-section rev">
@@ -22,8 +22,8 @@ const Brochure = () => {
 
           {/* ✅ Download Button */}
           <a
-            href="/assets/brochure.pdf"   // 🔥 put your PDF in public folder
-            download
+            href={brouchure}   // 🔥 put your PDF in public folder
+            target="_blank"
             className="btn btn-dark"
           >
             <FaDownload /> Download Brochure

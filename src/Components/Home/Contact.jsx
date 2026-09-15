@@ -104,13 +104,16 @@ const Contact = () => {
 
           {/* Form */}
           <form className="cform" onSubmit={handleSubmit}>
-
+            <h2 className="s-title">
+            </h2>
+            <br/>
             <div className="form-row">
               <div className="fg">
                 <label>First Name *</label>
                 <input
                   type="text"
                   name="firstName"
+                  placeholder="Enter First Name"
                   value={form.firstName}
                   onChange={handleChange}
                   required
@@ -122,6 +125,7 @@ const Contact = () => {
                 <input
                   type="text"
                   name="lastName"
+                  placeholder="Enter Last Name"
                   value={form.lastName}
                   onChange={handleChange}
                 />
@@ -134,6 +138,7 @@ const Contact = () => {
                 <input
                   type="email"
                   name="email"
+                  placeholder="Enter Email"
                   value={form.email}
                   onChange={handleChange}
                   required
@@ -145,6 +150,7 @@ const Contact = () => {
                 <input
                   type="tel"
                   name="phone"
+                  placeholder="Enter Phone"
                   value={form.phone}
                   onChange={handleChange}
                   required
@@ -152,22 +158,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="fg">
-              <label>Program of Interest</label>
-              <select
-                name="program"
-                value={form.program}
-                onChange={handleChange}
-              >
-                <option value="">Select a Program</option>
-                <option>B.Tech – Computer Science</option>
-                <option>B.Tech – Electronics & Communication</option>
-                <option>B.Tech – Mechanical Engineering</option>
-                <option>MBA</option>
-                <option>MCA</option>
-                <option>Ph.D</option>
-              </select>
-            </div>
+        
 
             <div className="fg">
               <label>Message</label>
@@ -175,6 +166,7 @@ const Contact = () => {
                 rows="5"
                 name="message"
                 value={form.message}
+                placeholder="Enter Message"
                 onChange={handleChange}
               ></textarea>
             </div>
