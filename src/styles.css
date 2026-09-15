@@ -35,6 +35,8 @@ body{
 }
 
 .tb-announcements-btn {
+    border: 0;
+    font-family: inherit;
     background: rgb(199, 16, 16);
     color: #fff;
     height: 100%;
@@ -952,6 +954,27 @@ body{
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+.announcement-category-links,
+.announcement-category-links li {
+    min-width: 0;
+    max-width: 100%;
+}
+.announcement-category-links li a {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+}
+.announcement-title-text {
+    display: block;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    line-height: 1.5;
 }
 .category-list li a {
     display: flex;
@@ -2437,20 +2460,27 @@ footer{
 }
 @media(max-width:1150px){
   :root{
-    --TB:0px;
+    --TB:38px;
   }
   #topbar.dark-topbar{
-    display:none !important;
+    display:flex;
+  }
+  .tb-announcements-btn, .tb-right {
+    display:none;
+  }
+  .tb-marquee {
+    min-width:0;
+    width:100%;
   }
   #navbar{
     padding:0 20px;
-    top:0;
+    top:var(--TB);
   }
   #mob-drawer{
-    top:var(--NB);
+    top:calc(var(--TB) + var(--NB));
   }
   body{
-    padding-top:var(--NB);
+    padding-top:calc(var(--TB) + var(--NB));
   }
   .nav-links{
     display:none;

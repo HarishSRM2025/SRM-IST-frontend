@@ -1,3 +1,4 @@
+import AnnouncementListing from './Pages/AnnouncementListing';
 import React from 'react'
 import './styles.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -67,6 +68,7 @@ const App = () => {
         <Route path="/institution" element={<Institution />} />
         <Route path="/institution/:slug" element={<Institution />} />
         <Route path="/center/:id" element={<CenterDetails />} />
+        <Route path="/announcements/category/:id" element={<AnnouncementListing />} />
         <Route path="/event/:id" element={<EventDetails />} />
         <Route path="/international-relations" element={<InternationalRelations />} />
         <Route path="/students" element={<Students />} />

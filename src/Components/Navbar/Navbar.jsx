@@ -1,3 +1,4 @@
+import AnnouncementCategories from './AnnouncementCategories';
 import React, { useEffect, useState } from "react";
 import { 
   FaChevronDown, 
@@ -33,31 +34,11 @@ import mandatory from "../../assets/pdf/mandatory.pdf";
 import { getRecordPath } from "../../utils/academicRoutes";
 
 
-const Navbar = ({ announcements = [] }) => {
+const Navbar = ({ categories = [], categoryAnnouncements = [] }) => {
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [activeMob, setActiveMob] = useState(null);
   const [institutions, setInstitutions] = useState([]);
-
-  const isUpcomingEvent = (item) => {
-    const status = String(item.status || '').toLowerCase();
-    const eventTime = item.eventDateTime ? new Date(item.eventDateTime).getTime() : NaN;
-    return status.includes('upcoming') || (!Number.isNaN(eventTime) && eventTime > Date.now());
-  };
-
-  const upcomingAnnouncements = announcements.filter(isUpcomingEvent);
-  const groupedAnnouncements = announcements
-    .filter((item) => !isUpcomingEvent(item))
-    .reduce((acc, item) => {
-      const typeLabel = item.type 
-        ? item.type.charAt(0).toUpperCase() + item.type.slice(1) 
-        : 'Other';
-      if (!acc[typeLabel]) {
-        acc[typeLabel] = [];
-      }
-      acc[typeLabel].push(item);
-      return acc;
-    }, {});
 
   // Fetch institutions
   useEffect(() => {
@@ -258,109 +239,7 @@ const Navbar = ({ announcements = [] }) => {
               }}
             >
               <div className="announcements-content" style={{ padding: '12px 20px 20px' }}>
-                {announcements.length > 0 ? (
-                  <>
-                    <Link to={`/event/${announcements[0]._id || announcements[0].id}`} className="announcement-link top-link" onClick={closeDrawer} style={{ paddingLeft: '0', color: 'var(--gold)', fontWeight: '600', fontSize: '13px', display: 'flex', alignItems: 'flex-start', gap: '8px', lineHeight: '1.4', marginBottom: '15px' }}>
-                      <FaArrowCircleRight className="a-arrow" style={{ marginTop: '3px', flexShrink: '0', color: 'var(--gold)' }} />
-                      <span>{announcements[0].name} – Newest Update</span>
-                    </Link>
-
-                    {upcomingAnnouncements.length > 0 && (
-                      <div className="announcement-category" style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.1)', paddingBottom: '12px', marginBottom: '12px' }}>
-                        <h3 className="category-title" style={{ fontSize: '12px', color: '#ffb3b3', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '6px', fontWeight: 'bold' }}>Upcoming Events</h3>
-                        <ul className="category-list" style={{ listStyle: 'none', paddingLeft: '0' }}>
-                          {upcomingAnnouncements.map((ann) => (
-                            <li key={ann._id || ann.id} style={{ margin: '6px 0' }}>
-                              <Link to={`/event/${ann._id || ann.id}`} onClick={closeDrawer} style={{ paddingLeft: '10px', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                <FaArrowCircleRight className="a-arrow" style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.5)' }} /> {ann.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-
-                    {Object.keys(groupedAnnouncements).map((typeLabel) => (
-                      <div className="announcement-category" key={typeLabel} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.1)', paddingBottom: '12px', marginBottom: '12px' }}>
-                        <h3 className="category-title" style={{ fontSize: '12px', color: '#ffb3b3', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '6px', fontWeight: 'bold' }}>{typeLabel}s</h3>
-                        <ul className="category-list" style={{ listStyle: 'none', paddingLeft: '0' }}>
-                          {groupedAnnouncements[typeLabel].map((ann) => (
-                            <li key={ann._id || ann.id} style={{ margin: '6px 0' }}>
-                              <Link to={`/event/${ann._id || ann.id}`} onClick={closeDrawer} style={{ paddingLeft: '10px', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                <FaArrowCircleRight className="a-arrow" style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.5)' }} /> {ann.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </>
-                ) : (
-                  <>
-                    <Link to="#" className="announcement-link top-link" onClick={closeDrawer} style={{ paddingLeft: '0', color: 'var(--gold)', fontWeight: '600', fontSize: '13px', display: 'flex', alignItems: 'flex-start', gap: '8px', lineHeight: '1.4', marginBottom: '15px' }}>
-                      <FaArrowCircleRight className="a-arrow" style={{ marginTop: '3px', flexShrink: '0', color: 'var(--gold)' }} />
-                      <span>Application Open for UG / PG / UG NRI / Foreign/ Research Programmes 2026 – 27 – Apply Now</span>
-                    </Link>
-
-                    <div className="announcement-category" style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.1)', paddingBottom: '12px', marginBottom: '12px' }}>
-                      <h3 className="category-title" style={{ fontSize: '12px', color: '#ffb3b3', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '6px', fontWeight: 'bold' }}>Admission Open</h3>
-                      <ul className="category-list" style={{ listStyle: 'none', paddingLeft: '0' }}>
-                        <li style={{ margin: '6px 0' }}>
-                          <Link to="#" onClick={closeDrawer} style={{ paddingLeft: '10px', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <FaArrowCircleRight className="a-arrow" style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.5)' }} /> Undergraduate Programmes 2026
-                          </Link>
-                        </li>
-                        <li style={{ margin: '6px 0' }}>
-                          <Link to="#" onClick={closeDrawer} style={{ paddingLeft: '10px', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <FaArrowCircleRight className="a-arrow" style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.5)' }} /> Postgraduate Programmes 2026
-                          </Link>
-                        </li>
-                        <li style={{ margin: '6px 0' }}>
-                          <Link to="#" onClick={closeDrawer} style={{ paddingLeft: '10px', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <FaArrowCircleRight className="a-arrow" style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.5)' }} /> Ph.D. Admissions 2026
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div className="announcement-category" style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.1)', paddingBottom: '12px', marginBottom: '12px' }}>
-                      <h3 className="category-title" style={{ fontSize: '12px', color: '#ffb3b3', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '6px', fontWeight: 'bold' }}>Hiring</h3>
-                      <ul className="category-list" style={{ listStyle: 'none', paddingLeft: '0' }}>
-                        <li style={{ margin: '6px 0' }}>
-                          <Link to="#" onClick={closeDrawer} style={{ paddingLeft: '10px', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <FaArrowCircleRight className="a-arrow" style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.5)' }} /> Faculty Positions
-                          </Link>
-                        </li>
-                        <li style={{ margin: '6px 0' }}>
-                          <Link to="#" onClick={closeDrawer} style={{ paddingLeft: '10px', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <FaArrowCircleRight className="a-arrow" style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.5)' }} /> Non-Teaching Staff
-                          </Link>
-                        </li>
-                        <li style={{ margin: '6px 0' }}>
-                          <Link to="#" onClick={closeDrawer} style={{ paddingLeft: '10px', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <FaArrowCircleRight className="a-arrow" style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.5)' }} /> Research Assistantships
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div className="announcement-category" style={{ borderBottom: 'none', paddingBottom: '0' }}>
-                      <h3 className="category-title" style={{ fontSize: '12px', color: '#ffb3b3', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '6px', fontWeight: 'bold' }}>Upcoming Events</h3>
-                      <ul className="category-list" style={{ listStyle: 'none', paddingLeft: '0' }}>
-                        <li style={{ margin: '6px 0' }}>
-                          <Link to="#" onClick={closeDrawer} style={{ paddingLeft: '10px', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <FaArrowCircleRight className="a-arrow" style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.5)' }} /> International Conference
-                          </Link>
-                        </li>
-                        <li style={{ margin: '6px 0' }}>
-                          <Link to="#" onClick={closeDrawer} style={{ paddingLeft: '10px', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <FaArrowCircleRight className="a-arrow" style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.5)' }} /> Annual Tech Fest 2026
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </>
-                )}
+                <AnnouncementCategories categories={categories} announcements={categoryAnnouncements} onNavigate={closeDrawer} />
               </div>
             </div>
           </div>
